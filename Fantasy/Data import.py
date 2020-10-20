@@ -88,6 +88,7 @@ for elem in category_lst:
         temp = hp.arrange_html(raw)
         category_df.append(temp)
         page += 1
+        nxt.click()
     final = pd.concat(category_df)
     final.rename(columns={'**': elem}, inplace=True)
     df_lst.append(final)
@@ -97,4 +98,13 @@ for elem in category_lst:
 # except webdriver.common.exceptions.ElementClickInterceptedException:
 #    pass
 
-df_lst[3]
+data = df_lst[0]
+
+for i in range(1, len(df_lst)):
+    data = pd.merge(data, df_lst[i], on=['Player', 'Cost', 'Sel.', 'Form', 'Pts.'], how='inner')
+
+full_category_lst = ['Player', 'Cost', 'Sel.', 'Form', 'Pts.'] + category_lst
+
+new_data = data[full_category_lst].copy()
+
+new_data.to_csv(r'C:\Users\nirgo\Documents\GitHub\Fantasy\Fantasy\GW1_7.csv', index=False)
