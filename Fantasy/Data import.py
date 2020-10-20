@@ -3,10 +3,14 @@ from lxml import html
 from bs4 import BeautifulSoup
 from time import sleep
 from selenium import webdriver
+from selenium.webdriver.support.ui import Select
 import time
 
 driver = webdriver.Chrome(r'C:\Users\nirgo\PycharmProjects\Fantasy\Browsers\chromedriver.exe')
 driver.get('https://fantasy.premierleague.com/statistics')
+sleep(5)
+nxt = driver.find_element_by_xpath('//*[@id="root"]/div[2]/div/div/div[3]/button[3]')
+menu = Select(driver.find_element_by_xpath('/html/body/main/div/div[2]/div/div/form/div/div[2]/div/div/select'))
 
 
 class HTMLTableParser:
@@ -67,15 +71,30 @@ class HTMLTableParser:
 
 hp = HTMLTableParser()
 df_lst = []
-page = 0
 
-while page <= 19:
-    raw = hp.parse_html()
-    temp = hp.arrange_html(raw)
-    df_lst.append(temp)
-    nxt = driver.find_element_by_xpath('//*[@id="root"]/div[2]/div/div/div[3]/button[3]')
-    nxt.click()
-    page += 1
+category_lst = ['Minutes played', 'Goals scored', 'Assists', 'Clean sheets', 'Goals conceded',
+           'Own goals', 'Penalties saved', 'Penalties missed', 'Yellow cards', 'Red cards',
+           'Saves', 'Bonus', 'Bonus Points System', 'Influence', 'Creativity', 'Threat',
+           'ICT Index', 'Form', 'Times in Dream Team', 'Value (form)', 'Value (season)',
+           'Points per match', 'Transfers in', 'Transfers out', 'Price rise', 'Price fall']
 
-data = pd.concat(df_lst)
+for elem in category_lst:
+    page = 0
+    category_df = []
+    clk = 'menu.select_by_visible_text' + '(' + '"' + elem + '"' + ')'
+    exec(clk)
+    while page <= 18:
+        raw = hp.parse_html()
+        temp = hp.arrange_html(raw)
+        category_df.append(temp)
+        page += 1
+    final = pd.concat(category_df)
+    final.rename(columns={'**': elem}, inplace=True)
+    df_lst.append(final)
 
+# try:
+#    nxt.click()
+# except webdriver.common.exceptions.ElementClickInterceptedException:
+#    pass
+
+df_lst[3]
