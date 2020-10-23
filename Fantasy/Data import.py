@@ -1,15 +1,18 @@
 import pandas as pd
-from lxml import html
 from bs4 import BeautifulSoup
 from time import sleep
 from selenium import webdriver
 from selenium.webdriver.support.ui import Select
-import time
+from selenium.common.exceptions import ElementClickInterceptedException
 
+# Setting driver and enter the Fantasy Premier League site
 driver = webdriver.Chrome(r'C:\Users\nirgo\PycharmProjects\Fantasy\Browsers\chromedriver.exe')
 driver.get('https://fantasy.premierleague.com/statistics')
 sleep(5)
-nxt = driver.find_element_by_xpath('//*[@id="root"]/div[2]/div/div/div[3]/button[3]')
+
+# Setting the path to the next page button, to scroll between pages online
+next_page = driver.find_element_by_xpath('//*[@id="root"]/div[2]/div/div/div[3]/button[3]')
+# Setting the path to the menu button, to switch between summaries of different stats
 menu = Select(driver.find_element_by_xpath('/html/body/main/div/div[2]/div/div/form/div/div[2]/div/div/select'))
 
 
@@ -69,42 +72,58 @@ class HTMLTableParser:
         return df
 
 
+# Shortcut for the HTMLTableParser class
 hp = HTMLTableParser()
+
+# Creating a list containing the full list of the stats we're interested in
+category_lst = ['Player', 'Cost', 'Sel.', 'Form', 'Pts.', 'Minutes played', 'Goals scored',
+                'Assists', 'Clean sheets', 'Goals conceded', 'Own goals', 'Penalties saved',
+                'Penalties missed', 'Yellow cards', 'Red cards', 'Saves', 'Bonus',
+                'Bonus Points System', 'Influence', 'Creativity', 'Threat', 'ICT Index',
+                'Form', 'Times in Dream Team', 'Value (form)', 'Value (season)',
+                'Points per match', 'Transfers in', 'Transfers out', 'Price rise', 'Price fall']
+
+# The first six elements in category_lst appears in all the pages, so we don't need to scrape them seperately.
+# Therefore we'll create a different scraping list
+scraping_lst = [elem for elem in category_lst if elem not in ['Player', 'Cost', 'Sel.', 'Form', 'Pts.']]
+
+# Creating an empty list to which we'll append the scarped dataframes
 df_lst = []
-
-category_lst = ['Minutes played', 'Goals scored', 'Assists', 'Clean sheets', 'Goals conceded',
-           'Own goals', 'Penalties saved', 'Penalties missed', 'Yellow cards', 'Red cards',
-           'Saves', 'Bonus', 'Bonus Points System', 'Influence', 'Creativity', 'Threat',
-           'ICT Index', 'Form', 'Times in Dream Team', 'Value (form)', 'Value (season)',
-           'Points per match', 'Transfers in', 'Transfers out', 'Price rise', 'Price fall']
-
-for elem in category_lst:
+# Iterating through the values in scraping_lst to scrape all wanted data and append to df_lst
+for elem in scraping_lst:
     page = 0
     category_df = []
     clk = 'menu.select_by_visible_text' + '(' + '"' + elem + '"' + ')'
     exec(clk)
-    while page <= 18:
-        raw = hp.parse_html()
-        temp = hp.arrange_html(raw)
-        category_df.append(temp)
-        page += 1
-        nxt.click()
+    while(True):
+        try:
+            raw = hp.parse_html()
+            temp = hp.arrange_html(raw)
+            category_df.append(temp)
+            page += 1
+            next_page.click()
+        except ElementClickInterceptedException:
+            break
     final = pd.concat(category_df)
     final.rename(columns={'**': elem}, inplace=True)
     df_lst.append(final)
 
-# try:
-#    nxt.click()
-# except webdriver.common.exceptions.ElementClickInterceptedException:
-#    pass
-
-data = df_lst[0]
-
+# Merging the different DF's in df_lst to one dataframe
+temp_df = df_lst[0]
 for i in range(1, len(df_lst)):
-    data = pd.merge(data, df_lst[i], on=['Player', 'Cost', 'Sel.', 'Form', 'Pts.'], how='inner')
+    temp_df = pd.merge(temp_df, df_lst[i], on=['Player', 'Cost', 'Sel.', 'Form', 'Pts.'], how='inner')
+final_df = temp_df[category_lst].copy()
 
-full_category_lst = ['Player', 'Cost', 'Sel.', 'Form', 'Pts.'] + category_lst
+# Spliting the Player column to three columns: Player, Team and Role
+Player = [player[0:len(player)-6] for player in final_df['Player']]
+Team = [player[len(player)-6:len(player)-3] for player in final_df['Player']]
+Role = [player[len(player)-3:len(player)] for player in final_df['Player']]
 
-new_data = data[full_category_lst].copy()
+# Inserting the three new columns to the dataframe
+final_df['Player'] = Player
+final_df.insert(1, 'Team', Team)
+final_df.insert(2, 'Role', Role)
 
-new_data.to_csv(r'C:\Users\nirgo\Documents\GitHub\Fantasy\Fantasy\GW1_7.csv', index=False)
+# Export the final dataframe to a csv file
+final_df.to_csv(r'C:\Users\nirgo\Documents\GitHub\Fantasy\Fantasy\S21_GW1_8.csv', index=False)
+
