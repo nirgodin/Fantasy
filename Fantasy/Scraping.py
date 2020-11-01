@@ -7,7 +7,6 @@ from selenium.webdriver.support.ui import Select
 from selenium.common.exceptions import ElementClickInterceptedException
 from selenium.common.exceptions import NoSuchElementException
 
-
 # Setting driver and enter the Fantasy Premier League site
 driver = webdriver.Chrome(r'C:\Users\nirgo\PycharmProjects\Fantasy\Browsers\chromedriver.exe')
 driver.get('https://fantasy.premierleague.com/statistics')
@@ -94,7 +93,6 @@ scraping_lst = [elem for elem in category_lst if elem not in ['Player', 'Cost', 
 df_lst = []
 # Iterating through the values in scraping_lst to scrape all wanted data and append to df_lst
 for elem in scraping_lst:
-    page = 0
     category_df = []
     clk = 'menu.select_by_visible_text' + '(' + '"' + elem + '"' + ')'
     exec(clk)
@@ -103,7 +101,6 @@ for elem in scraping_lst:
             raw = hp.parse_html()
             temp = hp.arrange_html(raw)
             category_df.append(temp)
-            page += 1
             next_page.click()
         except ElementClickInterceptedException:
             break
@@ -128,37 +125,90 @@ final_df.insert(1, 'Team', Team)
 final_df.insert(2, 'Role', Role)
 
 # Export the final dataframe to a csv file
-# final_df.to_csv(r'C:\Users\nirgo\Documents\GitHub\Fantasy\Fantasy\S21_GW1_8.csv', index=False)
+final_df.to_csv(r'C:\Users\nirgo\Documents\GitHub\Fantasy\Fantasy\S21_GW1_6.csv', index=False)
 
 ############################################################################################
 
-# Scrape the PLT - Premier League Table
+# # Scrape the PLT - Premier League Table
+#
+# # Enter the relevant URL, where the table is stored
+# driver.get('https://premierleague.com/tables')
+# sleep(5)
+# # Sometimes a commercial is popping when entering the site.
+# # So, we'll define the path to the exit button from the commercial, and try to click it.
+# try:
+#     exit_commercial = driver.find_element_by_xpath('/html/body/main/div[1]/nav/a[2]')
+#     exit_commercial.click()
+# except (ElementClickInterceptedException, NoSuchElementException, ElementNotInteractableException) as error:
+#     pass
 
-# Enter the relevant URL, where the table is stored
-driver.get('https://premierleague.com/tables')
-# Sometimes a commercial is popping when entering the site.
-# So, we'll define the path to the exit button from the commercial, and try to click it.
-try:
-    exit_commercial = driver.find_element_by_xpath('/html/body/main/div[1]/nav/a[2]')
-    exit_commercial.click()
-except (ElementClickInterceptedException, NoSuchElementException) as error:
-    pass
+# # Now we'll parse and arrange in a df the PLT
+# raw_PLT = hp.parse_html()
+# PLT = hp.arrange_html(raw_PLT)
+# # Clearing irrelevant rows in the end of the dataframe
+# PLT = PLT[0:39]
+# # Clearing NA rows in the middle of the dataframe
+# PLT = PLT[PLT['Club'].notna()]
+# # Clearing irrelevant columns
+# PLT = PLT.iloc[:, 2:11]
+# # Insert a position variable to the table
+# PLT.insert(0, 'Position', np.arange(1, 21))
+# # Creating list of desired colnames. PLT - Premier League Table
+# PLT_colnames = ['Position', 'Team', 'Games Played', 'Wins', 'Draws', 'Losses',
+#                 'Goals For', 'Goals Against', 'Goals Difference', 'Points']
+# # Assigning the desired colnames to the table
+# [PLT.rename(columns={PLT.columns[i]:PLT_colnames[i]}, inplace=True) for i in range(0, len(PLT_colnames))]
+# # Fixing the team names
+# PLT['Team'] = [team[len(team)-5:len(team)-2] for team in PLT['Team']]
 
-# Now we'll parse and arrange in a df the PLT
+
+###############################################################################
+
+# Entering the site
+driver.get('https://understat.com/league/EPL/2020')
+sleep(5)
+
+# Parsing the first page
 raw_PLT = hp.parse_html()
-PLT = hp.arrange_html(raw_PLT)
-# Clearing irrelevant rows in the end of the dataframe
-PLT = PLT[0:39]
-# Clearing NA rows in the middle of the dataframe
-PLT = PLT[PLT['Club'].notna()]
-# Clearing irrelevant columns
-PLT = PLT.iloc[:, 2:11]
-# Insert a position variable to the table
-PLT.insert(0, 'Position', np.arange(1, 21))
-# Creating list of desired colnames. PLT - Premier League Table
-PLT_colnames = ['Position', 'Team', 'Games Played', 'Wins', 'Draws', 'Losses',
-                'Goals For', 'Goals Against', 'Goals Difference', 'Points']
-# Assigning the desired colnames to the table
-[PLT.rename(columns={PLT.columns[i]:PLT_colnames[i]}, inplace=True) for i in range(0, len(PLT_colnames))]
-# Fixing the team names
-PLT['Team'] = [team[len(team)-5:len(team)-2] for team in PLT['Team']]
+
+# Arranging the Premier league table
+PLT = hp.arrange_html(raw_PLT).iloc[0:20]
+
+players_df = []
+players_pages = list(range(2, 6)) + [5]*32 + list(range(6, 8))
+[i = str(i) for i in players_pages]
+
+for i in range(2, 6):
+    try:
+        next_table = '#league-players > div.table-control-panel > ul > li:nth-child' + '(' + str(i) + ')'
+        next_table = driver.find_element_by_css_selector(next_table)
+        next_table.click()
+        raw_players = hp.parse_html()
+        temp_players = hp.arrange_html(raw_players)
+        temp_players = temp_players.iloc[20:len(temp_players)]
+        players_df.append(temp_players)
+    except (ElementClickInterceptedException, NoSuchElementException) as error:
+        pass
+
+for i in range(0, 60):
+    try:
+        driver.find_element_by_css_selector('#league-players > div.table-control-panel > ul > li:nth-child(5)').click()
+        raw_players = hp.parse_html()
+        temp_players = hp.arrange_html(raw_players)
+        temp_players = temp_players.iloc[20:len(temp_players)]
+        players_df.append(temp_players)
+    except (ElementClickInterceptedException, NoSuchElementException) as error:
+        pass
+
+final_players = pd.concat(players_df)
+
+
+raw_players = hp.parse_html()
+temp_players = hp.arrange_html(raw_players)
+temp_players = temp_players.iloc[20:len(temp_players)]
+
+
+#league-players > div.table-control-panel > ul > li:nth-child(5)
+#league-players > div.table-control-panel > ul > li:nth-child(5)
+
+#league-players > div.table-control-panel > ul > li.page.current

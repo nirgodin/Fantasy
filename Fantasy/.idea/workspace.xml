@@ -40,9 +40,13 @@
     <servers />
   </component>
   <component name="WindowStateProjectService">
-    <state width="647" height="347" key="XDebugger.FullValuePopup" timestamp="1603485009042">
+    <state width="647" height="347" key="XDebugger.FullValuePopup" timestamp="1603658758946">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="647" height="347" key="XDebugger.FullValuePopup/0.0.1280.680@0.0.1280.680" timestamp="1603485009042" />
+    <state width="647" height="347" key="XDebugger.FullValuePopup/0.0.1280.680@0.0.1280.680" timestamp="1603658758946" />
+    <state x="303" y="1" width="672" height="678" key="search.everywhere.popup" timestamp="1603827476960">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state x="303" y="1" width="672" height="678" key="search.everywhere.popup/0.0.1280.680@0.0.1280.680" timestamp="1603827476960" />
   </component>
 </project>
