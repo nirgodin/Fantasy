@@ -1,9 +1,13 @@
+import os
 import pandas as pd
 import numpy as np
 
+# Set working directory
+os.chdir(r'C:\Users\nirgo\Documents\GitHub\Fantasy\Fantasy)
+
 # Import the previous and this week cumulative dataframes
-previous_GW = pd.read_csv(r'C:\Users\nirgo\Documents\GitHub\Fantasy\Fantasy\S21_GW1_5.csv')
-current_GW = pd.read_csv(r'C:\Users\nirgo\Documents\GitHub\Fantasy\Fantasy\S21_GW1_6.csv')
+previous_GW = pd.read_csv('S21_GW1_5.csv')
+current_GW = pd.read_csv('S21_GW1_6.csv')
 
 # Creating this week gameweek not cumulative dataframe by subtracting the cumulative dataframes
 # Creating a list of all the variables that should be subtracted from each other
@@ -30,10 +34,11 @@ for col in list(GW.columns):
 ###########################################################################################
 
 # Import the schedule of all the teams
-Schedule = pd.read_csv(r'C:\Users\nirgo\Documents\GitHub\Fantasy\Fantasy\Schedule.csv', index_col=0)
+Schedule = pd.read_csv('Schedule.csv', index_col=0)
 
-# Inserting an empty opponent column in the Gameweek df
+# Inserting an empty opponent column in the GW dataframe
 GW.insert(2, 'Opponent', 'nan')
+
 # Inserting the relevant opponents from the Schedule df
 GW['Opponent'] = [Schedule.loc[team, '6'] for team in GW['Team']]
 
