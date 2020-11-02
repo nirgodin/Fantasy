@@ -168,11 +168,30 @@ final_df.to_csv(r'C:\Users\nirgo\Documents\GitHub\Fantasy\Fantasy\S21_GW1_6.csv'
 driver.get('https://understat.com/league/EPL/2020')
 sleep(5)
 
+#Expanding the table to include more data
+# Opening the options menu
+button = driver.find_element_by_xpath('/html/body/div[1]/div[3]/div[3]/div/div[2]/div/div[1]/button')
+button.click()
+
+# Iterate through the menu to click on all the unmarked labels
+labels_dct = {'NPxG': '11', 'NPxGA': '13', 'NPxGD': '14', 'PPDA': '15', 'OPPDA': '16', 'DC': '17', 'ODC': '18'}
+for label in labels_dct.values():
+    label_button = driver.find_element_by_xpath('/html/body/div[1]/div[3]/div[3]/div/div[2]/div/div[2]/div[2]/div/div[' + label + ']/div[2]/label')
+    label_button.click()
+
+# Applying the changes
+apply = driver.find_element_by_xpath('/html/body/div[1]/div[3]/div[3]/div/div[2]/div/div[2]/div[3]/a[2]')
+apply.click()
+
 # Parsing the first page
 raw_PLT = hp.parse_html()
 
 # Arranging the Premier league table
 PLT = hp.arrange_html(raw_PLT).iloc[0:20]
+
+
+###############################################################################
+
 
 players_df = []
 players_pages = list(range(2, 6)) + [5]*32 + list(range(6, 8))
