@@ -96,17 +96,25 @@ for elem in scraping_lst:
     category_df = []
     clk = 'menu.select_by_visible_text' + '(' + '"' + elem + '"' + ')'
     exec(clk)
-    while(True):
-        try:
-            raw = hp.parse_html()
-            temp = hp.arrange_html(raw)
-            category_df.append(temp)
-            next_page.click()
-        except ElementClickInterceptedException:
-            break
+    page = 0
+    while page <= 19:
+        raw = hp.parse_html()
+        temp = hp.arrange_html(raw)
+        category_df.append(temp)
+        next_page.click()
+        page += 1
     final = pd.concat(category_df)
     final.rename(columns={'**': elem}, inplace=True)
     df_lst.append(final)
+
+# while(True):
+#     try:
+#         raw = hp.parse_html()
+#         temp = hp.arrange_html(raw)
+#         category_df.append(temp)
+#         next_page.click()
+#     except (ElementClickInterceptedException, WebDriverException)  as error:
+#         break
 
 # Merging the different DF's in df_lst to one dataframe
 temp_df = df_lst[0]
@@ -121,11 +129,11 @@ Role = [player[len(player)-3:len(player)] for player in final_df['Player']]
 
 # Inserting the three new columns to the dataframe
 final_df['Player'] = Player
-final_df.insert(1, 'Team', Team)
 final_df.insert(2, 'Role', Role)
+final_df.insert(1, 'Team', Team)
 
 # Export the final dataframe to a csv file
-final_df.to_csv(r'C:\Users\nirgo\Documents\GitHub\Fantasy\Fantasy\S21_GW1_6.csv', index=False)
+final_df.to_csv(r'C:\Users\nirgo\Documents\GitHub\Fantasy\Fantasy\S21_GW1_7.csv', index=False)
 
 ############################################################################################
 
@@ -189,6 +197,33 @@ raw_PLT = hp.parse_html()
 # Arranging the Premier league table
 PLT = hp.arrange_html(raw_PLT).iloc[0:20]
 
+# Creating a dictionary to the team names in the PLT to three letters abbreviation
+team_dct = {'Arsenal':'ARS',
+           'Aston Villa':'AVL',
+           'Brighton':'BHA',
+           'Burnley':'BUR',
+           'Chelsea':'CHE',
+           'Crystal Palace':'CRY',
+           'Everton':'EVE',
+           'Fulham':'FUL',
+           'Leeds':'LEE',
+           'Leicester':'LEI',
+           'Liverpool':'LIV',
+           'Manchester City':'MCI',
+           'Manchester United':'MUN',
+           'Newcastle United':'NEW',
+           'Sheffield United':'SHU',
+           'Southampton':'SOU',
+           'Tottenham':'TOT',
+           'West Bromwich Albion':'WBA',
+           'West Ham':'WHU',
+           'Wolverhampton Wanderers':'WOL'}
+
+# Converting team names in the PLT to three letter abbreviation
+PLT['Team'] = [team_dct[team] for team in PLT['Team']]
+
+# Export the final dataframe to a csv file
+PLT.to_csv(r'C:\Users\nirgo\Documents\GitHub\Fantasy\Fantasy\League Table\S21_GW1_7.csv', index=False)
 
 ###############################################################################
 

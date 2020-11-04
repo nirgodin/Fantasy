@@ -2,12 +2,18 @@ import os
 import pandas as pd
 import numpy as np
 
+# First, we'll define a set of paramaters that will allow us
+# to modify easily the code from one gameweek to another
+season = '21'
+previous_GW = '5'
+current_GW = '6'
+
 # Set working directory
-os.chdir(r'C:\Users\nirgo\Documents\GitHub\Fantasy\Fantasy)
+os.chdir(r'C:\Users\nirgo\Documents\GitHub\Fantasy\Fantasy')
 
 # Import the previous and this week cumulative dataframes
-previous_GW = pd.read_csv('S21_GW1_5.csv')
-current_GW = pd.read_csv('S21_GW1_6.csv')
+previous_df = pd.read_csv('S' + season + '_GW1_' + previous_GW + '.csv')
+current_df = pd.read_csv('S' + season + '_GW1_' + current_GW + '.csv')
 
 # Creating this week gameweek not cumulative dataframe by subtracting the cumulative dataframes
 # Creating a list of all the variables that should be subtracted from each other
@@ -17,28 +23,42 @@ subtraction_lst = ['Pts.', 'Minutes played', 'Goals scored', 'Assists', 'Clean s
                    'Times in Dream Team', 'Transfers in', 'Transfers out']
 
 # Merging the previous and current gameweeks dataframes
-temp_GW = pd.merge(current_GW, previous_GW, on=['Player', 'Team', 'Role'], how='inner')
+temp_GW = pd.merge(current_df,
+                   previous_df,
+                   on=['Player', 'Team', 'Role'],
+                   how='outer',
+                   suffixes=['_current', '_previous'])
 
 # Creating an empty dataframe to which the not cumulative values will be passed
-GW = pd.DataFrame(columns=list(current_GW.columns))
+GW = pd.DataFrame(columns=list(current_df.columns))
 
 # Iterating through the columns and passing them to the final dataframe
 for col in list(GW.columns):
     if col in subtraction_lst:
-        GW[col] = temp_GW[col + '_x'] - temp_GW[col + '_y']
+        GW[col] = temp_GW[col + '_current'] - temp_GW[col + '_previous']
     elif col in ['Player', 'Team', 'Role']:
         GW[col] = temp_GW[col]
     else:
-        GW[col] = temp_GW[col + '_x']
+        GW[col] = temp_GW[col + '_current']
 
 ###########################################################################################
 
 # Import the schedule of all the teams
 Schedule = pd.read_csv('Schedule.csv', index_col=0)
 
+# Inserting a Gameweek column
+GW.insert(1, 'Gameweek', current_GW)
+
 # Inserting an empty opponent column in the GW dataframe
-GW.insert(2, 'Opponent', 'nan')
+GW.insert(3, 'Opponent', 'nan')
 
 # Inserting the relevant opponents from the Schedule df
-GW['Opponent'] = [Schedule.loc[team, '6'] for team in GW['Team']]
+GW['Opponent'] = [Schedule.loc[team, current_GW] for team in GW['Team']]
+
+
+##########################################################################################
+
+# Import the PLT with all the relevant team stats
+PLT = pd.read_csv(r'C:\Users\nirgo\Documents\GitHub\Fantasy\Fantasy\League Table\S21_GW1_7.csv')
+
 
