@@ -200,6 +200,12 @@ team_dct = {'Arsenal':'ARS',
 # Converting team names in the PLT to three letter abbreviation
 PLT['Team'] = [team_dct[team] for team in PLT['Team']]
 
+# Editing the PLT colnames
+PLT.rename(columns=lambda x: 'Team_' + x,
+           inplace=True)
+PLT.rename(columns={'Team_Team':'Team', 'Team_№':'Team_Ranking'},
+           inplace=True)
+
 # Export the final dataframe to a csv file
 PLT.to_csv(r'C:\Users\nirgo\Documents\GitHub\Fantasy\Fantasy\League Table\S21_GW1_' + current_GW + '.csv', index=False)
 
