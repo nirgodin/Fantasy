@@ -8,6 +8,12 @@ from selenium.common.exceptions import ElementClickInterceptedException
 from selenium.common.exceptions import NoSuchElementException
 import re
 
+# First, we'll define a set of paramaters that will allow us
+# to modify easily the code from one gameweek to another
+season = '21'
+previous_GW = '6'
+current_GW = '7'
+
 # Setting driver and enter the Fantasy Premier League site
 driver = webdriver.Chrome(r'C:\Users\nirgo\PycharmProjects\Fantasy\Browsers\chromedriver.exe')
 driver.get('https://fantasy.premierleague.com/statistics')
@@ -134,42 +140,7 @@ final_df.insert(2, 'Role', Role)
 final_df.insert(1, 'Team', Team)
 
 # Export the final dataframe to a csv file
-final_df.to_csv(r'C:\Users\nirgo\Documents\GitHub\Fantasy\Fantasy\S21_GW1_7.csv', index=False)
-
-############################################################################################
-
-# # Scrape the PLT - Premier League Table
-#
-# # Enter the relevant URL, where the table is stored
-# driver.get('https://premierleague.com/tables')
-# sleep(5)
-# # Sometimes a commercial is popping when entering the site.
-# # So, we'll define the path to the exit button from the commercial, and try to click it.
-# try:
-#     exit_commercial = driver.find_element_by_xpath('/html/body/main/div[1]/nav/a[2]')
-#     exit_commercial.click()
-# except (ElementClickInterceptedException, NoSuchElementException, ElementNotInteractableException) as error:
-#     pass
-
-# # Now we'll parse and arrange in a df the PLT
-# raw_PLT = hp.parse_html()
-# PLT = hp.arrange_html(raw_PLT)
-# # Clearing irrelevant rows in the end of the dataframe
-# PLT = PLT[0:39]
-# # Clearing NA rows in the middle of the dataframe
-# PLT = PLT[PLT['Club'].notna()]
-# # Clearing irrelevant columns
-# PLT = PLT.iloc[:, 2:11]
-# # Insert a position variable to the table
-# PLT.insert(0, 'Position', np.arange(1, 21))
-# # Creating list of desired colnames. PLT - Premier League Table
-# PLT_colnames = ['Position', 'Team', 'Games Played', 'Wins', 'Draws', 'Losses',
-#                 'Goals For', 'Goals Against', 'Goals Difference', 'Points']
-# # Assigning the desired colnames to the table
-# [PLT.rename(columns={PLT.columns[i]:PLT_colnames[i]}, inplace=True) for i in range(0, len(PLT_colnames))]
-# # Fixing the team names
-# PLT['Team'] = [team[len(team)-5:len(team)-2] for team in PLT['Team']]
-
+final_df.to_csv(r'C:\Users\nirgo\Documents\GitHub\Fantasy\Fantasy\S21_GW1_' + current_GW + '.csv', index=False)
 
 ###############################################################################
 
@@ -230,7 +201,7 @@ team_dct = {'Arsenal':'ARS',
 PLT['Team'] = [team_dct[team] for team in PLT['Team']]
 
 # Export the final dataframe to a csv file
-PLT.to_csv(r'C:\Users\nirgo\Documents\GitHub\Fantasy\Fantasy\League Table\S21_GW1_7.csv', index=False)
+PLT.to_csv(r'C:\Users\nirgo\Documents\GitHub\Fantasy\Fantasy\League Table\S21_GW1_' + current_GW + '.csv', index=False)
 
 ###############################################################################
 
