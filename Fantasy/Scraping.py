@@ -6,6 +6,7 @@ from selenium import webdriver
 from selenium.webdriver.support.ui import Select
 from selenium.common.exceptions import ElementClickInterceptedException
 from selenium.common.exceptions import NoSuchElementException
+import re
 
 # Setting driver and enter the Fantasy Premier League site
 driver = webdriver.Chrome(r'C:\Users\nirgo\PycharmProjects\Fantasy\Browsers\chromedriver.exe')
@@ -196,6 +197,12 @@ raw_PLT = hp.parse_html()
 
 # Arranging the Premier league table
 PLT = hp.arrange_html(raw_PLT).iloc[0:20]
+
+# Cut out irrelevant info from some of the strings in the table
+xG_lst = ['xG', 'xGA', 'xPTS']
+
+for elem in xG_lst:
+    PLT[elem] = [re.split('[-+]', PLT[elem][i])[0] for i in range(0,len(PLT))]
 
 # Creating a dictionary to the team names in the PLT to three letters abbreviation
 team_dct = {'Arsenal':'ARS',

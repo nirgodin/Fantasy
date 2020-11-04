@@ -59,6 +59,6 @@ GW['Opponent'] = [Schedule.loc[team, current_GW] for team in GW['Team']]
 ##########################################################################################
 
 # Import the PLT with all the relevant team stats
-PLT = pd.read_csv(r'C:\Users\nirgo\Documents\GitHub\Fantasy\Fantasy\League Table\S21_GW1_7.csv')
+PLT = pd.read_csv(r'League Table\S21_GW1_7.csv')
 
 
