@@ -5,8 +5,8 @@ import numpy as np
 # First, we'll define a set of paramaters that will allow us
 # to modify easily the code from one gameweek to another
 season = '21'
-previous_GW = '5'
-current_GW = '6'
+previous_GW = '6'
+current_GW = '7'
 
 # Set working directory
 os.chdir(r'C:\Users\nirgo\Documents\GitHub\Fantasy\Fantasy')
@@ -61,4 +61,9 @@ GW['Opponent'] = [Schedule.loc[team, current_GW] for team in GW['Team']]
 # Import the PLT with all the relevant team stats
 PLT = pd.read_csv(r'League Table\S21_GW1_7.csv')
 
+# Merge the PLT to the GW dataframe
+GW = pd.merge(GW,
+              PLT,
+              on=['Team'],
+              how='inner')
 
