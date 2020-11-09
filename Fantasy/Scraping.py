@@ -11,8 +11,8 @@ import re
 # First, we'll define a set of paramaters that will allow us
 # to modify easily the code from one gameweek to another
 season = '21'
-previous_GW = '6'
-current_GW = '7'
+previous_GW = '7'
+current_GW = '8'
 
 # Setting driver
 driver = webdriver.Chrome(r'C:\Users\nirgo\PycharmProjects\Fantasy\Browsers\chromedriver.exe')
@@ -215,7 +215,7 @@ PLT.rename(columns={'Team_Team': 'Team', 'Team_№': 'Team_Ranking'},
            inplace=True)
 
 # Export the final dataframe to a csv file
-# PLT.to_csv(r'C:\Users\nirgo\Documents\GitHub\Fantasy\Fantasy\League Table\S21_GW1_' + current_GW + '.csv', index=False)
+PLT.to_csv(r'C:\Users\nirgo\Documents\GitHub\Fantasy\Fantasy\League Table\S21_GW1_' + current_GW + '.csv', index=False)
 
 ###############################################################################
 
@@ -248,7 +248,7 @@ player_apply.click()
 # Scraping
 
 players_df = []
-players_pages = list(range(2, 6)) + [5] * 34 + [6, 7]
+players_pages = list(range(2, 6)) + [5] * 35 + [6, 7]
 players_pages = [str(i) for i in players_pages]
 
 for i in players_pages:
@@ -265,6 +265,35 @@ final_players = pd.concat(players_df)
 # Resetting the dataframe index
 final_players = final_players.reset_index(drop=True)
 
+# Creating a list of the categories of the final_players df
+US_category_lst = ['Player',
+                   'Team',
+                   'Appearances',
+                   'Minutes played',
+                   'Goals scored',
+                   'NPG',
+                   'Assists',
+                   'xG',
+                   'NPxG',
+                   'xA',
+                   'xGChain',
+                   'xGBuildup',
+                   'xG90',
+                   'NPxG90',
+                   'xA90',
+                   'xG90+xA90',
+                   'NPxG90+xA90',
+                   'xGChain90',
+                   'xGBuildup90']
+
+# Renaming the columns of the dataframe
+# Adding to the column names into 'Player', to distinguish them from the team stats in the final df
+for i in range(0, len(US_category_lst)):
+    final_players.rename(columns={final_players.columns[i]: 'Player_' + US_category_lst[i]},
+                         inplace=True)
+final_players.rename(columns={'Player_Team': 'Team', 'Player_Player': 'Player'},
+                     inplace=True)
+
 # Deleting second team for players who were playing for two teams this season
 final_players['Team'] = [re.split(',', team)[0] for team in final_players['Team']]
 
@@ -272,15 +301,18 @@ final_players['Team'] = [re.split(',', team)[0] for team in final_players['Team'
 final_players['Team'] = [team_dct[team] for team in final_players['Team']]
 
 # Cut out irrelevant info from some of the strings in the table
-for elem in ['GA', 'PTS', 'xG']:
+for elem in ['Player_xG', 'Player_NPxG', 'Player_xA']:
     final_players[elem] = [re.split('[-+]', final_players[elem][i])[0] for i in range(0, len(final_players))]
 
+# Breaking down the full name of the players to first (2nd column) and last names (1st column) 
+final_players.insert(1, 'Player_first', 'nan')
+for i in range(0, len(final_players)):
+    try:
+        final_players['Player_first'][i] = re.split('[ ]', final_players['Player'][i])[0]
+        final_players['Player'][i] = re.split('[ ]', final_players['Player'][i])[1]
+    except IndexError:
+        pass
 
-# Editing the PLT colnames
-PLT.rename(columns=lambda x: 'Team_' + x,
-           inplace=True)
-PLT.rename(columns={'Team_Team': 'Team', 'Team_№': 'Team_Ranking'},
-           inplace=True)
-
+# Exporting the final_players df to csv file
 final_players.to_csv(r'C:\Users\nirgo\Documents\GitHub\Fantasy\Fantasy\Understat\S21_GW1_' +
                      current_GW + '.csv', index=False)
