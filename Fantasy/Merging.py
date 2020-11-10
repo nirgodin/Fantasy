@@ -74,9 +74,23 @@ GW = pd.merge(GW,
 players_df = pd.read_csv(r'Understat\S' + season + '_GW1_' + current_GW + '.csv')
 
 lala = pd.merge(current_df,
-                   players_df,
-                   on=['Player', 'Team'],
-                   how='outer',
-                   indicator=True)
+                players_df,
+                on=['Player', 'Team'],
+                how='inner')
+
+players_df2 = players_df.drop(columns='Player')
+
+lala2 = pd.merge(current_df,
+                 players_df2,
+                 left_on=['Player', 'Team'],
+                 right_on=['Player_first', 'Team'],
+                 how='inner')
+
+lala_final = pd.concat([lala, lala2])
+
+players_lst = list(lala_final['Player'])
 
 
+players_df[~players_df['Player'].isin(list(lala_final['Player']))]
+
+lala_final['Player'].isin(list(players_df['Player']) + list(players_df['Player_first']))
