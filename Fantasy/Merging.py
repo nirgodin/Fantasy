@@ -102,6 +102,10 @@ for i in range(0, len(xG_df)):
                 pass
 
 # Inner merge the xG df with the FPL df based on the last name of the players
+# First, there are few players with incorrect team names, so we'll change them and then merge.
+xG_df['Team'][xG_df['Player'] == 'Walcott'] = 'SOU'
+xG_df['Team'][xG_df['Player'] == 'Loftus-Cheek'] = 'FUL'
+
 last_name = pd.merge(current_df,
                      xG_df,
                      on=['Player', 'Team'],
@@ -127,6 +131,7 @@ miss_df = xG_df[['Player', 'Player_first']][(~xG_df['Player'].isin(xG_FPL['Playe
 
 # Creating manually a dictionary to replace the wrong player names with right ones
 miss_dct = {'Mitrovic': 'Mitrović',
+            'Reid': 'Decordova-Reid',
             'Saiss': 'Saïss',
             'Pepe': 'Pépé',
             'Konsa Ngoyo': 'Konsa',
@@ -140,6 +145,8 @@ miss_dct = {'Mitrovic': 'Mitrović',
             'Zambo': 'Anguissa',
             'Vinicius': 'Carlos'}
 
+xG_FPL[xG_FPL['Player'] == 'Bobby Reid']['Team']
+current_df[current_df['Player'] == 'Loftus-Cheek']
 # Replace the wrong values player names by mapping
 xG_missing = xG_df[xG_df['Player'].isin(miss_dct.keys())]
 xG_missing['Player'] = xG_missing['Player'].map(miss_dct)
@@ -150,36 +157,4 @@ missing_name = pd.merge(current_df,
                         on=['Player', 'Team'],
                         how='inner')
 
-xG_FPL = pd.concat([xG_FPL, xG_missing]).drop(columns=['Player_first']).drop_duplicates()
-
-# Replace duplicate family names manually
-xG_df[(xG_df['Player'] == 'Luiz') & (xG_df['Player_first'] == 'David')] == 'David Luiz'
-xG_df[(xG_df['Player'] == 'Luiz') & (xG_df['Player_first'] == 'Douglas')] == 'Douglas Luiz'
-xG_df[(xG_df['Player'] == 'Longstaff') & (xG_df['Player_first'] == 'Sean')] == 'Sean Longstaff'
-xG_df[(xG_df['Player'] == 'Longstaff') & (xG_df['Player_first'] == 'Matthew')] == 'Matty Longstaff'
-
-
-# Concatenating the first and last name df's and dropping duplicate rows
-xG_FPL = pd.concat([first_name, last_name])
-xG_FPL[xG_FPL.duplicated()]
-# .drop_duplicates()
-
-xG_FPL[xG_FPL['Player'] == 'David Luiz']
-
-
-current_df.iloc[64]
-
-xG_df[xG_df['Player'] == 'Anderson']
-# players_lst = list(lala_final['Player'])
-#
-# check = xG_df['Player_first'][~xG_df['Player'].isin(lala['Player'])]
-# check2 = check[~check.isin(lala2['Player'])]
-# len(check2)
-# xG_df[~xG_df['Player'].isin(list(lala_final['Player']))]
-#
-# lala_final['Player'].isin(list(xG_df['Player']) + list(xG_df['Player_first']))
-#
-# lala_final[lala_final['Player'] == 'Kepa']
-# xG_df.drop_duplicates()
-#
-# len(xG_df[['Player', 'Player_first']][xG_df['Player'].isin(check2) | xG_df['Player_first'].isin(check2)])
+xG_FPL = pd.concat([xG_FPL, missing_name]).drop(columns=['Player_first']).drop_duplicates()
