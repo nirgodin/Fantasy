@@ -304,20 +304,6 @@ final_players['Team'] = [team_dct[team] for team in final_players['Team']]
 for elem in ['Player_xG', 'Player_NPxG', 'Player_xA']:
     final_players[elem] = [re.split('[-+]', final_players[elem][i])[0] for i in range(0, len(final_players))]
 
-# Breaking down the full name of the players to first (2nd column) and last names (1st column) 
-final_players.insert(1, 'Player_first', 'nan')
-for i in range(0, len(final_players)):
-    final_players['Player_first'][i] = re.split('[ ]', final_players['Player'][i])[0]
-    try:
-        final_players['Player'][i] = re.split('[ ]', final_players['Player'][i])[1] + ' ' +\
-                                     re.split('[ ]', final_players['Player'][i])[2]
-    except IndexError:
-        pass
-        try:
-            final_players['Player'][i] = re.split('[ ]', final_players['Player'][i])[1]
-        except IndexError:
-            pass
-
 # Exporting the final_players df to csv file
 final_players.to_csv(r'C:\Users\nirgo\Documents\GitHub\Fantasy\Fantasy\Understat\S21_GW1_' +
                      current_GW + '.csv', index=False)
