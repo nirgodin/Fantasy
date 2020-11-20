@@ -8,16 +8,15 @@ from selenium.common.exceptions import ElementClickInterceptedException
 from selenium.common.exceptions import NoSuchElementException
 import re
 
-# First, we'll define a set of paramaters that will allow us
-# to modify easily the code from one gameweek to another
+# First, we'll define a set of paramaters that will allow us to easily modify the code from one gameweek to another
 season = '21'
-previous_GW = '7'
-current_GW = '8'
+previous_GW = '8'
+current_GW = '9'
 
 # Setting driver
 driver = webdriver.Chrome(r'C:\Users\nirgo\PycharmProjects\Fantasy\Browsers\chromedriver.exe')
 
-
+# Defining the class and two functions that will allow us scraping the data and arranging it in a dataframe
 class HTMLTableParser:
 
     def parse_html(self):
@@ -142,7 +141,7 @@ final_df.insert(2, 'Role', Role)
 final_df.insert(1, 'Team', Team)
 
 # Export the final dataframe to a csv file
-final_df.to_csv(r'C:\Users\nirgo\Documents\GitHub\Fantasy\Fantasy\S21_GW1_' + current_GW + '.csv', index=False)
+final_df.to_csv(r'FPL\FPL_S21_GW1_' + current_GW + '.csv', index=False)
 
 ###############################################################################
 
@@ -215,7 +214,7 @@ PLT.rename(columns={'Team_Team': 'Team', 'Team_№': 'Team_Ranking'},
            inplace=True)
 
 # Export the final dataframe to a csv file
-PLT.to_csv(r'C:\Users\nirgo\Documents\GitHub\Fantasy\Fantasy\League Table\S21_GW1_' + current_GW + '.csv', index=False)
+# PLT.to_csv(r'PLT\PLT_S21_GW1_' + current_GW + '.csv', index=False)
 
 ###############################################################################
 
@@ -246,7 +245,6 @@ player_apply = driver.find_element_by_xpath('/html/body/div[1]/div[3]/div[4]/div
 player_apply.click()
 
 # Scraping
-
 players_df = []
 players_pages = list(range(2, 6)) + [5] * 35 + [6, 7]
 players_pages = [str(i) for i in players_pages]
@@ -294,6 +292,10 @@ for i in range(0, len(US_category_lst)):
 final_players.rename(columns={'Player_Team': 'Team', 'Player_Player': 'Player'},
                      inplace=True)
 
+# Verifying that there aren't any na's in the data
+final_players = final_players.dropna()
+final_players = final_players[final_players['Player'] != '']
+
 # Deleting second team for players who were playing for two teams this season
 final_players['Team'] = [re.split(',', team)[0] for team in final_players['Team']]
 
@@ -302,9 +304,8 @@ final_players['Team'] = [team_dct[team] for team in final_players['Team']]
 
 # Cut out irrelevant info from some of the strings in the table
 for elem in ['Player_xG', 'Player_NPxG', 'Player_xA']:
-    final_players[elem] = [re.split('[-+]', final_players[elem][i])[0] for i in range(0, len(final_players))]
+    final_players[elem] = [re.split('[-+]', final_players[elem][i])[0] for i in final_players.index.tolist()]
 
 # Exporting the final_players df to csv file
-final_players.to_csv(r'C:\Users\nirgo\Documents\GitHub\Fantasy\Fantasy\Understat\S21_GW1_' +
-                     current_GW + '.csv', index=False)
+final_players.to_csv(r'Understat\xG_S21_GW1_' + current_GW + '.csv', index=False)
 
