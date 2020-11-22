@@ -4,9 +4,6 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 import os
 
-# Set working directory
-os.chdir(r'C:\Users\nirgo\Documents\GitHub\Fantasy\Fantasy')
-
 data = pd.read_csv('S21_GW1_8.csv')
 
 # Checking if there are any missing values in the xG_FPL df, using a Seaborn heatmap
@@ -47,4 +44,12 @@ av_team_pts = sns.barplot(x='Team',
                           data=xG_FPL,
                           estimator=np.sum)
 
+# Correlation heatmap for teams: team points and teams xG and xGA
+sns.heatmap(xG_FPL_Team[['Team_PTS', 'Team_xG', 'Team_xGA']].corr(),
+            annot=True,
+            cmap='coolwarm')
 
+# Clustering map for the entire xG_FPL dataframe
+sns.clustermap(xG_FPL.drop(columns=['Player', 'Team', 'Role', 'Sel.']),
+               cmap='coolwarm',
+               standard_scale=1)

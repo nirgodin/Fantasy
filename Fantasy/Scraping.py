@@ -10,8 +10,8 @@ import re
 
 # First, we'll define a set of paramaters that will allow us to easily modify the code from one gameweek to another
 season = '21'
-previous_GW = '8'
-current_GW = '9'
+previous_GW = '6'
+current_GW = '7'
 
 # Setting driver
 driver = webdriver.Chrome(r'C:\Users\nirgo\PycharmProjects\Fantasy\Browsers\chromedriver.exe')
@@ -246,7 +246,7 @@ player_apply.click()
 
 # Scraping
 players_df = []
-players_pages = list(range(2, 6)) + [5] * 35 + [6, 7]
+players_pages = list(range(2, 6)) + [5] * 34 + [6, 7]
 players_pages = [str(i) for i in players_pages]
 
 for i in players_pages:

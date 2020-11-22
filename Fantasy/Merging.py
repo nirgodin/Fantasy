@@ -3,131 +3,83 @@ import pandas as pd
 import numpy as np
 import re
 
-# First, we'll define a set of paramaters that will allow us
+# First, we'll define a set of parameters that will allow us
 # to modify easily the code from one gameweek to another
 season = '21'
 previous_GW = '7'
 current_GW = '8'
 
-# Set working directory
-os.chdir(r'C:\Users\nirgo\Documents\GitHub\Fantasy\Fantasy')
-
 # Import the previous and this week cumulative dataframes
-previous_df = pd.read_csv('S' + season + '_GW1_' + previous_GW + '.csv')
-current_df = pd.read_csv('S' + season + '_GW1_' + current_GW + '.csv')
+cum_prev_df = pd.read_csv(r'FPL/FPL_S' + season + '_GW1_' + previous_GW + '.csv')
+cum_curr_df = pd.read_csv(r'FPL/FPL_S' + season + '_GW1_' + current_GW + '.csv')
 
-# Creating this week gameweek not cumulative dataframe by subtracting the cumulative dataframes
-# Creating a list of all the variables that should be subtracted from each other
-subtraction_lst = ['Pts.', 'Minutes played', 'Goals scored', 'Assists', 'Clean sheets',
-                   'Goals conceded', 'Own goals', 'Penalties saved', 'Penalties missed',
-                   'Yellow cards', 'Red cards', 'Saves', 'Bonus', 'Bonus Points System',
-                   'Times in Dream Team', 'Transfers in', 'Transfers out']
+# Importing the previous and current cumulative players xG stats from the Understat site
+cum_prev_xG_df = pd.read_csv(r'Understat\xG_S' + season + '_GW1_' + previous_GW + '.csv')
+cum_curr_xG_df = pd.read_csv(r'Understat\xG_S' + season + '_GW1_' + current_GW + '.csv')
 
-# Merging the previous and current gameweeks dataframes
-temp_GW = pd.merge(current_df,
-                   previous_df,
-                   on=['Player', 'Team', 'Role'],
-                   how='outer',
-                   suffixes=['_current', '_previous'])
+# First, we'll drop some column on the xG's dataframes we alredy have on the FPL dataframes
+drop_col_lst = ['Player_Minutes played',
+                'Player_Goals scored',
+                'Player_Assists']
 
-# Creating an empty dataframe to which the not cumulative values will be passed
-GW = pd.DataFrame(columns=list(current_df.columns))
+cum_prev_xG_df = cum_prev_xG_df.drop(columns=drop_col_lst)
+cum_curr_xG_df = cum_curr_xG_df.drop(columns=drop_col_lst)
 
-# Iterating through the columns and passing them to the final dataframe
-for col in list(GW.columns):
-    if col in subtraction_lst:
-        GW[col] = temp_GW[col + '_current'] - temp_GW[col + '_previous']
-    elif col in ['Player', 'Team', 'Role']:
-        GW[col] = temp_GW[col]
-    else:
-        GW[col] = temp_GW[col + '_current']
-
-###########################################################################################
-
-# Import the schedule of all the teams
-Schedule = pd.read_csv('Schedule.csv', index_col=0)
-
-# Inserting a Gameweek column
-GW.insert(1, 'Gameweek', current_GW)
-
-# Inserting an empty opponent column in the GW dataframe
-GW.insert(3, 'Opponent', 'nan')
-
-# Inserting the relevant opponents from the Schedule df
-GW['Opponent'] = [Schedule.loc[team, current_GW] for team in GW['Team']]
-
-
-##########################################################################################
-
-# Import the PLT with all the relevant team stats
-PLT = pd.read_csv(r'League Table\S' + season + '_GW1_' + current_GW + '.csv')
-
-# Merge the PLT to the GW dataframe
-GW = pd.merge(GW,
-              PLT,
-              on=['Team'],
-              how='inner')
-
-
-##########################################################################################
-
-# Importing the players xG stats from the Understat site
-xG_df = pd.read_csv(r'Understat\S' + season + '_GW1_' + current_GW + '.csv')
-
-# First, we'll merge using the full player name
-full_name = pd.merge(current_df,
-                     xG_df,
+# Now, we'll start the merging process
+# First, We'll merge using the full player name
+full_name = pd.merge(cum_curr_df,
+                     cum_curr_xG_df,
                      on=['Player', 'Team'],
                      how='inner')
 
 # This got us 379 out of 410 players merged.
 # Now, we'll break their names to first and last names, and try to merge by them
-xG_df.insert(1, 'Player_first', 'nan')
-for i in range(0, len(xG_df)):
-    xG_df['Player_first'][i] = re.split('[ ]', xG_df['Player'][i])[0]
+cum_curr_xG_df.insert(1, 'Player_first', 'nan')
+for i in range(0, len(cum_curr_xG_df)):
+    cum_curr_xG_df['Player_first'][i] = re.split('[ ]', cum_curr_xG_df['Player'][i])[0]
     try:
-        xG_df['Player'][i] = re.split('[ ]', xG_df['Player'][i])[1] + ' ' + \
-                                     re.split('[ ]', xG_df['Player'][i])[2] + ' ' + \
-                                     re.split('[ ]', xG_df['Player'][i])[3]
+        cum_curr_xG_df['Player'][i] = re.split('[ ]', cum_curr_xG_df['Player'][i])[1] + ' ' + \
+                                     re.split('[ ]', cum_curr_xG_df['Player'][i])[2] + ' ' + \
+                                     re.split('[ ]', cum_curr_xG_df['Player'][i])[3]
     except IndexError:
         pass
         try:
-            xG_df['Player'][i] = re.split('[ ]', xG_df['Player'][i])[1] + ' ' +\
-                                         re.split('[ ]', xG_df['Player'][i])[2]
+            cum_curr_xG_df['Player'][i] = re.split('[ ]', cum_curr_xG_df['Player'][i])[1] + ' ' +\
+                                         re.split('[ ]', cum_curr_xG_df['Player'][i])[2]
         except IndexError:
             pass
             try:
-                xG_df['Player'][i] = re.split('[ ]', xG_df['Player'][i])[1]
+                cum_curr_xG_df['Player'][i] = re.split('[ ]', cum_curr_xG_df['Player'][i])[1]
             except IndexError:
                 pass
 
 # Inner merge the xG df with the FPL df based on the last name of the players
 # First, there are few players with incorrect team names, so we'll change them and then merge.
-xG_df['Team'][xG_df['Player'] == 'Walcott'] = 'SOU'
-xG_df['Team'][xG_df['Player'] == 'Loftus-Cheek'] = 'FUL'
+cum_curr_xG_df['Team'][cum_curr_xG_df['Player'] == 'Walcott'] = 'SOU'
+cum_curr_xG_df['Team'][cum_curr_xG_df['Player'] == 'Loftus-Cheek'] = 'FUL'
 
-last_name = pd.merge(current_df,
-                     xG_df,
+last_name = pd.merge(cum_curr_df,
+                     cum_curr_xG_df,
                      on=['Player', 'Team'],
                      how='inner')
 
 # Concatenating the two dfs while dropping the first name column, which interfers dropping duplicates
-xG_FPL = pd.concat([full_name, last_name]).drop(columns=['Player_first']).drop_duplicates()
+curr_merged_df = pd.concat([full_name, last_name]).drop(columns=['Player_first']).drop_duplicates()
 
 # Then, we create another xG df without the Player column, to try merging based on the players' first name
-xG_df2 = xG_df.drop(columns='Player')
-first_name = pd.merge(current_df,
-                      xG_df2,
+cum_curr_xG_df2 = cum_curr_xG_df.drop(columns='Player')
+first_name = pd.merge(cum_curr_df,
+                      cum_curr_xG_df2,
                       left_on=['Player', 'Team'],
                       right_on=['Player_first', 'Team'],
                       how='inner')
 
-# Again, we concatenate the first_name df with the existing xG_FPL merged df
-xG_FPL = pd.concat([xG_FPL, first_name]).drop(columns=['Player_first']).drop_duplicates()
+# Again, we concatenate the first_name df with the existing curr_merged_df merged df
+curr_merged_df = pd.concat([curr_merged_df, first_name]).drop(columns=['Player_first']).drop_duplicates()
 
-# We're still missing 14 players to fully merge the xG_df and the current_df. Let's track them
-miss_df = xG_df[['Player', 'Player_first']][(~xG_df['Player'].isin(xG_FPL['Player'])) &
-                                             (~xG_df['Player_first'].isin(xG_FPL['Player']))]
+# We're still missing 14 players to fully merge the cum_curr_xG_df and the cum_curr_df. Let's track them
+miss_df = cum_curr_xG_df[['Player', 'Player_first']][(~cum_curr_xG_df['Player'].isin(curr_merged_df['Player'])) &
+                                             (~cum_curr_xG_df['Player_first'].isin(curr_merged_df['Player']))]
 
 # Creating manually a dictionary to replace the wrong player names with right ones
 miss_dct = {'Mitrovic': 'Mitrović',
@@ -145,16 +97,157 @@ miss_dct = {'Mitrovic': 'Mitrović',
             'Zambo': 'Anguissa',
             'Vinicius': 'Carlos'}
 
-xG_FPL[xG_FPL['Player'] == 'Bobby Reid']['Team']
-current_df[current_df['Player'] == 'Loftus-Cheek']
 # Replace the wrong values player names by mapping
-xG_missing = xG_df[xG_df['Player'].isin(miss_dct.keys())]
+xG_missing = cum_curr_xG_df[cum_curr_xG_df['Player'].isin(miss_dct.keys())]
 xG_missing['Player'] = xG_missing['Player'].map(miss_dct)
 
-# Merging the xG_FPL df with the xG_missing df, and then concatenating
-missing_name = pd.merge(current_df,
+# Merging the curr_merged_df df with the xG_missing df, and then concatenating
+missing_name = pd.merge(cum_curr_df,
                         xG_missing,
                         on=['Player', 'Team'],
                         how='inner')
 
-xG_FPL = pd.concat([xG_FPL, missing_name]).drop(columns=['Player_first']).drop_duplicates()
+curr_merged_df = pd.concat([curr_merged_df, missing_name]).drop(columns=['Player_first']).drop_duplicates().reset_index(drop=True)
+
+
+
+#######################################################################################################################
+
+
+
+# Now, we'll repeat the process for the previous gameweek xG and FPL dataframes
+
+# First, we'll merge using the full player name
+full_name = pd.merge(cum_prev_df,
+                     cum_prev_xG_df,
+                     on=['Player', 'Team'],
+                     how='inner')
+
+# This got us 379 out of 410 players merged.
+# Now, we'll break their names to first and last names, and try to merge by them
+cum_prev_xG_df.insert(1, 'Player_first', 'nan')
+for i in range(0, len(cum_prev_xG_df)):
+    cum_prev_xG_df['Player_first'][i] = re.split('[ ]', cum_prev_xG_df['Player'][i])[0]
+    try:
+        cum_prev_xG_df['Player'][i] = re.split('[ ]', cum_prev_xG_df['Player'][i])[1] + ' ' + \
+                                     re.split('[ ]', cum_prev_xG_df['Player'][i])[2] + ' ' + \
+                                     re.split('[ ]', cum_prev_xG_df['Player'][i])[3]
+    except IndexError:
+        pass
+        try:
+            cum_prev_xG_df['Player'][i] = re.split('[ ]', cum_prev_xG_df['Player'][i])[1] + ' ' +\
+                                         re.split('[ ]', cum_prev_xG_df['Player'][i])[2]
+        except IndexError:
+            pass
+            try:
+                cum_prev_xG_df['Player'][i] = re.split('[ ]', cum_prev_xG_df['Player'][i])[1]
+            except IndexError:
+                pass
+
+# Inner merge the xG df with the FPL df based on the last name of the players
+# First, there are few players with incorrect team names, so we'll change them and then merge.
+cum_prev_xG_df['Team'][cum_prev_xG_df['Player'] == 'Walcott'] = 'SOU'
+cum_prev_xG_df['Team'][cum_prev_xG_df['Player'] == 'Loftus-Cheek'] = 'FUL'
+
+last_name = pd.merge(cum_prev_df,
+                     cum_prev_xG_df,
+                     on=['Player', 'Team'],
+                     how='inner')
+
+# Concatenating the two dfs while dropping the first name column, which interfers dropping duplicates
+prev_merged_df = pd.concat([full_name, last_name]).drop(columns=['Player_first']).drop_duplicates()
+
+# Then, we create another xG df without the Player column, to try merging based on the players' first name
+cum_prev_xG_df2 = cum_prev_xG_df.drop(columns='Player')
+first_name = pd.merge(cum_prev_df,
+                      cum_prev_xG_df2,
+                      left_on=['Player', 'Team'],
+                      right_on=['Player_first', 'Team'],
+                      how='inner')
+
+# Again, we concatenate the first_name df with the existing prev_merged_df merged df
+prev_merged_df = pd.concat([prev_merged_df, first_name]).drop(columns=['Player_first']).drop_duplicates()
+
+# We're still missing 14 players to fully merge the cum_prev_xG_df and the cum_prev_df. Let's track them
+miss_df = cum_prev_xG_df[['Player', 'Player_first']][(~cum_prev_xG_df['Player'].isin(prev_merged_df['Player'])) &
+                                             (~cum_prev_xG_df['Player_first'].isin(prev_merged_df['Player']))]
+
+# Replace the wrong values player names by mapping
+xG_missing = cum_prev_xG_df[cum_prev_xG_df['Player'].isin(miss_dct.keys())]
+xG_missing['Player'] = xG_missing['Player'].map(miss_dct)
+
+# Merging the prev_merged_df df with the xG_missing df, and then concatenating
+missing_name = pd.merge(cum_prev_df,
+                        xG_missing,
+                        on=['Player', 'Team'],
+                        how='inner')
+
+prev_merged_df = pd.concat([prev_merged_df, missing_name]).drop(columns=['Player_first']).drop_duplicates().reset_index(drop=True)
+
+
+
+########################################################################################################################
+
+
+
+# Now, we'll crete the final Gameweek dataframe by subtracting the cumulative dataframes
+
+# Creating a list of all the variables that should be subtracted from each other
+subtraction_lst = ['Pts.', 'Minutes played', 'Goals scored', 'Assists', 'Clean sheets',
+                   'Goals conceded', 'Own goals', 'Penalties saved', 'Penalties missed',
+                   'Yellow cards', 'Red cards', 'Saves', 'Bonus', 'Bonus Points System',
+                   'Times in Dream Team', 'Transfers in', 'Transfers out', 'Player_NPG',
+                   'Player_xG', 'Player_NPxG', 'Player_xA', 'Player_xGChain', 'Player_xGBuildup']
+
+# Merging the previous and current gameweeks dataframes
+temp_GW = pd.merge(curr_merged_df,
+                   prev_merged_df,
+                   on=['Player', 'Team', 'Role'],
+                   how='outer',
+                   suffixes=['_current', '_previous'])
+
+# Creating an empty dataframe to which the not cumulative values will be passed
+GW = pd.DataFrame(columns=list(curr_merged_df.columns))
+
+# Iterating through the columns and passing them to the final dataframe
+for col in list(GW.columns):
+    if col in subtraction_lst:
+        GW[col] = temp_GW[col + '_current'] - temp_GW[col + '_previous']
+    elif col in ['Player', 'Team', 'Role']:
+        GW[col] = temp_GW[col]
+    else:
+        GW[col] = temp_GW[col + '_current']
+
+###########################################################################################
+
+# Import the schedule of all the teams
+Schedule = pd.read_csv('Schedule.csv', index_col=0)
+
+# Inserting a Gameweek and a Season column
+GW.insert(1, 'Gameweek', current_GW)
+GW.insert(1, 'Season', season)
+
+# Inserting an empty opponent column in the GW dataframe
+GW.insert(3, 'Opponent', 'nan')
+
+# Inserting the relevant opponents from the Schedule df
+GW['Opponent'] = [Schedule.loc[team, current_GW] for team in GW['Team']]
+
+
+##########################################################################################
+
+# Import the PLT with all the relevant team stats
+PLT = pd.read_csv(r'PLT\PLT_S' + season + '_GW1_' + current_GW + '.csv')
+
+# Merge the PLT to the GW dataframe
+GW = pd.merge(GW,
+              PLT,
+              on=['Team'],
+              how='inner')
+
+# Dropping the percent sign off the Sel. column in both dataframes.
+# This will allow us to convert the column to numeric type
+prev_merged_df['Sel.'] = [float(prev_merged_df['Sel.'][i].replace('%', '')) for i in prev_merged_df.index.tolist()]
+curr_merged_df['Sel.'] = [float(curr_merged_df['Sel.'][i].replace('%', '')) for i in curr_merged_df.index.tolist()]
+
+
