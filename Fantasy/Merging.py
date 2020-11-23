@@ -6,8 +6,8 @@ import re
 # First, we'll define a set of parameters that will allow us
 # to modify easily the code from one gameweek to another
 season = '21'
-previous_GW = '7'
-current_GW = '8'
+previous_GW = '5'
+current_GW = '6'
 
 # Import the previous and this week cumulative dataframes
 cum_prev_df = pd.read_csv(r'FPL/FPL_S' + season + '_GW1_' + previous_GW + '.csv')
@@ -17,7 +17,11 @@ cum_curr_df = pd.read_csv(r'FPL/FPL_S' + season + '_GW1_' + current_GW + '.csv')
 cum_prev_xG_df = pd.read_csv(r'Understat\xG_S' + season + '_GW1_' + previous_GW + '.csv')
 cum_curr_xG_df = pd.read_csv(r'Understat\xG_S' + season + '_GW1_' + current_GW + '.csv')
 
-# First, we'll drop some column on the xG's dataframes we alredy have on the FPL dataframes
+# Import the previous and current cumulative PLT's with all the relevant team stats
+cum_prev_PLT = pd.read_csv(r'PLT\PLT_S' + season + '_GW1_' + previous_GW + '.csv')
+cum_curr_PLT = pd.read_csv(r'PLT\PLT_S' + season + '_GW1_' + current_GW + '.csv')
+
+# First, we'll drop some column on the xG's dataframes we already have on the FPL dataframes
 drop_col_lst = ['Player_Minutes played',
                 'Player_Goals scored',
                 'Player_Assists']
@@ -109,6 +113,11 @@ missing_name = pd.merge(cum_curr_df,
 
 curr_merged_df = pd.concat([curr_merged_df, missing_name]).drop(columns=['Player_first']).drop_duplicates().reset_index(drop=True)
 
+# We'll finish by merging the cumulative team stats to the curr_merged_df
+curr_merged_df = pd.merge(curr_merged_df,
+                 cum_curr_PLT,
+                 on=['Team'],
+                 how='inner')
 
 
 #######################################################################################################################
@@ -184,20 +193,37 @@ missing_name = pd.merge(cum_prev_df,
 
 prev_merged_df = pd.concat([prev_merged_df, missing_name]).drop(columns=['Player_first']).drop_duplicates().reset_index(drop=True)
 
+# We'll finish by merging the cumulative team stats to the prev_merged_df
+prev_merged_df = pd.merge(prev_merged_df,
+                 cum_prev_PLT,
+                 on=['Team'],
+                 how='inner')
 
 
 ########################################################################################################################
 
-
+cum_curr_PLT.columns
 
 # Now, we'll crete the final Gameweek dataframe by subtracting the cumulative dataframes
 
 # Creating a list of all the variables that should be subtracted from each other
-subtraction_lst = ['Pts.', 'Minutes played', 'Goals scored', 'Assists', 'Clean sheets',
-                   'Goals conceded', 'Own goals', 'Penalties saved', 'Penalties missed',
-                   'Yellow cards', 'Red cards', 'Saves', 'Bonus', 'Bonus Points System',
-                   'Times in Dream Team', 'Transfers in', 'Transfers out', 'Player_NPG',
-                   'Player_xG', 'Player_NPxG', 'Player_xA', 'Player_xGChain', 'Player_xGBuildup']
+# List of variables of the FPL stats that should be subtracted
+FPL_subtract = ['Pts.', 'Minutes played', 'Goals scored', 'Assists', 'Clean sheets',
+                'Goals conceded', 'Own goals', 'Penalties saved', 'Penalties missed',
+                'Yellow cards', 'Red cards', 'Saves', 'Bonus', 'Bonus Points System',
+                'Times in Dream Team', 'Transfers in', 'Transfers out']
+
+# List of variables of the player xG stats that should be subtracted
+xG_subtract = ['Player_NPG', 'Player_xG', 'Player_NPxG',
+               'Player_xA', 'Player_xGChain', 'Player_xGBuildup']
+
+# List of variables of the Team stats that should be subtracted
+PLT_subtract = ['Team_M', 'Team_W', 'Team_D', 'Team_L', 'Team_G', 'Team_GA',
+                'Team_PTS', 'Team_xG', 'Team_NPxG', 'Team_xGA', 'Team_NPxGA',
+                'Team_NPxGD', 'Team_PPDA', 'Team_OPPDA', 'Team_DC', 'Team_ODC', 'Team_xPTS']
+
+# Concatenating the three list to the final subtraction list
+subtraction_lst = FPL_subtract + xG_subtract + PLT_subtract
 
 # Merging the previous and current gameweeks dataframes
 temp_GW = pd.merge(curr_merged_df,
@@ -221,7 +247,7 @@ for col in list(GW.columns):
 ###########################################################################################
 
 # Import the schedule of all the teams
-Schedule = pd.read_csv('Schedule.csv', index_col=0)
+Schedule = pd.read_csv(r'Schedule\Schedule_S' + season + '.csv', index_col=0)
 
 # Inserting a Gameweek and a Season column
 GW.insert(1, 'Gameweek', current_GW)
@@ -236,18 +262,11 @@ GW['Opponent'] = [Schedule.loc[team, current_GW] for team in GW['Team']]
 
 ##########################################################################################
 
-# Import the PLT with all the relevant team stats
-PLT = pd.read_csv(r'PLT\PLT_S' + season + '_GW1_' + current_GW + '.csv')
-
-# Merge the PLT to the GW dataframe
-GW = pd.merge(GW,
-              PLT,
-              on=['Team'],
-              how='inner')
-
 # Dropping the percent sign off the Sel. column in both dataframes.
 # This will allow us to convert the column to numeric type
-prev_merged_df['Sel.'] = [float(prev_merged_df['Sel.'][i].replace('%', '')) for i in prev_merged_df.index.tolist()]
-curr_merged_df['Sel.'] = [float(curr_merged_df['Sel.'][i].replace('%', '')) for i in curr_merged_df.index.tolist()]
+GW['Sel.'] = [float(str(GW['Sel.'][i]).replace('%', '')) for i in GW.index.tolist()]
 
+# Exporting the final GW dataframe to a single gameweek csv file
+GW.to_csv(r'Single GW\SGW_S' + season + '_GW_' + current_GW + '.csv', index=False)
 
+# Appending the final GW dataframe to the Final Data file, which contains all the gameweeks
