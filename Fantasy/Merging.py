@@ -6,8 +6,8 @@ import re
 # First, we'll define a set of parameters that will allow us
 # to modify easily the code from one gameweek to another
 season = '21'
-previous_GW = '8'
-current_GW = '9'
+previous_GW = '5'
+current_GW = '6'
 
 # Import the previous and this week cumulative dataframes
 cum_prev_df = pd.read_csv(r'FPL/FPL_S' + season + '_GW1_' + previous_GW + '.csv')
@@ -260,10 +260,36 @@ GW['Opponent'] = [Schedule.loc[team, current_GW] for team in GW['Team']]
 
 # Inserting Home column, which will contain a dummy variable: 1 for home game, 0 for away game
 # Classification to Home/Away games is done based on the opponent team's name being uppercase/lowercase
-# GW.insert(5, 'Home', 0)
-# GW['Home'] = [1 if GW['Opponent'][i].isupper() == True else 0 for i in GW.index.tolist()]
+GW.insert(5, 'Home', 0)
+GW['Home'] = [1 if GW['Opponent'][i].isupper() == True else 0 for i in GW.index.tolist()]
 
 ##########################################################################################
+
+# Create a dataframe which will contain the average stats of the team. This stats will be merged to the dataframe
+# as the opponent team stats, in order to get a better understanding of the quality of the opponent team
+avg_opponent = cum_curr_PLT.drop(columns=['Team_W', 'Team_D', 'Team_L'])
+
+# Dividing and changing column names to start with "Opp_Avg" instead of "Team"
+for elem in avg_opponent.columns.drop(['Team_Ranking', 'Team', 'Team_M']):
+    avg_opponent[elem] = avg_opponent[elem] / avg_opponent['Team_M']
+    avg_opponent = avg_opponent.rename(columns={elem: str(elem).replace('Team', 'Opp_Avg')})
+
+avg_opponent = avg_opponent.rename(columns={'Team_Ranking': 'Opp_Ranking',
+                                            'Team': 'Opponent'})
+
+# Drop the opponent number of matches stats, which doesn't interest us.
+avg_opponent = avg_opponent.drop(columns='Team_M')
+
+# Merging this information to the main dataframe, with the Opponent column on the left and the Team column on the right
+
+# Before merging, we'll have to uppercase the team names in the GW's Opponent column, otherwise merge won't work
+GW['Opponent'] = GW['Opponent'].str.upper()
+
+# Merging
+GW = pd.merge(GW,
+              avg_opponent,
+              on='Opponent',
+              how='inner')
 
 # Dropping the percent sign off the Sel. column in both dataframes.
 # This will allow us to convert the column to numeric type
@@ -273,7 +299,10 @@ GW['Sel.'] = [float(str(GW['Sel.'][i]).replace('%', '')) for i in GW.index.tolis
 # GW.to_csv(r'Single GW\SGW_S' + season + '_GW_' + current_GW + '.csv', index=False)
 
 # Appending the final GW dataframe to the Final Data file, which contains all the gameweeks
-GW.to_csv('Final Data.csv',
-          mode='a',
-          header=False,
-          index=False)
+# GW.to_csv('Final Data.csv',
+#           mode='a',
+#           header=False,
+#           index=False)
+
+
+
