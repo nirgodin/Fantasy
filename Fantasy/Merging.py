@@ -6,8 +6,8 @@ import re
 # First, we'll define a set of parameters that will allow us
 # to modify easily the code from one gameweek to another
 season = '21'
-previous_GW = '5'
-current_GW = '6'
+previous_GW = '8'
+current_GW = '9'
 
 # Import the previous and this week cumulative dataframes
 cum_prev_df = pd.read_csv(r'FPL/FPL_S' + season + '_GW1_' + previous_GW + '.csv')
@@ -202,7 +202,6 @@ prev_merged_df = pd.merge(prev_merged_df,
 
 ########################################################################################################################
 
-cum_curr_PLT.columns
 
 # Now, we'll crete the final Gameweek dataframe by subtracting the cumulative dataframes
 
@@ -259,6 +258,10 @@ GW.insert(3, 'Opponent', 'nan')
 # Inserting the relevant opponents from the Schedule df
 GW['Opponent'] = [Schedule.loc[team, current_GW] for team in GW['Team']]
 
+# Inserting Home column, which will contain a dummy variable: 1 for home game, 0 for away game
+# Classification to Home/Away games is done based on the opponent team's name being uppercase/lowercase
+# GW.insert(5, 'Home', 0)
+# GW['Home'] = [1 if GW['Opponent'][i].isupper() == True else 0 for i in GW.index.tolist()]
 
 ##########################################################################################
 
@@ -267,6 +270,10 @@ GW['Opponent'] = [Schedule.loc[team, current_GW] for team in GW['Team']]
 GW['Sel.'] = [float(str(GW['Sel.'][i]).replace('%', '')) for i in GW.index.tolist()]
 
 # Exporting the final GW dataframe to a single gameweek csv file
-GW.to_csv(r'Single GW\SGW_S' + season + '_GW_' + current_GW + '.csv', index=False)
+# GW.to_csv(r'Single GW\SGW_S' + season + '_GW_' + current_GW + '.csv', index=False)
 
 # Appending the final GW dataframe to the Final Data file, which contains all the gameweeks
+GW.to_csv('Final Data.csv',
+          mode='a',
+          header=False,
+          index=False)
