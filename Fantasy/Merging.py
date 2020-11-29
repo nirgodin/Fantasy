@@ -3,12 +3,6 @@ import pandas as pd
 import numpy as np
 import re
 
-# First, we'll define a set of parameters that will allow us
-# to modify easily the code from one gameweek to another
-season = '21'
-previous_GW = '5'
-current_GW = '6'
-
 # Import the previous and this week cumulative dataframes
 cum_prev_df = pd.read_csv(r'FPL/FPL_S' + season + '_GW1_' + previous_GW + '.csv')
 cum_curr_df = pd.read_csv(r'FPL/FPL_S' + season + '_GW1_' + current_GW + '.csv')

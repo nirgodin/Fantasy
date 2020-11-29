@@ -8,16 +8,13 @@ from selenium.common.exceptions import ElementClickInterceptedException
 from selenium.common.exceptions import NoSuchElementException
 import re
 
-# First, we'll define a set of paramaters that will allow us to easily modify the code from one gameweek to another
-season = '21'
-previous_GW = '8'
-current_GW = '9'
-
 # Setting driver
 driver = webdriver.Chrome(r'C:\Users\nirgo\PycharmProjects\Fantasy\Browsers\chromedriver.exe')
 
 
-# Defining the class and two functions that will allow us scraping the data and arranging it in a dataframe
+# Defining the class and two functions that will allow us scraping the data and arranging it in a dataframe.
+# Credit for these function to Scott Rome. They can be found here:
+# https://srome.github.io/Parsing-HTML-Tables-in-Python-with-BeautifulSoup-and-pandas/
 class HTMLTableParser:
 
     def parse_html(self):

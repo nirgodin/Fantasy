@@ -3,13 +3,9 @@ import pandas as pd
 import os
 from datetime import datetime
 
-# First, we'll define a set of parameters that will allow us
-# to modify easily the code from one gameweek to another
-season = '21'
-previous_GW = '7'
-current_GW = '8'
-
 # Create the functions that will connect between python and the sql database, create and populate the tables
+# Credit to Niels Goet from TowardsDataScience for these functions. they can be found here:
+# https://towardsdatascience.com/how-to-build-a-relational-database-from-csv-files-using-python-and-heroku-20ea89a55c63
 
 
 def run_syntax(db_connection: psycopg2, syntax: str) -> None:
@@ -127,89 +123,144 @@ def populate_table(table_name: str, df: pd.DataFrame) -> None:
 # create_table(table='s21_schedule',
 #              schema=schedule_schema)
 
-# Fantasy Table
-fantasy_schema = """
-season REAL,
-gameweek REAL,
-player VARCHAR,
-team VARCHAR(3),
-role VARCHAR(3),
-cost REAL,
-sel VARCHAR,
-form REAL,
-pts REAL,
-minutes_played REAL,
-goals_scored REAL,
-assists REAL,
-clean_sheets REAL,
-goals_conceded REAL,
-own_goals REAL,
-penalties_saved REAL,
-penalties_missed REAL,
-yellow_cards REAL,
-red_cards REAL,
-saves REAL,
-bonus REAL,
-bonus_points_system REAL,
-influence REAL,
-creativity REAL,
-threat REAL,
-ict_index REAL,
-form1 REAL,
-times_in_dream_team REAL,
-value_form REAL,
-value_season REAL,
-points_per_match REAL,
-transfers_in REAL,
-transfers_out REAL,
-price_rise REAL,
-price_fall REAL
-"""
+#######################################################################################################################
 
-# Creating the 2020-2021 Season schedule table
-create_table(table='fantasy',
-             schema=fantasy_schema)
+# # Fantasy Table
+# fantasy_schema = """
+# season REAL,
+# gameweek REAL,
+# player VARCHAR,
+# team VARCHAR(3),
+# role VARCHAR(3),
+# cost REAL,
+# sel VARCHAR,
+# form REAL,
+# pts REAL,
+# minutes_played REAL,
+# goals_scored REAL,
+# assists REAL,
+# clean_sheets REAL,
+# goals_conceded REAL,
+# own_goals REAL,
+# penalties_saved REAL,
+# penalties_missed REAL,
+# yellow_cards REAL,
+# red_cards REAL,
+# saves REAL,
+# bonus REAL,
+# bonus_points_system REAL,
+# influence REAL,
+# creativity REAL,
+# threat REAL,
+# ict_index REAL,
+# form1 REAL,
+# times_in_dream_team REAL,
+# value_form REAL,
+# value_season REAL,
+# points_per_match REAL,
+# transfers_in REAL,
+# transfers_out REAL,
+# price_rise REAL,
+# price_fall REAL
+# """
+#
+# # Creating the fantasy table
+# create_table(table='fantasy',
+#              schema=fantasy_schema)
 
+#######################################################################################################################
+
+# # xg_players table
+# xg_players_schema = """
+# season REAL,
+# gameweek REAL,
+# player VARCHAR,
+# team VARCHAR(3),
+# appearances REAL,
+# minutes_played REAL,
+# goals_scored REAL,
+# npg REAL,
+# assists REAL,
+# xg REAL,
+# npxg REAL,
+# xa REAL,
+# xgchain REAL,
+# xgbuildup REAL,
+# xg90 REAL,
+# npxg90 REAL,
+# xa90 REAL,
+# xg90_plus_xa90 REAL,
+# npxg90_plus_xa90 REAL,
+# xgchain90 REAL,
+# xgbuildup90 REAL
+# """
+#
+# # Creating the fantasy table
+# create_table(table='xg_players',
+#              schema=xg_players_schema)
+
+
+# Load and populate the xg_players table
+cum_curr_xG = pd.read_csv(r'Understat\xG_S' + season + '_GW1_' + current_GW + '.csv').fillna('-')
+
+# Transforming the column names to a suitable format for a SQL database (lowercase, no spaces and parenthesis)
+for col in cum_curr_xG.columns.tolist():
+    cum_curr_xG = cum_curr_xG.rename(columns={col: col.lower()
+                                                      .replace('player_', '')
+                                                      .replace(' ', '_')
+                                                      .replace('+', '_plus_')})
+
+# Deleting apostrophes in the players' names, which causes troubles to upload to the sql database
+cum_curr_xG['player'] = [player.replace("'", "") for player in cum_curr_xG['player']]
+
+# Inserting season and gameweek variables to the dataframe, to help distinguish between different seasons and weeks
+cum_curr_xG.insert(0, 'gameweek', current_GW)
+cum_curr_xG.insert(0, 'season', season)
+
+# Populating the table
+populate_table(table_name='xg_players',
+               df=cum_curr_xG)
+
+#######################################################################################################################
 
 # Import the schedule of all the teams
 
 # Load and populate the schedule table.
 # This is commented out until there will be a new season and a new schedule to load
-Schedule = pd.read_csv(r'Schedule\Schedule_S21.csv')
-Schedule = Schedule.fillna('-')
+Schedule = pd.read_csv(r'Schedule\Schedule_S21.csv').fillna('-')
+
+# Adding 'gw_' introduction to all the column names besides team, to avoid numeric column names
 for col in Schedule.columns.drop('Team'):
     Schedule = Schedule.rename(columns={col: 'gw_' + col})
+
+# Lowercase the team column name, to better suit SQL
 Schedule = Schedule.rename(columns={'Team': 'team'})
 
 # Populating the table
 populate_table(table_name='s21_schedule',
                df=Schedule)
 
-for i in list(range(5,10)):
-    current_GW = str(i)
+#######################################################################################################################
 
-    # Load and populate the fantasy table
-    cum_curr_fpl = pd.read_csv(r'FPL/FPL_S' + season + '_GW1_' + current_GW + '.csv').fillna('-')
+# Load and populate the fantasy table
+cum_curr_fpl = pd.read_csv(r'FPL/FPL_S' + season + '_GW1_' + current_GW + '.csv').fillna('-')
 
-    # Transforming the column names to a suitable format for a SQL database (lowercase, no spaces and parenthesis)
-    for col in cum_curr_fpl.columns.tolist():
-        cum_curr_fpl = cum_curr_fpl.rename(columns={col:col.lower().replace(' ', '_')})
-    for col in cum_curr_fpl.columns.tolist():
-        cum_curr_fpl = cum_curr_fpl.rename(columns={col: col.replace('(', '')})
-    for col in cum_curr_fpl.columns.tolist():
-        cum_curr_fpl = cum_curr_fpl.rename(columns={col: col.replace(')', '')})
-    for col in cum_curr_fpl.columns.tolist():
-        cum_curr_fpl = cum_curr_fpl.rename(columns={col: col.replace('.', '')})
+# Transforming the column names to a suitable format for a SQL database (lowercase, no spaces, parenthesis or dots)
+for col in cum_curr_fpl.columns.tolist():
+    cum_curr_fpl = cum_curr_fpl.rename(columns={col: col.lower()
+                                                        .replace(' ', '_')
+                                                        .replace('(', '')
+                                                        .replace(')', '')
+                                                        .replace('.', '')})
 
-    cum_curr_fpl['player'] = [player.replace("'", "") for player in cum_curr_fpl['player']]
+# Deleting apostrophes in the players' names, which causes troubles to upload to the sql database
+cum_curr_fpl['player'] = [player.replace("'", "") for player in cum_curr_fpl['player']]
 
-    # Inserting season and gameweek variables to the dataframe, to help distinguish between different seasons and weeks
-    cum_curr_fpl.insert(0, 'gameweek', current_GW)
-    cum_curr_fpl.insert(0, 'season', season)
+# Inserting season and gameweek variables to the dataframe, to help distinguish between different seasons and weeks
+cum_curr_fpl.insert(0, 'gameweek', current_GW)
+cum_curr_fpl.insert(0, 'season', season)
 
-    # Introducing the schema for creating the fantasy table
-
-    # Populating the table
-    populate_table(table_name='fantasy',
-                   df=cum_curr_fpl)
+# Populating the table
+populate_table(table_name='fantasy',
+               df=cum_curr_fpl)
 
