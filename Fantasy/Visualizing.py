@@ -4,41 +4,55 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 import os
 
+# Setting variables which are relevant for the entire analysis
+season = '21'
+last_GW = '10'
+minutes_threshold = 200
+
+# Import data
 data = pd.read_csv('Final Data.csv')
 
-# Section 1: Fantasy
+######################                            SECTION 1 - FANTASY                            ######################
 
-######################                               Player Stability                             ######################
+# SECTION 1.a - PLAYER STABILITY
 
-# which are the most stable players from the fantasy points aspect
+# Which are the most stable players from the fantasy points aspect?
+# This question is answered by measuring the different players' fantasy points standard deviation
+# Low standard deviation indicates a stabler player
 
-# Subsetting the relevant data and pivoting the table
+# Subset the relevant data and pivot the table
 stable_players = data[['Gameweek', 'Player', 'Pts.']]
 stable_players = pd.pivot_table(stable_players,
                                 index='Player',
                                 columns='Gameweek',
                                 values='Pts.')
 
-cum_min_played = pd.read_csv(r'Cumulative Merged Data\CMD_S21_GW_10.csv')[['Player', 'Minutes played']]
+# We won't like to include players who didn't play much in our analysis, so we will import the data about
+# the cumulative minutes each played played in the season, and delete players who didn't play much
+minutes_played = pd.read_csv(r'Cumulative Merged Data\CMD_S' + season + '_GW_' + last_GW + '.csv')[['Player',
+                                                                                                    'Team',
+                                                                                                    'Minutes played']]
 
+# Merge the minutes played to the stable players df
 stable_players = pd.merge(stable_players,
-                          cum_min_played,
-                          on='Player',
+                          minutes_played,
+                          on=['Player', 'Team'],
                           how='inner')
 
-stable_players = stable_players[stable_players['Minutes played'] >= 200]
+# Subsetting players who played less minutes than the minutes threshold we defined
+stable_players = stable_players[stable_players['Minutes played'] >= minutes_threshold]
 
 # Calculating the Mean and Standard Deviation for each player
 stable_players['Mean'] = stable_players.drop(columns='Minutes played').mean(axis=1,
                                                                             skipna=True)
-
 stable_players['Std'] = stable_players.drop(columns='Minutes played').std(axis=1,
                                                                           skipna=True)
 
+# Sorting the players by their standard deviation
 stable_players = stable_players.sort_values(by='Std')
+
+# Creating a list of the top 10 stable player who scored a lot of points
 top_10_stable_players = stable_players[stable_players['Mean'] > 5].sort_values(by='Std').reset_index().head(10)
-
-
 
 # Checking if there are any missing values in the xG_FPL df, using a Seaborn heatmap
 sns.heatmap(xG_FPL.isnull(),

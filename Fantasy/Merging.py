@@ -307,3 +307,71 @@ GW = GW[Final_Data.columns]
 Final_Data = pd.concat([Final_Data, GW])
 
 Final_Data.to_csv('Final Data.csv', index=False)
+
+# Finally, we'll create a dataframe which contains the average player, team and opponent data until the previous GW
+# And the current gameweek points. This data will be used for most of our models
+Model_Data = prev_merged_df.drop(columns='Pts.')
+
+# Inserting a Gameweek and a Season column
+Model_Data.insert(1, 'Gameweek', current_GW)
+Model_Data.insert(1, 'Season', season)
+
+# Inserting an empty opponent column in the Model_Data dataframe
+Model_Data.insert(3, 'Opponent', 'nan')
+
+# Inserting the relevant opponents from the Schedule df
+Model_Data['Opponent'] = [Schedule.loc[team, current_GW] for team in Model_Data['Team']]
+
+# Inserting Home column, which will contain a dummy variable: 1 for home game, 0 for away game
+# Classification to Home/Away games is done based on the opponent team's name being uppercase/lowercase
+Model_Data.insert(5, 'Home', 0)
+Model_Data['Home'] = [1 if Model_Data['Opponent'][i].isupper() == True else 0 for i in Model_Data.index.tolist()]
+
+# Create a dataframe which will contain the average stats of the team. This stats will be merged to the dataframe
+# as the opponent team stats, in order to get a better understanding of the quality of the opponent team
+avg_opponent_2 = cum_prev_PLT.drop(columns=['Team_W', 'Team_D', 'Team_L'])
+
+# Dividing and changing column names to start with "Opp_Avg" instead of "Team"
+for elem in avg_opponent_2.columns.drop(['Team_Ranking', 'Team', 'Team_M']):
+    avg_opponent_2[elem] = avg_opponent_2[elem] / avg_opponent_2['Team_M']
+    avg_opponent_2 = avg_opponent_2.rename(columns={elem: str(elem).replace('Team', 'Opp_Avg')})
+
+avg_opponent_2 = avg_opponent_2.rename(columns={'Team_Ranking': 'Opp_Ranking',
+                                                'Team': 'Opponent'})
+
+# Drop the opponent number of matches stats, which doesn't interest us.
+avg_opponent_2 = avg_opponent_2.drop(columns='Team_M')
+
+# Merging this information to the main dataframe, with the Opponent column on the left and the Team column on the right
+
+# Before merging, we'll have to uppercase the team names in the GW's Opponent column, otherwise merge won't work
+Model_Data['Opponent'] = Model_Data['Opponent'].str.upper()
+
+# Merging the opponent stats
+Model_Data = pd.merge(Model_Data,
+                      avg_opponent_2,
+                      on='Opponent',
+                      how='inner')
+
+# Merging the fantasy points stats for this gameweek
+Model_Data = pd.merge(Model_Data,
+                      GW[['Player', 'Team', 'Pts.']],
+                      on=['Player', 'Team'],
+                      how='inner')
+
+# Dropping Duplicates
+Model_Data = Model_Data.drop_duplicates()
+
+# Exporting
+Model_Data.to_csv(r'Model Data\Single GW\MD_S' + season + '_GW1_' + current_GW + '.csv', index=False)
+
+# Appending the final GW dataframe to the Final Data file, which contains all the gameweeks
+Model_Data_Final = pd.read_csv(r'Model Data\Model Data - Final.csv')
+
+# Verifying the GW dataframe is in the same column order as the final data one
+Model_Data = Model_Data[Model_Data_Final.columns]
+
+# Concatenating and saving
+Model_Data_Final = pd.concat([Model_Data_Final, Model_Data])
+
+Model_Data_Final.to_csv(r'Model Data\Model Data - Final.csv', index=False)
