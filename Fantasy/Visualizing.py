@@ -52,7 +52,69 @@ stable_players['Std'] = stable_players.drop(columns='Minutes played').std(axis=1
 stable_players = stable_players.sort_values(by='Std')
 
 # Creating a list of the top 10 stable player who scored a lot of points
-top_10_stable_players = stable_players[stable_players['Mean'] > 5].sort_values(by='Std').reset_index().head(10)
+top10_stable_players = stable_players[stable_players['Mean'] > 5].sort_values(by='Std').reset_index().head(10)
+
+
+# SECTION 1.b - PLAYER VALUE FOR MONEY
+
+# Subset, create the Value variable and pivot
+value_for_money = data[['Player', 'Gameweek', 'Cost', 'Pts.']]
+value_for_money['Value'] = value_for_money['Pts.'] / value_for_money['Cost']
+value_for_money = pd.pivot_table(value_for_money.drop(columns=['Cost', 'Pts.']),
+                                 index='Player',
+                                 columns='Gameweek',
+                                 values='Value')
+
+# Calculating average value for money
+value_for_money['Mean'] = value_for_money.mean(axis=1,
+                                               skipna=True)
+
+# Sorting
+value_for_money = value_for_money.sort_values(by='Mean',
+                                              ascending=False)
+
+######################                            SECTION 2 - PLAYERS                            ######################
+
+# SECTION 2.a - PLAYER OPPORTUNITY SEIZURE
+
+# Which are the players who are best in seizing goaling opportunities?
+# This question is answered by measuring the different players' cumulative non penalty Goals minus NPxG (non penalty xG).
+# The higher this substraction is, the better the player in seizing opportunities, and vice versa.
+
+# Import data and subset relevant columns
+CM_data = pd.read_csv(r'Cumulative Merged Data\CMD_S' + season + '_GW_' + last_GW + '.csv')
+seizing_players = CM_data[['Player', 'Player_NPG', 'Player_NPxG']]
+
+# Create the Seizure variable
+seizing_players['Seizure'] = seizing_players['Player_NPG'] - seizing_players['Player_NPxG']
+
+# Sorting
+seizing_players = seizing_players.sort_values(by='Seizure',
+                                              ascending=False)
+
+# Creating a list of the top 10 and worst 10 seizing players
+top10_seizing_players = seizing_players.head(10)
+worst10_seizing_players = seizing_players.tail(10)
+
+
+#######################                            SECTION 3 - TEAMS                            #######################
+
+# SECTION 2.a - TEAM OPPORTUNITY SEIZURE
+
+# Which are the teams who are best in seizing goaling opportunities?
+# This question is answered by the same methodology as the player opportunity seizure was answered
+
+# Import data and subset relevant columns
+PLT_data = pd.read_csv(r'PLT\PLT_S' + season + '_GW1_' + last_GW + '.csv')
+seizing_teams = PLT_data[['Team', 'Team_G', 'Team_xG']]
+
+# Create the Seizure variable
+seizing_teams['Seizure'] = seizing_teams['Team_G'] - seizing_teams['Team_xG']
+
+# Sorting
+seizing_teams = seizing_teams.sort_values(by='Seizure',
+                                          ascending=False)
+
 
 # Checking if there are any missing values in the xG_FPL df, using a Seaborn heatmap
 sns.heatmap(xG_FPL.isnull(),
