@@ -10,8 +10,8 @@ import re
 
 # First, we set the season, current gameweek and previous gameweek variables
 season = '21'
-previous_GW = '9'
-current_GW = '10'
+previous_GW = '10'
+current_GW = '11'
 
 # Setting driver
 driver = webdriver.Chrome(r'C:\Users\nirgo\PycharmProjects\Fantasy\Browsers\chromedriver.exe')
@@ -79,77 +79,8 @@ class HTMLTableParser:
 # Shortcut for the HTMLTableParser class
 hp = HTMLTableParser()
 
-# Enter the Fantasy Premier League site
-driver.get('https://fantasy.premierleague.com/statistics')
-sleep(5)
-
-# Setting the path to the next page button, to scroll between pages online
-next_page = driver.find_element_by_xpath('//*[@id="root"]/div[2]/div/div/div[3]/button[3]')
-# Setting the path to the menu button, to switch between summaries of different stats
-menu = Select(driver.find_element_by_xpath('/html/body/main/div/div[2]/div/div/form/div/div[2]/div/div/select'))
-
-# Creating a list containing the full list of the stats we're interested in
-category_lst = ['Player', 'Cost', 'Sel.', 'Form', 'Pts.', 'Minutes played', 'Goals scored',
-                'Assists', 'Clean sheets', 'Goals conceded', 'Own goals', 'Penalties saved',
-                'Penalties missed', 'Yellow cards', 'Red cards', 'Saves', 'Bonus',
-                'Bonus Points System', 'Influence', 'Creativity', 'Threat', 'ICT Index',
-                'Form', 'Times in Dream Team', 'Value (form)', 'Value (season)',
-                'Points per match', 'Transfers in', 'Transfers out', 'Price rise', 'Price fall']
-
-# The first six elements in category_lst appears in all the pages, so we don't need to scrape them seperately.
-# Therefore we'll create a different scraping list
-scraping_lst = [elem for elem in category_lst if elem not in ['Player', 'Cost', 'Sel.', 'Form', 'Pts.']]
-
-# Creating an empty list to which we'll append the scarped dataframes
-df_lst = []
-# Iterating through the values in scraping_lst to scrape all wanted data and append to df_lst
-for elem in scraping_lst:
-    category_df = []
-    clk = 'menu.select_by_visible_text' + '(' + '"' + elem + '"' + ')'
-    exec(clk)
-    page = 0
-    while (True):
-        try:
-            raw = hp.parse_html()
-            temp = hp.arrange_html(raw)
-            category_df.append(temp)
-            next_page.click()
-        except ElementClickInterceptedException as error:
-            break
-    final = pd.concat(category_df)
-    final.rename(columns={'**': elem}, inplace=True)
-    df_lst.append(final)
-
-    # while page <= 20:
-    #     raw = hp.parse_html()
-    #     temp = hp.arrange_html(raw)
-    #     category_df.append(temp)
-    #     next_page.click()
-    #     page += 1
-
-# Merging the different DF's in df_lst to one dataframe
-temp_df = df_lst[0]
-for i in range(1, len(df_lst)):
-    temp_df = pd.merge(temp_df, df_lst[i], on=['Player', 'Cost', 'Sel.', 'Form', 'Pts.'], how='inner')
-final_df = temp_df[category_lst].copy()
-
-# Spliting the Player column to three columns: Player, Team and Role
-Player = [player[0:len(player) - 6] for player in final_df['Player']]
-Team = [player[len(player) - 6:len(player) - 3] for player in final_df['Player']]
-Role = [player[len(player) - 3:len(player)] for player in final_df['Player']]
-
-# Inserting the three new columns to the dataframe
-final_df['Player'] = Player
-final_df.insert(2, 'Role', Role)
-final_df.insert(1, 'Team', Team)
-
-# Export the final dataframe to a csv file
-final_df.to_csv(r'FPL\FPL_S' + season + '_GW1_' + current_GW + '.csv', index=False)
-
-###############################################################################
-
 # Entering the site
-driver.get('https://understat.com/league/EPL/2020')
+driver.get('https://understat.com/league/La_liga')
 sleep(5)
 
 # Expanding the table to include more data
@@ -185,30 +116,30 @@ PLT = hp.arrange_html(raw_PLT).iloc[0:20]
 for elem in ['xG', 'xGA', 'xPTS']:
     PLT[elem] = [re.split('[-+]', PLT[elem][i])[0] for i in range(0, len(PLT))]
 
-# Creating a dictionary to the team names in the PLT to three letters abbreviation
-team_dct = {'Arsenal': 'ARS',
-            'Aston Villa': 'AVL',
-            'Brighton': 'BHA',
-            'Burnley': 'BUR',
-            'Chelsea': 'CHE',
-            'Crystal Palace': 'CRY',
-            'Everton': 'EVE',
-            'Fulham': 'FUL',
-            'Leeds': 'LEE',
-            'Leicester': 'LEI',
-            'Liverpool': 'LIV',
-            'Manchester City': 'MCI',
-            'Manchester United': 'MUN',
-            'Newcastle United': 'NEW',
-            'Sheffield United': 'SHU',
-            'Southampton': 'SOU',
-            'Tottenham': 'TOT',
-            'West Bromwich Albion': 'WBA',
-            'West Ham': 'WHU',
-            'Wolverhampton Wanderers': 'WOL'}
-
-# Converting team names in the PLT to three letter abbreviation
-PLT['Team'] = [team_dct[team] for team in PLT['Team']]
+# # Creating a dictionary to the team names in the PLT to three letters abbreviation
+# team_dct = {'Arsenal': 'ARS',
+#             'Aston Villa': 'AVL',
+#             'Brighton': 'BHA',
+#             'Burnley': 'BUR',
+#             'Chelsea': 'CHE',
+#             'Crystal Palace': 'CRY',
+#             'Everton': 'EVE',
+#             'Fulham': 'FUL',
+#             'Leeds': 'LEE',
+#             'Leicester': 'LEI',
+#             'Liverpool': 'LIV',
+#             'Manchester City': 'MCI',
+#             'Manchester United': 'MUN',
+#             'Newcastle United': 'NEW',
+#             'Sheffield United': 'SHU',
+#             'Southampton': 'SOU',
+#             'Tottenham': 'TOT',
+#             'West Bromwich Albion': 'WBA',
+#             'West Ham': 'WHU',
+#             'Wolverhampton Wanderers': 'WOL'}
+#
+# # Converting team names in the PLT to three letter abbreviation
+# PLT['Team'] = [team_dct[team] for team in PLT['Team']]
 
 # Editing the PLT colnames
 PLT.rename(columns=lambda x: 'Team_' + x,
@@ -217,7 +148,7 @@ PLT.rename(columns={'Team_Team': 'Team', 'Team_№': 'Team_Ranking'},
            inplace=True)
 
 # Export the final dataframe to a csv file
-PLT.to_csv(r'PLT\PLT_S' + season + '_GW1_' + current_GW + '.csv', index=False)
+PLT.to_csv(r'C:\Users\nirgo\Documents\GitHub\La Liga\Teams\LLT_S' + season + '_GW1_' + current_GW + '.csv', index=False)
 
 ###############################################################################
 
@@ -249,7 +180,7 @@ player_apply.click()
 
 # Scraping
 players_df = []
-players_pages = list(range(2, 6)) + [5] * 38 + [6, 7]
+players_pages = list(range(2, 6)) + [5] * 43 + [6, 7]
 players_pages = [str(i) for i in players_pages]
 
 for i in players_pages:
@@ -299,16 +230,16 @@ final_players.rename(columns={'Player_Team': 'Team', 'Player_Player': 'Player'},
 final_players = final_players.dropna()
 final_players = final_players[final_players['Player'] != '']
 
-# Deleting second team for players who were playing for two teams this season
-final_players['Team'] = [re.split(',', team)[0] for team in final_players['Team']]
-
-# Converting team names in the final_players to three letter abbreviation
-final_players['Team'] = [team_dct[team] for team in final_players['Team']]
+# # Deleting second team for players who were playing for two teams this season
+# final_players['Team'] = [re.split(',', team)[0] for team in final_players['Team']]
+#
+# # Converting team names in the final_players to three letter abbreviation
+# final_players['Team'] = [team_dct[team] for team in final_players['Team']]
 
 # Cut out irrelevant info from some of the strings in the table
 for elem in ['Player_xG', 'Player_NPxG', 'Player_xA']:
     final_players[elem] = [re.split('[-+]', final_players[elem][i])[0] for i in final_players.index.tolist()]
 
 # Exporting the final_players df to csv file
-final_players.to_csv(r'Understat\xG_S' + season + '_GW1_' + current_GW + '.csv', index=False)
+final_players.to_csv(r'C:\Users\nirgo\Documents\GitHub\La Liga\Players\LLP_S' + season + '_GW1_' + current_GW + '.csv', index=False)
 

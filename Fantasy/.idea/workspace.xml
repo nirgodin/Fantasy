@@ -26,11 +26,12 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="com.intellij.ide.scratch.LRUPopupBuilder$1/New Scratch File" value="Python" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../עדי פינקלשטיין/תקציב המשכי" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\nirgo\Documents\GitHub\Fantasy\Fantasy" />
       <recent name="C:\Users\nirgo\Documents\עדי פינקלשטיין\תקציב המשכי" />
     </key>
   </component>
@@ -46,28 +47,28 @@
     <servers />
   </component>
   <component name="WindowStateProjectService">
-    <state x="740" y="262" key="FileChooserDialogImpl" timestamp="1604494304347">
+    <state x="740" y="262" key="FileChooserDialogImpl" timestamp="1606910436054">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="740" y="262" key="FileChooserDialogImpl/0.0.1920.1040/1920.0.1280.680@0.0.1920.1040" timestamp="1604494304347" />
+    <state x="740" y="262" key="FileChooserDialogImpl/0.0.1920.1040/1920.0.1280.680@0.0.1920.1040" timestamp="1606910436054" />
     <state x="461" y="165" key="SettingsEditor" timestamp="1605635666264">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="461" y="165" key="SettingsEditor/0.0.1920.1040/1920.0.1280.680@0.0.1920.1040" timestamp="1605635666264" />
-    <state width="971" height="531" key="XDebugger.FullValuePopup" timestamp="1606210382972">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state width="647" height="347" key="XDebugger.FullValuePopup/0.0.1280.680@0.0.1280.680" timestamp="1604601622886" />
-    <state width="971" height="531" key="XDebugger.FullValuePopup/0.0.1920.1040/1920.0.1280.680@0.0.1920.1040" timestamp="1606210382972" />
-    <state x="777" y="434" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1606321564935">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="777" y="434" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1920.1040/1920.0.1280.680@0.0.1920.1040" timestamp="1606321564935" />
-    <state x="303" y="1" width="672" height="678" key="search.everywhere.popup" timestamp="1606412845719">
+    <state width="647" height="347" key="XDebugger.FullValuePopup" timestamp="1606942332437">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
+    <state width="647" height="347" key="XDebugger.FullValuePopup/0.0.1280.680@0.0.1280.680" timestamp="1606942332437" />
+    <state width="971" height="531" key="XDebugger.FullValuePopup/0.0.1920.1040/1920.0.1280.680@0.0.1920.1040" timestamp="1606734797369" />
+    <state x="777" y="434" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1606659521383">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="777" y="434" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1920.1040/1920.0.1280.680@0.0.1920.1040" timestamp="1606659521383" />
+    <state x="455" y="2" width="1008" height="1037" key="search.everywhere.popup" timestamp="1606820573476">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
     <state x="303" y="1" width="672" height="678" key="search.everywhere.popup/0.0.1280.680@0.0.1280.680" timestamp="1606412845719" />
-    <state x="455" y="2" width="1008" height="1037" key="search.everywhere.popup/0.0.1920.1040/1920.0.1280.680@0.0.1920.1040" timestamp="1606322769898" />
+    <state x="455" y="2" width="1008" height="1037" key="search.everywhere.popup/0.0.1920.1040/1920.0.1280.680@0.0.1920.1040" timestamp="1606820573476" />
     <state x="455" y="2" width="1008" height="1037" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1604311629690" />
   </component>
 </project>

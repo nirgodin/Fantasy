@@ -4,7 +4,41 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 import os
 
-data = pd.read_csv('S21_GW1_8.csv')
+data = pd.read_csv('Final Data.csv')
+
+# Section 1: Fantasy
+
+######################                               Player Stability                             ######################
+
+# which are the most stable players from the fantasy points aspect
+
+# Subsetting the relevant data and pivoting the table
+stable_players = data[['Gameweek', 'Player', 'Pts.']]
+stable_players = pd.pivot_table(stable_players,
+                                index='Player',
+                                columns='Gameweek',
+                                values='Pts.')
+
+cum_min_played = pd.read_csv(r'Cumulative Merged Data\CMD_S21_GW_10.csv')[['Player', 'Minutes played']]
+
+stable_players = pd.merge(stable_players,
+                          cum_min_played,
+                          on='Player',
+                          how='inner')
+
+stable_players = stable_players[stable_players['Minutes played'] >= 200]
+
+# Calculating the Mean and Standard Deviation for each player
+stable_players['Mean'] = stable_players.drop(columns='Minutes played').mean(axis=1,
+                                                                            skipna=True)
+
+stable_players['Std'] = stable_players.drop(columns='Minutes played').std(axis=1,
+                                                                          skipna=True)
+
+stable_players = stable_players.sort_values(by='Std')
+top_10_stable_players = stable_players[stable_players['Mean'] > 5].sort_values(by='Std').reset_index().head(10)
+
+
 
 # Checking if there are any missing values in the xG_FPL df, using a Seaborn heatmap
 sns.heatmap(xG_FPL.isnull(),
@@ -53,3 +87,5 @@ sns.heatmap(xG_FPL_Team[['Team_PTS', 'Team_xG', 'Team_xGA']].corr(),
 sns.clustermap(xG_FPL.drop(columns=['Player', 'Team', 'Role', 'Sel.']),
                cmap='coolwarm',
                standard_scale=1)
+
+

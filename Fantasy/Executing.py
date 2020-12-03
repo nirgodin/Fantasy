@@ -1,9 +1,5 @@
-# Defining the season, previous gameweek and current gameweek
-season = '21'
-previous_GW = '8'
-current_GW = '9'
-
-# Executing
+# FIRST, YOU NEED TO DEFINE YOUR DATABASE INFORMATION AND PASSWORD AS ENVIRONMENT VARIABLES!
+# SECOND, MAKE SURE YOU UPDATE THE SEASON AND GAMEWEEK VARIABLES IN THE FILES BEFORE EXECUTING THE CODE
 
 import Scraping
 import Merging

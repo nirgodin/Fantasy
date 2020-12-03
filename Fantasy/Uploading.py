@@ -3,6 +3,11 @@ import pandas as pd
 import os
 from datetime import datetime
 
+# First, we set the season, current gameweek and previous gameweek variables
+season = '21'
+previous_GW = '9'
+current_GW = '10'
+
 # Create the functions that will connect between python and the sql database, create and populate the tables
 # Credit to Niels Goet from TowardsDataScience for these functions. they can be found here:
 # https://towardsdatascience.com/how-to-build-a-relational-database-from-csv-files-using-python-and-heroku-20ea89a55c63
@@ -77,51 +82,6 @@ def populate_table(table_name: str, df: pd.DataFrame) -> None:
 # Creating the tables that will be later populated.
 # This code runs one time when uploading a new table, and then is commented out.
 
-# Schedule Table
-# schedule_schema = """
-# team VARCHAR(3) PRIMARY KEY NOT NULL,
-# gw_1 VARCHAR(3),
-# gw_2 VARCHAR(3),
-# gw_3 VARCHAR(3),
-# gw_4 VARCHAR(3),
-# gw_5 VARCHAR(3),
-# gw_6 VARCHAR(3),
-# gw_7 VARCHAR(3),
-# gw_8 VARCHAR(3),
-# gw_9 VARCHAR(3),
-# gw_10 VARCHAR(3),
-# gw_11 VARCHAR(3),
-# gw_12 VARCHAR(3),
-# gw_13 VARCHAR(3),
-# gw_14 VARCHAR(3),
-# gw_15 VARCHAR(3),
-# gw_16 VARCHAR(3),
-# gw_17 VARCHAR(3),
-# gw_18 VARCHAR(3),
-# gw_19 VARCHAR(3),
-# gw_20 VARCHAR(3),
-# gw_21 VARCHAR(3),
-# gw_22 VARCHAR(3),
-# gw_23 VARCHAR(3),
-# gw_24 VARCHAR(3),
-# gw_25 VARCHAR(3),
-# gw_26 VARCHAR(3),
-# gw_27 VARCHAR(3),
-# gw_28 VARCHAR(3),
-# gw_29 VARCHAR(3),
-# gw_30 VARCHAR(3),
-# gw_31 VARCHAR(3),
-# gw_32 VARCHAR(3),
-# gw_33 VARCHAR(3),
-# gw_34 VARCHAR(3),
-# gw_35 VARCHAR(3),
-# gw_36 VARCHAR(3),
-# gw_37 VARCHAR(3),
-# gw_38 VARCHAR(3)
-# """
-#
-# create_table(table='s21_schedule',
-#              schema=schedule_schema)
 
 #######################################################################################################################
 
@@ -195,50 +155,88 @@ def populate_table(table_name: str, df: pd.DataFrame) -> None:
 # xgbuildup90 REAL
 # """
 #
-# # Creating the fantasy table
+# # Creating the xg_players table
 # create_table(table='xg_players',
 #              schema=xg_players_schema)
 
+#######################################################################################################################
 
-# Load and populate the xg_players table
-cum_curr_xG = pd.read_csv(r'Understat\xG_S' + season + '_GW1_' + current_GW + '.csv').fillna('-')
-
-# Transforming the column names to a suitable format for a SQL database (lowercase, no spaces and parenthesis)
-for col in cum_curr_xG.columns.tolist():
-    cum_curr_xG = cum_curr_xG.rename(columns={col: col.lower()
-                                                      .replace('player_', '')
-                                                      .replace(' ', '_')
-                                                      .replace('+', '_plus_')})
-
-# Deleting apostrophes in the players' names, which causes troubles to upload to the sql database
-cum_curr_xG['player'] = [player.replace("'", "") for player in cum_curr_xG['player']]
-
-# Inserting season and gameweek variables to the dataframe, to help distinguish between different seasons and weeks
-cum_curr_xG.insert(0, 'gameweek', current_GW)
-cum_curr_xG.insert(0, 'season', season)
-
-# Populating the table
-populate_table(table_name='xg_players',
-               df=cum_curr_xG)
+# # xg_teams table
+# xg_teams_schema = """
+# season REAL,
+# gameweek REAL,
+# ranking REAL,
+# team VARCHAR (3),
+# m REAL,
+# w REAL,
+# d REAL,
+# l REAL,
+# g REAL,
+# ga REAL,
+# pts REAL,
+# xg REAL,
+# npxg REAL,
+# xga REAL,
+# npxga REAL,
+# npxgd REAL,
+# ppda REAL,
+# oppda REAL,
+# dc REAL,
+# odc REAL,
+# xpts REAL
+# """
+#
+# # Creating the xg_teams table
+# create_table(table='xg_teams',
+#              schema=xg_teams_schema)
 
 #######################################################################################################################
 
-# Import the schedule of all the teams
-
-# Load and populate the schedule table.
-# This is commented out until there will be a new season and a new schedule to load
-Schedule = pd.read_csv(r'Schedule\Schedule_S21.csv').fillna('-')
-
-# Adding 'gw_' introduction to all the column names besides team, to avoid numeric column names
-for col in Schedule.columns.drop('Team'):
-    Schedule = Schedule.rename(columns={col: 'gw_' + col})
-
-# Lowercase the team column name, to better suit SQL
-Schedule = Schedule.rename(columns={'Team': 'team'})
-
-# Populating the table
-populate_table(table_name='s21_schedule',
-               df=Schedule)
+# # Schedule Table
+# schedule_schema = """
+# team VARCHAR(3) PRIMARY KEY NOT NULL,
+# gw_1 VARCHAR(3),
+# gw_2 VARCHAR(3),
+# gw_3 VARCHAR(3),
+# gw_4 VARCHAR(3),
+# gw_5 VARCHAR(3),
+# gw_6 VARCHAR(3),
+# gw_7 VARCHAR(3),
+# gw_8 VARCHAR(3),
+# gw_9 VARCHAR(3),
+# gw_10 VARCHAR(3),
+# gw_11 VARCHAR(3),
+# gw_12 VARCHAR(3),
+# gw_13 VARCHAR(3),
+# gw_14 VARCHAR(3),
+# gw_15 VARCHAR(3),
+# gw_16 VARCHAR(3),
+# gw_17 VARCHAR(3),
+# gw_18 VARCHAR(3),
+# gw_19 VARCHAR(3),
+# gw_20 VARCHAR(3),
+# gw_21 VARCHAR(3),
+# gw_22 VARCHAR(3),
+# gw_23 VARCHAR(3),
+# gw_24 VARCHAR(3),
+# gw_25 VARCHAR(3),
+# gw_26 VARCHAR(3),
+# gw_27 VARCHAR(3),
+# gw_28 VARCHAR(3),
+# gw_29 VARCHAR(3),
+# gw_30 VARCHAR(3),
+# gw_31 VARCHAR(3),
+# gw_32 VARCHAR(3),
+# gw_33 VARCHAR(3),
+# gw_34 VARCHAR(3),
+# gw_35 VARCHAR(3),
+# gw_36 VARCHAR(3),
+# gw_37 VARCHAR(3),
+# gw_38 VARCHAR(3)
+# """
+#
+# create_table(table='s21_schedule',
+#              schema=schedule_schema)
 
 #######################################################################################################################
 
@@ -263,4 +261,64 @@ cum_curr_fpl.insert(0, 'season', season)
 # Populating the table
 populate_table(table_name='fantasy',
                df=cum_curr_fpl)
+
+#######################################################################################################################
+
+# Load and populate the xg_players table
+cum_curr_xG = pd.read_csv(r'Understat\xG_S' + season + '_GW1_' + current_GW + '.csv').fillna('-')
+
+# Transforming the column names to a suitable format for a SQL database (lowercase, no spaces and parenthesis)
+for col in cum_curr_xG.columns.tolist():
+    cum_curr_xG = cum_curr_xG.rename(columns={col: col.lower()
+                                                      .replace('player_', '')
+                                                      .replace(' ', '_')
+                                                      .replace('+', '_plus_')})
+
+# Deleting apostrophes in the players' names, which causes troubles to upload to the sql database
+cum_curr_xG['player'] = [player.replace("'", "") for player in cum_curr_xG['player']]
+
+# Inserting season and gameweek variables to the dataframe, to help distinguish between different seasons and weeks
+cum_curr_xG.insert(0, 'gameweek', current_GW)
+cum_curr_xG.insert(0, 'season', season)
+
+# Populating the table
+populate_table(table_name='xg_players',
+               df=cum_curr_xG)
+
+#######################################################################################################################
+
+# Load and populate the PLT_teams table
+cum_curr_PLT = pd.read_csv(r'PLT\PLT_S' + season + '_GW1_' + current_GW + '.csv').fillna('-')
+
+# Transforming the column names to a suitable format for a SQL database (lowercase, no spaces and parenthesis)
+for col in cum_curr_PLT.columns.tolist():
+    cum_curr_PLT = cum_curr_PLT.rename(columns={col: col.lower()
+                                                        .replace('team_', '')})
+
+# Inserting season and gameweek variables to the dataframe, to help distinguish between different seasons and weeks
+cum_curr_PLT.insert(0, 'gameweek', current_GW)
+cum_curr_PLT.insert(0, 'season', season)
+
+# Populating the table
+populate_table(table_name='xg_teams',
+               df=cum_curr_PLT)
+
+#######################################################################################################################
+
+# Import the schedule of all the teams
+
+# Load and populate the schedule table.
+# This is commented out until there will be a new season and a new schedule to load
+Schedule = pd.read_csv(r'Schedule\Schedule_S21.csv').fillna('-')
+
+# Adding 'gw_' introduction to all the column names besides team, to avoid numeric column names
+for col in Schedule.columns.drop('Team'):
+    Schedule = Schedule.rename(columns={col: 'gw_' + col})
+
+# Lowercase the team column name, to better suit SQL
+Schedule = Schedule.rename(columns={'Team': 'team'})
+
+# Populating the table
+populate_table(table_name='s21_schedule',
+               df=Schedule)
 

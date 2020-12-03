@@ -1,7 +1,10 @@
-import os
 import pandas as pd
-import numpy as np
 import re
+
+# First, we set the season, current gameweek and previous gameweek variables
+season = '21'
+previous_GW = '9'
+current_GW = '10'
 
 # Import the previous and this week cumulative dataframes
 cum_prev_df = pd.read_csv(r'FPL/FPL_S' + season + '_GW1_' + previous_GW + '.csv')
@@ -107,12 +110,14 @@ missing_name = pd.merge(cum_curr_df,
 
 curr_merged_df = pd.concat([curr_merged_df, missing_name]).drop(columns=['Player_first']).drop_duplicates().reset_index(drop=True)
 
-# We'll finish by merging the cumulative team stats to the curr_merged_df
+# Merging the cumulative team stats to the curr_merged_df
 curr_merged_df = pd.merge(curr_merged_df,
                  cum_curr_PLT,
                  on=['Team'],
                  how='inner')
 
+# We'll finish by exporting to csv file the curr_merged_df, which will be useful for some of our models
+curr_merged_df.to_csv(r'Cumulative Merged Data\CMD_S' + season + '_GW_' + current_GW + '.csv', index=False)
 
 #######################################################################################################################
 
@@ -290,13 +295,15 @@ GW = pd.merge(GW,
 GW['Sel.'] = [float(str(GW['Sel.'][i]).replace('%', '')) for i in GW.index.tolist()]
 
 # Exporting the final GW dataframe to a single gameweek csv file
-# GW.to_csv(r'Single GW\SGW_S' + season + '_GW_' + current_GW + '.csv', index=False)
+GW.to_csv(r'Single GW\SGW_S' + season + '_GW_' + current_GW + '.csv', index=False)
 
 # Appending the final GW dataframe to the Final Data file, which contains all the gameweeks
-# GW.to_csv('Final Data.csv',
-#           mode='a',
-#           header=False,
-#           index=False)
+Final_Data = pd.read_csv('Final Data.csv')
 
+# Verifying the GW dataframe is in the same column order as the final data one
+GW = GW[Final_Data.columns]
 
+# Concatenating and saving
+Final_Data = pd.concat([Final_Data, GW])
 
+Final_Data.to_csv('Final Data.csv', index=False)
