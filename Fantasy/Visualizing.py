@@ -20,12 +20,8 @@ data = pd.read_csv('Final Data.csv')
 # This question is answered by measuring the different players' fantasy points standard deviation
 # Low standard deviation indicates a stabler player
 
-# Subset the relevant data and pivot the table
-stable_players = data[['Gameweek', 'Player', 'Pts.']]
-stable_players = pd.pivot_table(stable_players,
-                                index='Player',
-                                columns='Gameweek',
-                                values='Pts.')
+# Subset the relevant data
+stable_players = data[['Gameweek', 'Player', 'Team', 'Pts.']]
 
 # We won't like to include players who didn't play much in our analysis, so we will import the data about
 # the cumulative minutes each played played in the season, and delete players who didn't play much
@@ -42,11 +38,17 @@ stable_players = pd.merge(stable_players,
 # Subsetting players who played less minutes than the minutes threshold we defined
 stable_players = stable_players[stable_players['Minutes played'] >= minutes_threshold]
 
+# Pivot the table
+stable_players = pd.pivot_table(stable_players.drop(columns=['Team', 'Minutes played']),
+                                index='Player',
+                                columns='Gameweek',
+                                values='Pts.')
+
 # Calculating the Mean and Standard Deviation for each player
-stable_players['Mean'] = stable_players.drop(columns='Minutes played').mean(axis=1,
-                                                                            skipna=True)
-stable_players['Std'] = stable_players.drop(columns='Minutes played').std(axis=1,
-                                                                          skipna=True)
+stable_players['Mean'] = stable_players.mean(axis=1,
+                                             skipna=True)
+stable_players['Std'] = stable_players.std(axis=1,
+                                           skipna=True)
 
 # Sorting the players by their standard deviation
 stable_players = stable_players.sort_values(by='Std')
@@ -72,6 +74,29 @@ value_for_money['Mean'] = value_for_money.mean(axis=1,
 # Sorting
 value_for_money = value_for_money.sort_values(by='Mean',
                                               ascending=False)
+
+# SECTION 1.c - FANTASY POINTS BY ROLE
+role_fantasy_points = pd.read_csv(r'FPL\FPL_S' + season + '_GW1_' + last_GW + '.csv')[['Player',
+                                                                                       'Team',
+                                                                                       'Role',
+                                                                                       'Pts.']]
+
+# Merge with the minutes played dataframe
+role_fantasy_points = pd.merge(role_fantasy_points,
+                               minutes_played,
+                               on=['Player', 'Team'],
+                               how='inner')
+
+role_fantasy_points = role_fantasy_points[role_fantasy_points['Minutes played'] >= minutes_threshold]
+role_fantasy_points = role_fantasy_points.drop(columns=['Player', 'Team', 'Minutes played'])
+
+role_fantasy_points = role_fantasy_points.groupby(by='Role').mean().sort_values(by='Pts.',
+                                                                                ascending=False)
+
+# SECTION 1.d - TEAMS FANTASY POINTS
+team_fantasy_points = pd.read_csv(r'FPL\FPL_S' + season + '_GW1_' + last_GW + '.csv')[['Team', 'Pts.']]
+team_fantasy_points = team_fantasy_points.groupby(by='Team').sum().sort_values(by='Pts.',
+                                                                               ascending=False)
 
 ######################                            SECTION 2 - PLAYERS                            ######################
 
