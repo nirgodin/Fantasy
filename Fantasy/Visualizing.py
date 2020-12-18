@@ -98,6 +98,16 @@ team_fantasy_points = pd.read_csv(r'FPL\FPL_S' + season + '_GW1_' + last_GW + '.
 team_fantasy_points = team_fantasy_points.groupby(by='Team').sum().sort_values(by='Pts.',
                                                                                ascending=False)
 
+# SECTION 1.e - Selection vs. Fantasy Points
+
+# Does most fantasy players knows what they are doing? Does the selection ratio of each player predicts his points?
+# This is measured via a scatter plot of fantasy points and the selection ratio
+
+sel_fantasy_points = sns.scatterplot(x='Sel.',
+                                     y='Pts.',
+                                     x_jitter=.1,
+                                     data=data)
+
 ######################                            SECTION 2 - PLAYERS                            ######################
 
 # SECTION 2.a - PLAYER OPPORTUNITY SEIZURE

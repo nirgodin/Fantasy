@@ -5,8 +5,8 @@ from datetime import datetime
 
 # First, we set the season, current gameweek and previous gameweek variables
 season = '21'
-previous_GW = '9'
-current_GW = '10'
+previous_GW = '10'
+current_GW = '11'
 
 # Create the functions that will connect between python and the sql database, create and populate the tables
 # Credit to Niels Goet from TowardsDataScience for these functions. they can be found here:

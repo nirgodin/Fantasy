@@ -1,10 +1,11 @@
 import pandas as pd
+import numpy as np
 import re
 
 # First, we set the season, current gameweek and previous gameweek variables
 season = '21'
-previous_GW = '9'
-current_GW = '10'
+previous_GW = '12'
+current_GW = '13'
 
 # Import the previous and this week cumulative dataframes
 cum_prev_df = pd.read_csv(r'FPL/FPL_S' + season + '_GW1_' + previous_GW + '.csv')
@@ -260,7 +261,14 @@ GW['Opponent'] = [Schedule.loc[team, current_GW] for team in GW['Team']]
 # Inserting Home column, which will contain a dummy variable: 1 for home game, 0 for away game
 # Classification to Home/Away games is done based on the opponent team's name being uppercase/lowercase
 GW.insert(5, 'Home', 0)
-GW['Home'] = [1 if GW['Opponent'][i].isupper() == True else 0 for i in GW.index.tolist()]
+for i in GW.index.tolist():
+    try:
+        if GW['Opponent'][i].isupper():
+            GW['Home'][i] = 1 
+        else:
+            pass
+    except AttributeError:
+        GW['Home'][i] = np.nan
 
 ##########################################################################################
 
@@ -325,7 +333,14 @@ Model_Data['Opponent'] = [Schedule.loc[team, current_GW] for team in Model_Data[
 # Inserting Home column, which will contain a dummy variable: 1 for home game, 0 for away game
 # Classification to Home/Away games is done based on the opponent team's name being uppercase/lowercase
 Model_Data.insert(5, 'Home', 0)
-Model_Data['Home'] = [1 if Model_Data['Opponent'][i].isupper() == True else 0 for i in Model_Data.index.tolist()]
+for i in Model_Data.index.tolist():
+    try:
+        if Model_Data['Opponent'][i].isupper():
+            Model_Data['Home'][i] = 1 
+        else:
+            pass
+    except AttributeError:
+        Model_Data['Home'][i] = np.nan
 
 # Create a dataframe which will contain the average stats of the team. This stats will be merged to the dataframe
 # as the opponent team stats, in order to get a better understanding of the quality of the opponent team

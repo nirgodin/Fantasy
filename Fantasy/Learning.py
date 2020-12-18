@@ -1,9 +1,10 @@
 import pandas as pd
 import numpy as np
-from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import scale
-from sklearn.linear_model import LinearRegression
+from sklearn.preprocessing import PolynomialFeatures
 from sklearn.model_selection import learning_curve
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LinearRegression
 from sklearn.ensemble import RandomForestRegressor
 import matplotlib.pyplot as plt
 import seaborn as sns
@@ -13,33 +14,39 @@ import seaborn as sns
 # LINEAR REGRESSION
 
 # Import data
-lm_data = pd.read_csv(r'Models Data\lm_data.csv')
+data = pd.read_csv(r'Model Data\Model Data - Final.csv')
 
 # Creating dummy variables for Role
-Role = pd.get_dummies(lm_data['Role'], drop_first=True)
-lm_data = pd.concat([lm_data, Role], axis=1).drop(columns=['Role'])
+Role = pd.get_dummies(data['Role'], drop_first=True)
+data = pd.concat([data, Role], axis=1).drop(columns=['Role'])
 
 # Dropping irrelevant columns for the regression
-lm_data = lm_data.drop(columns=['Player', 'Team']).dropna()
+data = data.drop(columns=['Player', 'Team', 'Opponent', 'Sel.']).dropna()
+
+# Define X vector of independents variables and y dependent variable we want to predict (points)
+X = data.drop('Pts.', axis=1)
+y = data['Pts.']
+
+# Introducing Polynomial Features
+trans2 = PolynomialFeatures(degree=2)
+poly2 = pd.DataFrame(trans2.fit_transform(X[['Goals scored', 'Assists', 'Cost']]))
+X = pd.concat([X.drop(columns=['Goals scored', 'Assists', 'Cost']).reset_index(), poly2.reset_index()], axis=1)
 
 # Feature scaling
-lm_data[lm_data.drop(columns=['Pts.', 'FWD', 'GKP', 'MID']).columns] = lm_data.drop(columns=['Pts.', 'FWD', 'GKP', 'MID']).apply(scale)
+X[X.drop(columns=['FWD', 'GKP', 'MID']).columns] = X.drop(columns=['FWD', 'GKP', 'MID']).apply(scale)
 
-# Define X vector of independents variables and Y dependent variable we want to predict (points)
-X_lm = lm_data.drop('Pts.', axis=1)
-y_lm = lm_data['Pts.']
 
 # Define training and test sets
-X_lm_train, X_lm_test, y_lm_train, y_lm_test = train_test_split(X_lm,
-                                                                y_lm,
-                                                                test_size=0.33,
-                                                                random_state=42)
+X_train, X_test, y_train, y_test = train_test_split(X,
+                                                    y,
+                                                    test_size=0.33,
+                                                    random_state=42)
 
 # Learning Curve
 train_sizes, train_scores, validation_scores = learning_curve(estimator=LinearRegression(),
-                                                              X=X_lm,
-                                                              y=y_lm,
-                                                              train_sizes=list(range(1, len(X_lm_train), round((len(X_lm_train)/20)))),
+                                                              X=X,
+                                                              y=y,
+                                                              train_sizes=list(range(1, len(X_train), round((len(X_train)/20)))),
                                                               cv=5,
                                                               scoring='neg_mean_squared_error')
 
@@ -85,22 +92,22 @@ sns.displot((y_test-lm_predictions))
 # RANDOM FOREST TREE
 
 # Setting Regressor
-rft = RandomForestRegressor(n_estimators=500)
+rft = RandomForestRegressor(n_estimators=200)
 
 # Fitting
-rft.fit(X_lm_train, y_lm_train)
+rft.fit(X_train, y_train)
 
 # Predicting
-rft_predictions = rft.predict(X_lm_test)
+rft_predictions = rft.predict(X_test)
 
 # Predictions vs. Test set Distance plot
-sns.displot((y_lm_test-rft_predictions))
+sns.displot((y_test-rft_predictions))
 
 # Learning Curve
 train_sizes, train_scores, validation_scores = learning_curve(estimator=RandomForestRegressor(n_estimators=200),
-                                                              X=X_lm,
-                                                              y=y_lm,
-                                                              train_sizes=list(range(1, len(X_lm_train), round((len(X_lm_train)/20)))),
+                                                              X=X,
+                                                              y=y,
+                                                              train_sizes=list(range(1, len(X_train), round((len(X_train)/20)))),
                                                               cv=5,
                                                               scoring='neg_mean_squared_error')
 

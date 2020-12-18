@@ -10,8 +10,8 @@ import re
 
 # First, we set the season, current gameweek and previous gameweek variables
 season = '21'
-previous_GW = '9'
-current_GW = '10'
+previous_GW = '12'
+current_GW = '13'
 
 # Setting driver
 driver = webdriver.Chrome(r'C:\Users\nirgo\PycharmProjects\Fantasy\Browsers\chromedriver.exe')
@@ -249,7 +249,7 @@ player_apply.click()
 
 # Scraping
 players_df = []
-players_pages = list(range(2, 6)) + [5] * 38 + [6, 7]
+players_pages = list(range(2, 6)) + [5] * 45 + [6, 7]
 players_pages = [str(i) for i in players_pages]
 
 for i in players_pages:
@@ -264,7 +264,7 @@ for i in players_pages:
 final_players = pd.concat(players_df)
 
 # Resetting the dataframe index
-final_players = final_players.reset_index(drop=True)
+final_players = final_players.drop_duplicates().reset_index(drop=True)
 
 # Creating a list of the categories of the final_players df
 US_category_lst = ['Player',
