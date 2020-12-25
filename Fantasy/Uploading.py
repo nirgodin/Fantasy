@@ -5,8 +5,8 @@ from datetime import datetime
 
 # First, we set the season, current gameweek and previous gameweek variables
 season = '21'
-previous_GW = '10'
-current_GW = '11'
+previous_GW = '13'
+current_GW = '14'
 
 # Create the functions that will connect between python and the sql database, create and populate the tables
 # Credit to Niels Goet from TowardsDataScience for these functions. they can be found here:
@@ -305,20 +305,20 @@ populate_table(table_name='xg_teams',
 
 #######################################################################################################################
 
-# Import the schedule of all the teams
-
-# Load and populate the schedule table.
-# This is commented out until there will be a new season and a new schedule to load
-Schedule = pd.read_csv(r'Schedule\Schedule_S21.csv').fillna('-')
-
-# Adding 'gw_' introduction to all the column names besides team, to avoid numeric column names
-for col in Schedule.columns.drop('Team'):
-    Schedule = Schedule.rename(columns={col: 'gw_' + col})
-
-# Lowercase the team column name, to better suit SQL
-Schedule = Schedule.rename(columns={'Team': 'team'})
-
-# Populating the table
-populate_table(table_name='s21_schedule',
-               df=Schedule)
+# # Import the schedule of all the teams
+#
+# # Load and populate the schedule table.
+# # This is commented out until there will be a new season and a new schedule to load
+# Schedule = pd.read_csv(r'Schedule\Schedule_S21.csv').fillna('-')
+#
+# # Adding 'gw_' introduction to all the column names besides team, to avoid numeric column names
+# for col in Schedule.columns.drop('Team'):
+#     Schedule = Schedule.rename(columns={col: 'gw_' + col})
+#
+# # Lowercase the team column name, to better suit SQL
+# Schedule = Schedule.rename(columns={'Team': 'team'})
+#
+# # Populating the table
+# populate_table(table_name='s21_schedule',
+#                df=Schedule)
 
