@@ -11,6 +11,7 @@ minutes_threshold = 200
 
 # Import data
 data = pd.read_csv('Final Data.csv')
+data = data.drop_duplicates()
 
 ######################                            SECTION 1 - FANTASY                            ######################
 

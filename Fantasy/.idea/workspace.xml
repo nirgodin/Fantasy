@@ -2,25 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0d0d6c7f-7c70-44de-ad73-0d337eef8da5" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/Cumulative Merged Data/CMD_S21_GW_14.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FPL/FPL_S21_GW1_14.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Model Data/Single GW/MD_S21_GW1_14.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/PLT/PLT_S21_GW1_14.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Single GW/SGW_S21_GW_14.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Understat/xG_S21_GW1_14.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Exploring.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.name" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.name" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Cumulative Merged Data/CMD_S21_GW_10.csv" beforeDir="false" afterPath="$PROJECT_DIR$/Cumulative Merged Data/CMD_S21_GW_10.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FPL/FPL_S21_GW1_10.csv" beforeDir="false" afterPath="$PROJECT_DIR$/FPL/FPL_S21_GW1_10.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Final Data.csv" beforeDir="false" afterPath="$PROJECT_DIR$/Final Data.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Merging.py" beforeDir="false" afterPath="$PROJECT_DIR$/Merging.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Learning.py" beforeDir="false" afterPath="$PROJECT_DIR$/Learning.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Model Data/Model Data - Final.csv" beforeDir="false" afterPath="$PROJECT_DIR$/Model Data/Model Data - Final.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Model Data/Single GW/MD_S21_GW1_10.csv" beforeDir="false" afterPath="$PROJECT_DIR$/Model Data/Single GW/MD_S21_GW1_10.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PLT/PLT_S21_GW1_10.csv" beforeDir="false" afterPath="$PROJECT_DIR$/PLT/PLT_S21_GW1_10.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Scraping.py" beforeDir="false" afterPath="$PROJECT_DIR$/Scraping.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Single GW/SGW_S21_GW_10.csv" beforeDir="false" afterPath="$PROJECT_DIR$/Single GW/SGW_S21_GW_10.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Understat/xG_S21_GW1_10.csv" beforeDir="false" afterPath="$PROJECT_DIR$/Understat/xG_S21_GW1_10.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Uploading.py" beforeDir="false" afterPath="$PROJECT_DIR$/Uploading.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Visualizing.py" beforeDir="false" afterPath="$PROJECT_DIR$/Visualizing.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -71,31 +59,5 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-  </component>
-  <component name="WindowStateProjectService">
-    <state x="493" y="164" key="FileChooserDialogImpl" timestamp="1607074653964">
-      <screen x="0" y="0" width="1280" height="680" />
-    </state>
-    <state x="493" y="164" key="FileChooserDialogImpl/0.0.1280.680@0.0.1280.680" timestamp="1607074653964" />
-    <state x="740" y="262" key="FileChooserDialogImpl/0.0.1920.1040/1920.0.1280.680@0.0.1920.1040" timestamp="1606910436054" />
-    <state x="461" y="165" key="SettingsEditor" timestamp="1605635666264">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="461" y="165" key="SettingsEditor/0.0.1920.1040/1920.0.1280.680@0.0.1920.1040" timestamp="1605635666264" />
-    <state width="647" height="347" key="XDebugger.FullValuePopup" timestamp="1606942332437">
-      <screen x="0" y="0" width="1280" height="680" />
-    </state>
-    <state width="647" height="347" key="XDebugger.FullValuePopup/0.0.1280.680@0.0.1280.680" timestamp="1606942332437" />
-    <state width="971" height="531" key="XDebugger.FullValuePopup/0.0.1920.1040/1920.0.1280.680@0.0.1920.1040" timestamp="1606734797369" />
-    <state x="777" y="434" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1606659521383">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="777" y="434" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1920.1040/1920.0.1280.680@0.0.1920.1040" timestamp="1606659521383" />
-    <state x="455" y="2" width="1008" height="1037" key="search.everywhere.popup" timestamp="1607006168685">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="303" y="1" width="672" height="678" key="search.everywhere.popup/0.0.1280.680@0.0.1280.680" timestamp="1606412845719" />
-    <state x="455" y="2" width="1008" height="1037" key="search.everywhere.popup/0.0.1920.1040/1920.0.1280.680@0.0.1920.1040" timestamp="1607006168685" />
-    <state x="455" y="2" width="1008" height="1037" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1604311629690" />
   </component>
 </project>
