@@ -2,12 +2,30 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0d0d6c7f-7c70-44de-ad73-0d337eef8da5" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/Exploring.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Cumulative Merged Data/CMD_S21_GW_15.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Cumulative Merged Data/CMD_S21_GW_16.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FPL/FPL_S21_GW1_15.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FPL/FPL_S21_GW1_16.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Model Data/Single GW/MD_S21_GW1_15.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Model Data/Single GW/MD_S21_GW1_16.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Older Models.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/PLT/PLT_S21_GW1_15.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/PLT/PLT_S21_GW1_16.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Single GW/SGW_S21_GW_15.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Single GW/SGW_S21_GW_16.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Understat/xG_S21_GW1_15.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Understat/xG_S21_GW1_16.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../PCA.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.name" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.name" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Exploring.py" beforeDir="false" afterPath="$PROJECT_DIR$/Exploring.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Final Data.csv" beforeDir="false" afterPath="$PROJECT_DIR$/Final Data.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Learning.py" beforeDir="false" afterPath="$PROJECT_DIR$/Learning.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Merging.py" beforeDir="false" afterPath="$PROJECT_DIR$/Merging.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Model Data/Model Data - Final.csv" beforeDir="false" afterPath="$PROJECT_DIR$/Model Data/Model Data - Final.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Model Data/Single GW/MD_S21_GW1_6.csv" beforeDir="false" afterPath="$PROJECT_DIR$/Model Data/Single GW/MD_S21_GW1_6.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Schedule/Schedule_S21.csv" beforeDir="false" afterPath="$PROJECT_DIR$/Schedule/Schedule_S21.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Scraping.py" beforeDir="false" afterPath="$PROJECT_DIR$/Scraping.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Visualizing.py" beforeDir="false" afterPath="$PROJECT_DIR$/Visualizing.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -25,6 +43,14 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
+  </component>
   <component name="ProjectId" id="1jH73tr5CViBxvHvHMbLpynWAvo" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
@@ -37,11 +63,12 @@
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="com.intellij.ide.scratch.LRUPopupBuilder$1/New Scratch File" value="Python" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/.." />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\nirgo\Documents\GitHub\Fantasy" />
       <recent name="C:\Users\nirgo\Documents\GitHub\Fantasy\Fantasy" />
       <recent name="C:\Users\nirgo\Documents\עדי פינקלשטיין\תקציב המשכי" />
     </key>

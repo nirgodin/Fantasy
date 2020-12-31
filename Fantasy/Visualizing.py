@@ -6,7 +6,7 @@ import os
 
 # Setting variables which are relevant for the entire analysis
 season = '21'
-last_GW = '10'
+last_GW = '15'
 minutes_threshold = 200
 
 # Import data
@@ -150,6 +150,47 @@ seizing_teams['Seizure'] = seizing_teams['Team_G'] - seizing_teams['Team_xG']
 # Sorting
 seizing_teams = seizing_teams.sort_values(by='Seizure',
                                           ascending=False)
+
+
+#################                            SECTION 4 - STATISTICS ACCURACY                           #################
+
+# SECTION 4.a - Players' xG vs. players' goals
+
+# Does the xG stat predicts well the player number of goals
+# This is a twofold comparison: 1. xG per game vs. goals per game ; 2. Total xG vs. Total Goals over all games
+
+# Single game xG and goals
+sns.scatterplot(x='Player_xG',
+                y='Goals scored',
+                data=data)
+
+SGW_xG_corr = data.corr()._get_value('Goals scored', 'Player_xG')
+
+# Cumulative xG and goals
+sns.regplot(x='Player_xG',
+            y='Goals scored',
+            data=CM_data)
+
+CM_xG_corr = CM_data.corr()._get_value('Goals scored', 'Player_xG')
+
+# SECTION 4.b - Players' xA vs. players' assists
+
+# Does the xA stat predicts well the players' number of assists
+# This is a twofold comparison: 1. xA per game vs. assists per game ; 2. Total xA vs. Total Assists over all games
+
+# Single games data
+sns.scatterplot(x='Player_xA',
+                y='Assists',
+                data=data)
+
+SGW_xA_corr = data.corr()._get_value('Assists', 'Player_xA')
+
+# Cumulative data
+sns.regplot(x='Player_xA',
+            y='Assists',
+            data=CM_data)
+
+CM_xA_corr = CM_data.corr()._get_value('Assists', 'Player_xA')
 
 
 # Checking if there are any missing values in the xG_FPL df, using a Seaborn heatmap

@@ -4,8 +4,8 @@ import re
 
 # First, we set the season, current gameweek and previous gameweek variables
 season = '21'
-previous_GW = '9'
-current_GW = '10'
+previous_GW = '16'
+current_GW = '17'
 
 # Import the previous and this week cumulative dataframes
 cum_prev_df = pd.read_csv(r'FPL/FPL_S' + season + '_GW1_' + previous_GW + '.csv')
@@ -113,9 +113,9 @@ curr_merged_df = pd.concat([curr_merged_df, missing_name]).drop(columns=['Player
 
 # Merging the cumulative team stats to the curr_merged_df
 curr_merged_df = pd.merge(curr_merged_df,
-                 cum_curr_PLT,
-                 on=['Team'],
-                 how='inner')
+                          cum_curr_PLT,
+                          on=['Team'],
+                          how='inner')
 
 # We'll finish by exporting to csv file the curr_merged_df, which will be useful for some of our models
 curr_merged_df.to_csv(r'Cumulative Merged Data\CMD_S' + season + '_GW_' + current_GW + '.csv', index=False)
@@ -195,9 +195,9 @@ prev_merged_df = pd.concat([prev_merged_df, missing_name]).drop(columns=['Player
 
 # We'll finish by merging the cumulative team stats to the prev_merged_df
 prev_merged_df = pd.merge(prev_merged_df,
-                 cum_prev_PLT,
-                 on=['Team'],
-                 how='inner')
+                          cum_prev_PLT,
+                          on=['Team'],
+                          how='inner')
 
 
 ########################################################################################################################
@@ -264,7 +264,7 @@ GW.insert(5, 'Home', 0)
 for i in GW.index.tolist():
     try:
         if GW['Opponent'][i].isupper():
-            GW['Home'][i] = 1 
+            GW['Home'][i] = 1
         else:
             pass
     except AttributeError:
@@ -318,7 +318,7 @@ Final_Data.to_csv('Final Data.csv', index=False)
 
 # Finally, we'll create a dataframe which contains the average player, team and opponent data until the previous GW
 # And the current gameweek points. This data will be used for most of our models
-Model_Data = prev_merged_df.drop(columns='Pts.')
+Model_Data = prev_merged_df.rename(columns={'Pts.': 'Cum Pts.'})
 
 # Inserting a Gameweek and a Season column
 Model_Data.insert(1, 'Gameweek', current_GW)
@@ -336,7 +336,7 @@ Model_Data.insert(5, 'Home', 0)
 for i in Model_Data.index.tolist():
     try:
         if Model_Data['Opponent'][i].isupper():
-            Model_Data['Home'][i] = 1 
+            Model_Data['Home'][i] = 1
         else:
             pass
     except AttributeError:
