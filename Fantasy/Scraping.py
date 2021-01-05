@@ -10,7 +10,7 @@ import re
 
 # First, we set the season, current gameweek and previous gameweek variables
 season = '21'
-current_GW = '16'
+current_GW = '17'
 
 # Setting driver
 driver = webdriver.Chrome(r'C:\Users\nirgo\PycharmProjects\Fantasy\Browsers\chromedriver.exe')

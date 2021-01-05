@@ -63,10 +63,8 @@ X_cv, X_test, y_cv, y_test = train_test_split(X_test, y_test, test_size=0.5)
 ann = Sequential()
 
 # Add three dense layers with decreasing number of neurons, each with dropout layers
-ann.add(Dense(30, activation='relu'))
-ann.add(Dropout(0.4))
-
-ann.add(Dropout(0.4))
+ann.add(Dense(5, activation='selu'))
+ann.add(Dropout(0.5))
 
 # Add final output layer, which will predict the number of points
 ann.add(Dense(1))
