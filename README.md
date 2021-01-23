@@ -1,4 +1,8 @@
 ## About
-This repo contains the code to scrape the official English Premier League stats, and the related Fantasy stats associated with. In addition, the code scrapes Understat.com, a websites that stores advanced soccer stats (such as xG) about teams and players, and merges those stats with the official ones. 
+This project scrapes the official Fantasy Premier League stats, and advanced soccer stats (such as xG) about teams and players from Understat.com. In addition, it merges the data from the two sources, and uploads the data to a Heroku PostgreSQL database directly from Python.
 
-These stats are used in two ways: First, for better understanding of the English Premier Leauge (or, more generally, soccer) via data analysis and visualizations. Second, for building a machine learning model to predict players' fantasy points based on theire past performance.
+## Motivation
+This data is very valuable for better understanding of the English Premier League, the Fantasy game and most important - soccer in general.
+
+## Some Application Examples
+### *are xG stats and alike good predictors?*
