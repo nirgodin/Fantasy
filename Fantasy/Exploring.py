@@ -6,8 +6,23 @@ import seaborn as sns
 # Import data
 data = pd.read_csv(r'Model Data\Model Data - Final.csv')
 
+# Create a new dataframe which is regularized to player appearances
+col_lst = ['Cum Pts.',
+           'Minutes played',
+           'Goals scored',
+           'Assists',
+           'Clean sheets',
+           'Goals conceded',
+           'Own goals',
+           'Penalties']
+data2 = data
+
+
 # Exploring the upper percentile of the points distribution
-data['Pts.'].sort_values(ascending=False).head(round(.01*len(data)))
+head = data['Pts.'].sort_values(ascending=False).head(round(.01*len(data)))
+
+# Exploring the bottom percentile of the points distribution
+tail = data['Pts.'].sort_values(ascending=True).head(round(.01*len(data)))
 
 # Checking if there are any players with 0 minutes played
 minutes = data[data['Minutes played'] / data['Player_Appearances'] < 10]

@@ -17,18 +17,50 @@ from tensorflow.keras.callbacks import EarlyStopping
 # Import data
 data = pd.read_csv(r'Model Data\Model Data - Final.csv')
 
-# Creating dummy variables for Role
-Role = pd.get_dummies(data['Role'], drop_first=True)
-data = pd.concat([data, Role], axis=1).drop(columns=['Role'])
+# Drop NA's
+data = data.dropna()
 
-# Dropping irrelevant columns for the regression
-data = data.drop(columns=['Player', 'Team', 'Opponent', 'Sel.']).dropna()
+# Creating dummy variables for Role
+Role = pd.get_dummies(data['Role'])
+data = pd.concat([data, Role.drop(columns=['GKP'])], axis=1).drop(columns=['Role'])
+
+# Interactions features for Goalkeepers and Defenders
+for role in ['GKP', 'DEF']:
+    for var in ['Goals conceded', 'Team_xGA', 'Opp_Avg_xG']:
+        data.insert(len(data.columns), role + '*' + var, Role[role]*data[var])
+
+# Interactions features for Midfielders and Forwards
+for role in ['MID', 'FWD']:
+    for var in ['Goals scored', 'Team_xG', 'Opp_Avg_xGA']:
+        data.insert(len(data.columns), role + '*' + var, Role[role]*data[var])
+
+# Dropping categorical columns
+data = data.drop(columns=['Player', 'Team', 'Opponent', 'Sel.'])
+
+# Dropping features which are highly unlikely to effect the dependent variable
+data = data.drop(columns=['Own goals', 'Penalties saved', 'Penalties missed', 'Red cards'])
+
+# Dropping Price fall column due to collinearity with the Price rise column
+data = data.drop(columns=['Price fall'])
+
+# Dropping the advanced xG (etc) stats which are not regularized to 90 minutes
+data = data.drop(columns=['Player_xG',
+                          'Player_NPxG',
+                          'Player_xA',
+                          'Player_xGChain',
+                          'Player_xGBuildup'])
 
 # Dropping observations with the highest number of points, which doesn't represent typical players' performance
 data = data[data['Pts.'] <= 16]
 
+# Dropping observations with negative number of points, which doesn't represent typical players' performance
+data = data[data['Pts.'] >= 0]
+
 # Dropping players who played less than 10 minutes per appearance
 data = data[data['Minutes played'] / data['Player_Appearances'] > 10]
+
+# Introduce a penalty taker dummy feature
+data['Penalty taker'] = [0 if data['Player_xG90'][i] == data['Player_NPxG90'][i] else 1 for i in data.index.tolist()]
 
 # Define X vector of independent variables and y dependent variable we want to predict (points)
 X = data.drop('Pts.', axis=1)
