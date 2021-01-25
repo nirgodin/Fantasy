@@ -6,12 +6,14 @@ import os
 
 # Setting variables which are relevant for the entire analysis
 season = '21'
-last_GW = '15'
+last_GW = '19'
 minutes_threshold = 200
 
 # Import data
 data = pd.read_csv('Final Data.csv')
 data = data.drop_duplicates()
+CM_data = pd.read_csv(r'Cumulative Merged Data\CMD_S' + season + '_GW_' + last_GW + '.csv')
+CM_data.drop_duplicates()
 
 ######################                            SECTION 1 - FANTASY                            ######################
 
@@ -118,7 +120,6 @@ sel_fantasy_points = sns.scatterplot(x='Sel.',
 # The higher this substraction is, the better the player in seizing opportunities, and vice versa.
 
 # Import data and subset relevant columns
-CM_data = pd.read_csv(r'Cumulative Merged Data\CMD_S' + season + '_GW_' + last_GW + '.csv')
 seizing_players = CM_data[['Player', 'Player_NPG', 'Player_NPxG']]
 
 # Create the Seizure variable

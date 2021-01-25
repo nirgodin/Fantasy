@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="0d0d6c7f-7c70-44de-ad73-0d337eef8da5" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/Browsers/chromedriver.exe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Cumulative Merged Data/CMD_S21_GW_10.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Cumulative Merged Data/CMD_S21_GW_11.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Cumulative Merged Data/CMD_S21_GW_12.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Cumulative Merged Data/CMD_S21_GW_13.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Cumulative Merged Data/CMD_S21_GW_14.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Cumulative Merged Data/CMD_S21_GW_15.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Cumulative Merged Data/CMD_S21_GW_16.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Cumulative Merged Data/CMD_S21_GW_17.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Cumulative Merged Data/CMD_S21_GW_18.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Cumulative Merged Data/CMD_S21_GW_19.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Cumulative Merged Data/CMD_S21_GW_5.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Cumulative Merged Data/CMD_S21_GW_6.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Cumulative Merged Data/CMD_S21_GW_7.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Cumulative Merged Data/CMD_S21_GW_8.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Cumulative Merged Data/CMD_S21_GW_9.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FPL/FPL_S21_GW1_10.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FPL/FPL_S21_GW1_11.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FPL/FPL_S21_GW1_12.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FPL/FPL_S21_GW1_13.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FPL/FPL_S21_GW1_14.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FPL/FPL_S21_GW1_15.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FPL/FPL_S21_GW1_16.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FPL/FPL_S21_GW1_17.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FPL/FPL_S21_GW1_18.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FPL/FPL_S21_GW1_19.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FPL/FPL_S21_GW1_5.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FPL/FPL_S21_GW1_6.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FPL/FPL_S21_GW1_7.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FPL/FPL_S21_GW1_8.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FPL/FPL_S21_GW1_9.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Final Data.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Football Leagues Scraping.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Functions.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Literature/Bunker and Thabtah - A machine learning framework for sport result prediction.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Literature/Sapienza, Goyal and Ferrara - Deep Neural Networks for Optimal Team Composition.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Model Data/Model Data - Final.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Model Data/Single GW/MD_S21_GW1_10.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Model Data/Single GW/MD_S21_GW1_11.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Model Data/Single GW/MD_S21_GW1_12.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Model Data/Single GW/MD_S21_GW1_13.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Model Data/Single GW/MD_S21_GW1_14.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Model Data/Single GW/MD_S21_GW1_15.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Model Data/Single GW/MD_S21_GW1_16.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Model Data/Single GW/MD_S21_GW1_17.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Model Data/Single GW/MD_S21_GW1_18.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Model Data/Single GW/MD_S21_GW1_19.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Model Data/Single GW/MD_S21_GW1_6.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Model Data/Single GW/MD_S21_GW1_7.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Model Data/Single GW/MD_S21_GW1_8.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Model Data/Single GW/MD_S21_GW1_9.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/PLT/PLT_S21_GW1_10.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/PLT/PLT_S21_GW1_11.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/PLT/PLT_S21_GW1_12.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/PLT/PLT_S21_GW1_13.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/PLT/PLT_S21_GW1_14.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/PLT/PLT_S21_GW1_15.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/PLT/PLT_S21_GW1_16.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/PLT/PLT_S21_GW1_17.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/PLT/PLT_S21_GW1_18.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/PLT/PLT_S21_GW1_19.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/PLT/PLT_S21_GW1_5.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/PLT/PLT_S21_GW1_6.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/PLT/PLT_S21_GW1_7.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/PLT/PLT_S21_GW1_8.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/PLT/PLT_S21_GW1_9.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Schedule/Schedule_S21.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Single GW/SGW_S21_GW_10.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Single GW/SGW_S21_GW_11.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Single GW/SGW_S21_GW_12.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Single GW/SGW_S21_GW_13.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Single GW/SGW_S21_GW_14.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Single GW/SGW_S21_GW_15.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Single GW/SGW_S21_GW_16.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Single GW/SGW_S21_GW_17.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Single GW/SGW_S21_GW_18.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Single GW/SGW_S21_GW_19.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Single GW/SGW_S21_GW_6.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Single GW/SGW_S21_GW_7.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Single GW/SGW_S21_GW_8.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Single GW/SGW_S21_GW_9.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Understat/xG_S21_GW1_10.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Understat/xG_S21_GW1_11.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Understat/xG_S21_GW1_12.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Understat/xG_S21_GW1_13.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Understat/xG_S21_GW1_14.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Understat/xG_S21_GW1_15.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Understat/xG_S21_GW1_16.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Understat/xG_S21_GW1_17.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Understat/xG_S21_GW1_18.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Understat/xG_S21_GW1_19.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Understat/xG_S21_GW1_5.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Understat/xG_S21_GW1_6.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Understat/xG_S21_GW1_7.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Understat/xG_S21_GW1_8.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Understat/xG_S21_GW1_9.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/debug.log" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/רעיונות לתרשימים.docx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Fantasy/.idea/.name" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Fantasy/.idea/Fantasy.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Fantasy/.idea/inspectionProfiles/profiles_settings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Fantasy/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Fantasy/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Fantasy/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Fantasy/.idea/workspace.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Fantasy/Browsers/chromedriver.exe" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Fantasy/Cumulative Merged Data/CMD_S21_GW_10.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Fantasy/Cumulative Merged Data/CMD_S21_GW_11.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Fantasy/Cumulative Merged Data/CMD_S21_GW_12.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Fantasy/Cumulative Merged Data/CMD_S21_GW_13.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Fantasy/Cumulative Merged Data/CMD_S21_GW_14.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Fantasy/Cumulative Merged Data/CMD_S21_GW_15.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Fantasy/Cumulative Merged Data/CMD_S21_GW_16.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Fantasy/Cumulative Merged Data/CMD_S21_GW_17.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Fantasy/Cumulative Merged Data/CMD_S21_GW_18.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Fantasy/Cumulative Merged Data/CMD_S21_GW_19.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Fantasy/Cumulative Merged Data/CMD_S21_GW_5.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Fantasy/Cumulative Merged Data/CMD_S21_GW_6.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Fantasy/Cumulative Merged Data/CMD_S21_GW_7.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Fantasy/Cumulative Merged Data/CMD_S21_GW_8.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Fantasy/Cumulative Merged Data/CMD_S21_GW_9.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Fantasy/Executing.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Fantasy/Exploring.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Fantasy/FPL/FPL_S21_GW1_10.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Fantasy/FPL/FPL_S21_GW1_11.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Fantasy/FPL/FPL_S21_GW1_12.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Fantasy/FPL/FPL_S21_GW1_13.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Fantasy/FPL/FPL_S21_GW1_14.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Fantasy/FPL/FPL_S21_GW1_15.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Fantasy/FPL/FPL_S21_GW1_16.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Fantasy/FPL/FPL_S21_GW1_17.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Fantasy/FPL/FPL_S21_GW1_18.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Fantasy/FPL/FPL_S21_GW1_19.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Fantasy/FPL/FPL_S21_GW1_5.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Fantasy/FPL/FPL_S21_GW1_6.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Fantasy/FPL/FPL_S21_GW1_7.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Fantasy/FPL/FPL_S21_GW1_8.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Fantasy/FPL/FPL_S21_GW1_9.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Fantasy/Final Data.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Fantasy/Football Leagues Scraping.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Fantasy/Imputating.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Fantasy/Learning.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Fantasy/Literature/Bunker and Thabtah - A machine learning framework for sport result prediction.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Fantasy/Literature/Sapienza, Goyal and Ferrara - Deep Neural Networks for Optimal Team Composition.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Fantasy/Merging.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Fantasy/Model Data/Model Data - Final.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Fantasy/Model Data/Single GW/MD_S21_GW1_10.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Fantasy/Model Data/Single GW/MD_S21_GW1_11.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Fantasy/Model Data/Single GW/MD_S21_GW1_12.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Fantasy/Model Data/Single GW/MD_S21_GW1_13.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Fantasy/Model Data/Single GW/MD_S21_GW1_14.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Fantasy/Model Data/Single GW/MD_S21_GW1_15.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Fantasy/Model Data/Single GW/MD_S21_GW1_16.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Fantasy/Model Data/Single GW/MD_S21_GW1_17.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Fantasy/Model Data/Single GW/MD_S21_GW1_18.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Fantasy/Model Data/Single GW/MD_S21_GW1_19.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Fantasy/Model Data/Single GW/MD_S21_GW1_6.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Fantasy/Model Data/Single GW/MD_S21_GW1_7.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Fantasy/Model Data/Single GW/MD_S21_GW1_8.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Fantasy/Model Data/Single GW/MD_S21_GW1_9.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Fantasy/Older Models.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Fantasy/PLT/PLT_S21_GW1_10.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Fantasy/PLT/PLT_S21_GW1_11.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Fantasy/PLT/PLT_S21_GW1_12.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Fantasy/PLT/PLT_S21_GW1_13.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Fantasy/PLT/PLT_S21_GW1_14.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Fantasy/PLT/PLT_S21_GW1_15.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Fantasy/PLT/PLT_S21_GW1_16.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Fantasy/PLT/PLT_S21_GW1_17.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Fantasy/PLT/PLT_S21_GW1_18.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Fantasy/PLT/PLT_S21_GW1_19.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Fantasy/PLT/PLT_S21_GW1_5.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Fantasy/PLT/PLT_S21_GW1_6.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Fantasy/PLT/PLT_S21_GW1_7.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Fantasy/PLT/PLT_S21_GW1_8.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Fantasy/PLT/PLT_S21_GW1_9.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Fantasy/Schedule/Schedule_S21.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Fantasy/Scraping.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Fantasy/Single GW/SGW_S21_GW_10.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Fantasy/Single GW/SGW_S21_GW_11.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Fantasy/Single GW/SGW_S21_GW_12.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Fantasy/Single GW/SGW_S21_GW_13.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Fantasy/Single GW/SGW_S21_GW_14.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Fantasy/Single GW/SGW_S21_GW_15.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Fantasy/Single GW/SGW_S21_GW_16.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Fantasy/Single GW/SGW_S21_GW_17.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Fantasy/Single GW/SGW_S21_GW_18.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Fantasy/Single GW/SGW_S21_GW_19.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Fantasy/Single GW/SGW_S21_GW_6.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Fantasy/Single GW/SGW_S21_GW_7.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Fantasy/Single GW/SGW_S21_GW_8.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Fantasy/Single GW/SGW_S21_GW_9.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Fantasy/Understat/xG_S21_GW1_10.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Fantasy/Understat/xG_S21_GW1_11.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Fantasy/Understat/xG_S21_GW1_12.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Fantasy/Understat/xG_S21_GW1_13.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Fantasy/Understat/xG_S21_GW1_14.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Fantasy/Understat/xG_S21_GW1_15.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Fantasy/Understat/xG_S21_GW1_16.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Fantasy/Understat/xG_S21_GW1_17.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Fantasy/Understat/xG_S21_GW1_18.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Fantasy/Understat/xG_S21_GW1_19.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Fantasy/Understat/xG_S21_GW1_5.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Fantasy/Understat/xG_S21_GW1_6.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Fantasy/Understat/xG_S21_GW1_7.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Fantasy/Understat/xG_S21_GW1_8.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Fantasy/Understat/xG_S21_GW1_9.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Fantasy/Uploading.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Fantasy/Visualizing.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Fantasy/debug.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Fantasy/רעיונות לתרשימים.docx" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
+  </component>
+  <component name="ProjectId" id="1jH73tr5CViBxvHvHMbLpynWAvo" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="com.intellij.ide.scratch.LRUPopupBuilder$1/New Scratch File" value="Python" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/.." />
+    <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\nirgo\Documents\GitHub\Fantasy" />
+      <recent name="C:\Users\nirgo\Documents\GitHub\Fantasy\Fantasy" />
+      <recent name="C:\Users\nirgo\Documents\עדי פינקלשטיין\תקציב המשכי" />
+    </key>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="0d0d6c7f-7c70-44de-ad73-0d337eef8da5" name="Default Changelist" comment="" />
+      <created>1603448968484</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1603448968484</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+  </component>
+</project>
