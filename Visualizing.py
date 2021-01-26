@@ -4,10 +4,11 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 import os
 from sklearn.preprocessing import MinMaxScaler
+import plotly.graph_objects as go
 
 # Setting variables which are relevant for the entire analysis
 season = '21'
-last_GW = '19a'
+last_GW = '19'
 minutes_threshold = 200
 
 # Import data
@@ -49,21 +50,33 @@ stable_players['Std'] = stable_players.std(axis=1,
 stable_players = stable_players[stable_players['Std'] != 0]
 
 # Multiply the Std column by -1 to assign the lowest std (i.e the most stable player) the highest value
-stable_players['Std'] = stable_players['Std']*(-1)
+stable_players['Minus Std'] = stable_players['Std']*(-1)
 
 # Use the MinMax scaler to produce a score ranging from 0 to 1 (where 0 is the most unstable player)
 scaler = MinMaxScaler()
-stable_players['Stability'] = scaler.fit_transform(stable_players['Std'].values.reshape(-1, 1))
-
+stable_players['Stability'] = scaler.fit_transform(stable_players['Minus Std'].values.reshape(-1, 1))
+stable_players = stable_players.drop(index='Dawson')
+# Get rid from players with mean points less than 4, and sort the dataframe by stability
 stable_players = stable_players[stable_players['Mean'] > 4].sort_values(by='Stability',
                                                                         ascending=False).head(20)
 
-# Plot
-sns.barplot(x='Stability',
-            y=stable_players.index,
-            palette='ch:.25',
-            edgecolor='.6',
-            data=stable_players)
+# Delete irrelevant columns and round numbers
+stable_players = stable_players[['Stability', 'Mean']].round(1)
+
+# Create table
+stable_table = go.Figure(data=[go.Table(
+             header=dict(values=['Player', 'Stability', 'Points per game'],
+                         fill_color='paleturquoise'),
+             cells=dict(values=[stable_players.index, stable_players.Stability, stable_players.Mean],
+                        fill_color='lavender'))
+])
+
+# Update layout and size
+stable_table.update_layout(width=600,
+                           height=335)
+
+# Export
+stable_table.write_image('Visualizations/Stability.png')
 
 # SECTION 1.b - PLAYER VALUE FOR MONEY
 
