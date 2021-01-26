@@ -20,11 +20,11 @@ Fantasy players deal with tight budget constraint, and as so it is of great impo
 </p>
 
 ### *Stability*
+Another feature which fantasy players are highly interested in is stability, or in more formal statistic language - low variance. A player which scores every 10 games a hattrick may have a lot of points, but it is very hard to predict when will he get them. To this end I've created a stability index. It is caculated by taking the standard deviation of each player's points variable, multiplying it by -1 (so the lowest standard deviation will be the highest number), and then passing it to a MinMax scaler, producing a range of value between 0 (the least stable player) and 1 (the most stable player). This table, for example, presents the stability index of the top 20 stable players due to GW19 with a least 4 points average per game
 
 <p align="center">
   <img src="/Visualizations/Stability.png" width="900"/>
 </p>
-
 
 ### *are xG and xA stats good predictors?*
 xG (expected goals) is an advanced soccer stat produced by training deep learning models on goaling opportunities that became very popular in the last years.  (and the same goes for xA for Assists). But are these stats really good in predicting the number of goals and assists of a player in a given game? let's check this question by examining a scatterplot of the xG stats and the actual goals scored, and the correlation between them.
