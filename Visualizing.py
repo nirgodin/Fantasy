@@ -75,6 +75,9 @@ stable_table = go.Figure(data=[go.Table(
 stable_table.update_layout(width=600,
                            height=335)
 
+# Show table on browser
+stable_table.show()
+
 # Export
 stable_table.write_image('Visualizations/Stability.png')
 
