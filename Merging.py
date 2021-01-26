@@ -4,7 +4,7 @@ import re
 
 # First, we set the season, current gameweek and previous gameweek variables
 season = '21'
-previous_GW = '18'
+previous_GW = '19a'
 current_GW = '19'
 
 # Import the previous and this week cumulative dataframes

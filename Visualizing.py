@@ -3,10 +3,11 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 import os
+from sklearn.preprocessing import MinMaxScaler
 
 # Setting variables which are relevant for the entire analysis
 season = '21'
-last_GW = '19'
+last_GW = '19a'
 minutes_threshold = 200
 
 # Import data
@@ -23,18 +24,9 @@ CM_data.drop_duplicates()
 # This question is answered by measuring the different players' fantasy points standard deviation
 # Low standard deviation indicates a stabler player
 
-# Subset the relevant data
-stable_players = data[['Gameweek', 'Player', 'Team', 'Pts.']]
-
-# We won't like to include players who didn't play much in our analysis, so we will import the data about
-# the cumulative minutes each played played in the season, and delete players who didn't play much
-minutes_played = pd.read_csv(r'Cumulative Merged Data\CMD_S' + season + '_GW_' + last_GW + '.csv')[['Player',
-                                                                                                    'Team',
-                                                                                                    'Minutes played']]
-
 # Merge the minutes played to the stable players df
-stable_players = pd.merge(stable_players,
-                          minutes_played,
+stable_players = pd.merge(data[['Gameweek', 'Player', 'Team', 'Pts.']],
+                          CM_data[['Player', 'Team', 'Minutes played']],
                           on=['Player', 'Team'],
                           how='inner')
 
@@ -53,12 +45,25 @@ stable_players['Mean'] = stable_players.mean(axis=1,
 stable_players['Std'] = stable_players.std(axis=1,
                                            skipna=True)
 
-# Sorting the players by their standard deviation
-stable_players = stable_players.sort_values(by='Std')
+# Drop players with Std = 0
+stable_players = stable_players[stable_players['Std'] != 0]
 
-# Creating a list of the top 10 stable player who scored a lot of points
-top10_stable_players = stable_players[stable_players['Mean'] > 5].sort_values(by='Std').reset_index().head(10)
+# Multiply the Std column by -1 to assign the lowest std (i.e the most stable player) the highest value
+stable_players['Std'] = stable_players['Std']*(-1)
 
+# Use the MinMax scaler to produce a score ranging from 0 to 1 (where 0 is the most unstable player)
+scaler = MinMaxScaler()
+stable_players['Stability'] = scaler.fit_transform(stable_players['Std'].values.reshape(-1, 1))
+
+stable_players = stable_players[stable_players['Mean'] > 4].sort_values(by='Stability',
+                                                                        ascending=False).head(20)
+
+# Plot
+sns.barplot(x='Stability',
+            y=stable_players.index,
+            palette='ch:.25',
+            edgecolor='.6',
+            data=stable_players)
 
 # SECTION 1.b - PLAYER VALUE FOR MONEY
 
