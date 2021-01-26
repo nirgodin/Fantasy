@@ -19,10 +19,10 @@ Fantasy players deal with tight budget constraint, and as so it is of great impo
   <img src="/Visualizations/Cost_Pts.png" width="600"/>
 </p>
 
-### *Players' stability*
+### *Stability*
 
 <p align="center">
-  <img src="/Visualizations/Stability.png" width="600"/>
+  <img src="/Visualizations/Stability.png" width="900"/>
 </p>
 
 
