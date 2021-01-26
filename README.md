@@ -13,7 +13,7 @@ Which are the players who makes the maximum from their goaling opportunities? Th
 </p>
 
 ### *Value for (virtual) money*
-Fantasy players deal with tight budget constraint, and as so it is of great importance to pick cheap players that produce many points. As before, this can be learnt by scatterplotting the two parameters and checking who is above the regression line (high value) and who is under it (low value). Here we can see, for example, that although Moe Salah is the most expensive player in the game he is still of great value. On the other hand, the disappointing season of Aubameyang is reflected in this chart as well, as he is one of the most expensive players in the game but doesn't produce that many points. 
+Fantasy players deal with tight budget constraint, and as so it is of great importance to pick cheap players that produce many points. As before, It can be learned by scatterplotting the two parameters (cost and points) and checking who is above the regression line (high value) and who is under it (low value). Here we can see, for example, that although Moe Salah is the most expensive player in the game he is still of great value. On the other hand, the disappointing season of Aubameyang is reflected in this chart as well, as he is one of the most expensive players in the game but doesn't produce that many points. 
 
 <p align="center">
   <img src="/Visualizations/Cost_Pts.png" width="600"/>
