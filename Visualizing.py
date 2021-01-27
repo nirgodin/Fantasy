@@ -61,7 +61,7 @@ stable_players = stable_players[stable_players['Mean'] > 4].sort_values(by='Stab
                                                                         ascending=False).head(20)
 
 # Delete irrelevant columns and round numbers
-stable_players = stable_players[['Stability', 'Mean']].round(1)
+stable_players = stable_players[['Stability', 'Mean']].round(2)
 
 # Create table
 stable_table = go.Figure(data=[go.Table(
@@ -71,9 +71,9 @@ stable_table = go.Figure(data=[go.Table(
                         fill_color='lavender'))
 ])
 
-# Update layout and size
-stable_table.update_layout(width=600,
-                           height=335)
+# # Update layout and size
+# stable_table.update_layout_images(width=600,
+#                                   height=335)
 
 # Show table on browser
 stable_table.show()

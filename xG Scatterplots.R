@@ -3,6 +3,7 @@
 # Loading libraries
 library(ggplot2)
 library(ggpmisc)
+library(formattable)
 
 # setting working directory
 setwd('C:/Users/nirgo/Documents/GitHub/Fantasy')
@@ -13,6 +14,11 @@ cum_data <- read.csv('./Cumulative Merged Data/CMD_S21_GW_19.csv')
 
 # Changing encoding for R doesn't catch well some of the latin players' names 
 Encoding(cum_data$Player) <- 'UTF-8'
+Encoding(sgw_data$Player) <- 'UTF-8'
+
+# Drop duplicates
+sgw_data <- sgw_data %>% distinct()
+cum_data <- cum_data %>% distinct()
 
 # Single GW - xG vs. Goals scored
 ggplot(data = sgw_data[sgw_data$Player_xG >= 0,], aes(x = Player_xG, y = Goals.scored)) +
