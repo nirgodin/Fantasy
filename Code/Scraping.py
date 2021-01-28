@@ -110,7 +110,7 @@ final_df.insert(2, 'Role', Role)
 final_df.insert(1, 'Team', Team)
 
 # Export the final dataframe to a csv file
-final_df.to_csv(r'FPL\FPL_S' + season + '_GW1_' + current_GW + '.csv', index=False)
+final_df.to_csv(r'Data\FPL\FPL_S' + season + '_GW1_' + current_GW + '.csv', index=False)
 
 ###############################################################################
 
@@ -183,7 +183,7 @@ PLT.rename(columns={'Team_Team': 'Team', 'Team_№': 'Team_Ranking'},
            inplace=True)
 
 # Export the final dataframe to a csv file
-PLT.to_csv(r'PLT\PLT_S' + season + '_GW1_' + current_GW + '.csv', index=False)
+PLT.to_csv(r'Data\PLT\PLT_S' + season + '_GW1_' + current_GW + '.csv', index=False)
 
 ###############################################################################
 
@@ -276,5 +276,5 @@ for elem in ['Player_xG', 'Player_NPxG', 'Player_xA']:
     final_players[elem] = [re.split('[-+]', final_players[elem][i])[0] for i in final_players.index.tolist()]
 
 # Exporting the final_players df to csv file
-final_players.to_csv(r'Understat\xG_S' + season + '_GW1_' + current_GW + '.csv', index=False)
+final_players.to_csv(r'Data\Understat\xG_S' + season + '_GW1_' + current_GW + '.csv', index=False)
 

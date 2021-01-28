@@ -8,16 +8,16 @@ previous_GW = '19a'
 current_GW = '19'
 
 # Import the previous and this week cumulative dataframes
-cum_prev_df = pd.read_csv(r'FPL/FPL_S' + season + '_GW1_' + previous_GW + '.csv')
-cum_curr_df = pd.read_csv(r'FPL/FPL_S' + season + '_GW1_' + current_GW + '.csv')
+cum_prev_df = pd.read_csv(r'Data\FPL\FPL_S' + season + '_GW1_' + previous_GW + '.csv')
+cum_curr_df = pd.read_csv(r'Data\FPL\FPL_S' + season + '_GW1_' + current_GW + '.csv')
 
 # Importing the previous and current cumulative players xG stats from the Understat site
-cum_prev_xG_df = pd.read_csv(r'Understat\xG_S' + season + '_GW1_' + previous_GW + '.csv')
-cum_curr_xG_df = pd.read_csv(r'Understat\xG_S' + season + '_GW1_' + current_GW + '.csv')
+cum_prev_xG_df = pd.read_csv(r'Data\Understat\xG_S' + season + '_GW1_' + previous_GW + '.csv')
+cum_curr_xG_df = pd.read_csv(r'Data\Understat\xG_S' + season + '_GW1_' + current_GW + '.csv')
 
 # Import the previous and current cumulative PLT's with all the relevant team stats
-cum_prev_PLT = pd.read_csv(r'PLT\PLT_S' + season + '_GW1_' + previous_GW + '.csv')
-cum_curr_PLT = pd.read_csv(r'PLT\PLT_S' + season + '_GW1_' + current_GW + '.csv')
+cum_prev_PLT = pd.read_csv(r'Data\PLT\PLT_S' + season + '_GW1_' + previous_GW + '.csv')
+cum_curr_PLT = pd.read_csv(r'Data\PLT\PLT_S' + season + '_GW1_' + current_GW + '.csv')
 
 # First, we'll drop some column on the xG's dataframes we already have on the FPL dataframes
 drop_col_lst = ['Player_Minutes played',
@@ -118,7 +118,7 @@ curr_merged_df = pd.merge(curr_merged_df,
                           how='inner')
 
 # We'll finish by exporting to csv file the curr_merged_df, which will be useful for some of our models
-curr_merged_df.to_csv(r'Cumulative Merged Data\CMD_S' + season + '_GW_' + current_GW + '.csv', index=False)
+curr_merged_df.to_csv(r'Data\Cumulative Merged Data\CMD_S' + season + '_GW_' + current_GW + '.csv', index=False)
 
 #######################################################################################################################
 
@@ -246,7 +246,7 @@ for col in list(GW.columns):
 ###########################################################################################
 
 # Import the schedule of all the teams
-Schedule = pd.read_csv(r'Schedule\Schedule_S' + season + '.csv', index_col=0)
+Schedule = pd.read_csv(r'Data\Schedule\Schedule_S' + season + '.csv', index_col=0)
 
 # Inserting a Gameweek and a Season column
 GW.insert(1, 'Gameweek', current_GW)
@@ -303,10 +303,10 @@ GW = pd.merge(GW,
 GW['Sel.'] = [float(str(GW['Sel.'][i]).replace('%', '')) for i in GW.index.tolist()]
 
 # Exporting the final GW dataframe to a single gameweek csv file
-GW.to_csv(r'Single GW\SGW_S' + season + '_GW_' + current_GW + '.csv', index=False)
+GW.to_csv(r'Data\Single GW\SGW_S' + season + '_GW_' + current_GW + '.csv', index=False)
 
 # Appending the final GW dataframe to the Final Data file, which contains all the gameweeks
-Final_Data = pd.read_csv('Final Data.csv')
+Final_Data = pd.read_csv(r'Data\Final Data.csv')
 
 # Verifying the GW dataframe is in the same column order as the final data one
 GW = GW[Final_Data.columns]
@@ -314,7 +314,7 @@ GW = GW[Final_Data.columns]
 # Concatenating and saving
 Final_Data = pd.concat([Final_Data, GW])
 
-Final_Data.to_csv('Final Data.csv', index=False)
+Final_Data.to_csv(r'Data\Final Data.csv', index=False)
 
 # Finally, we'll create a dataframe which contains the average player, team and opponent data until the previous GW
 # And the current gameweek points. This data will be used for most of our models
@@ -378,10 +378,10 @@ Model_Data = pd.merge(Model_Data,
 Model_Data = Model_Data.drop_duplicates()
 
 # Exporting
-Model_Data.to_csv(r'Model Data\Single GW\MD_S' + season + '_GW1_' + current_GW + '.csv', index=False)
+Model_Data.to_csv(r'Data\Model Data\Single GW\MD_S' + season + '_GW1_' + current_GW + '.csv', index=False)
 
 # Appending the final GW dataframe to the Final Data file, which contains all the gameweeks
-Model_Data_Final = pd.read_csv(r'Model Data\Model Data - Final.csv')
+Model_Data_Final = pd.read_csv(r'Data\Model Data\Model Data - Final.csv')
 
 # Verifying the GW dataframe is in the same column order as the final data one
 Model_Data = Model_Data[Model_Data_Final.columns]
@@ -389,4 +389,4 @@ Model_Data = Model_Data[Model_Data_Final.columns]
 # Concatenating and saving
 Model_Data_Final = pd.concat([Model_Data_Final, Model_Data])
 
-Model_Data_Final.to_csv(r'Model Data\Model Data - Final.csv', index=False)
+Model_Data_Final.to_csv(r'Data\Model Data\Model Data - Final.csv', index=False)
