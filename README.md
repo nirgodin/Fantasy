@@ -28,3 +28,8 @@ Another feature which fantasy players are highly interested in is stability, or 
 
 ### *are xG and xA stats good predictors?*
 xG (expected goals) is an advanced soccer stat produced by training deep learning models on goaling opportunities that became very popular in the last years.  (and the same goes for xA for Assists). But are these stats really good in predicting the number of goals and assists of a player in a given game? let's check this question by examining a scatterplot of the xG stats and the actual goals scored, and the correlation between them.
+
+### *Head 2 Head Comparison*
+<p align="center">
+  <img src="/Visualizations/Radar.png" width="600"/>
+</p>
