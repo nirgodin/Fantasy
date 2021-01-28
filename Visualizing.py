@@ -157,6 +157,10 @@ worst10_seizing_players = seizing_players.tail(10)
 
 # SECTION 2.b - HEAD 2 HEAD PLAYER COMPARISON
 
+# Define the two player name you want to compare
+name1 = 'De Bruyne'
+name2 = 'Salah'
+
 # Which player is better - player A or player B?
 # This question is answered by creating a radar plot comparing two players by multiple aspects
 
@@ -164,23 +168,24 @@ worst10_seizing_players = seizing_players.tail(10)
 categories = ['Cost',
               'Goals scored',
               'Assists',
-              'Points per match']
+              'Points per match',
+              'Form']
 
 # Create a new dataframe containing only the desired categories
 radar_data = CM_data[['Player'] + categories]
 
 # Create a list of each player stats
-De_Bruyne = radar_data[radar_data['Player'] == 'De Bruyne'].values.tolist()[0]
-Salah = radar_data[radar_data['Player'] == 'Salah'].values.tolist()[0]
+Player1 = radar_data[radar_data['Player'] == name1].values.tolist()[0]
+Player2 = radar_data[radar_data['Player'] == name2].values.tolist()[0]
 
 # Append two more values to each player's list, using the stats we produced earlier: Seizure and Stability
 # Seizure
-De_Bruyne.append(seizing_players['Seizure'][seizing_players['Player'] == 'De Bruyne'].values[0])
-Salah.append(seizing_players['Seizure'][seizing_players['Player'] == 'Salah'].values[0])
+Player1.append(seizing_players['Seizure'][seizing_players['Player'] == name1].values[0])
+Player2.append(seizing_players['Seizure'][seizing_players['Player'] == name2].values[0])
 
 # Stability
-De_Bruyne.append(stable_players['Stability'][stable_players.index == 'De Bruyne'].values[0]*10)
-Salah.append(stable_players['Stability'][stable_players.index == 'Salah'].values[0]*10)
+Player1.append(stable_players['Stability'][stable_players.index == name1].values[0]*10)
+Player2.append(stable_players['Stability'][stable_players.index == name2].values[0]*10)
 
 # Update the categories names
 categories = categories + ['Seizure', 'Stability']
@@ -188,22 +193,22 @@ categories = categories + ['Seizure', 'Stability']
 radar = go.Figure()
 
 radar.add_trace(go.Scatterpolar(
-                r=De_Bruyne[1:],
+                r=Player1[1:],
                 theta=categories,
                 fill='toself',
-                name=De_Bruyne[0]))
+                name=Player1[0]))
 
 radar.add_trace(go.Scatterpolar(
-                r=Salah[1:],
+                r=Player2[1:],
                 theta=categories,
                 fill='toself',
-                name=Salah[0]))
+                name=Player2[0]))
 
 radar.update_layout(
   polar=dict(
     radialaxis=dict(
       visible=False,
-      range=[-6, 13]
+      range=[min(Player1[1:] + Player2[1:]) - 1, max(Player1[1:] + Player2[1:]) + 1]
     )),
   legend=dict(
       yanchor="top",
