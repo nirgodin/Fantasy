@@ -31,5 +31,5 @@ xG (expected goals) is an advanced soccer stat produced by training deep learnin
 
 ### *Head 2 Head Comparison*
 <p align="center">
-  <img src="/Visualizations/Radar.png" width="600"/>
+  <img src="/Visualizations/Radar.png" width="900"/>
 </p>
