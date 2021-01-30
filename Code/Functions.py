@@ -1,6 +1,6 @@
 import psycopg2
 import os
-import Credentials
+import Code.Credentials
 import pandas as pd
 
 

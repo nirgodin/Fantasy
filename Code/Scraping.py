@@ -5,12 +5,12 @@ from selenium import webdriver
 from selenium.webdriver.support.ui import Select
 from selenium.common.exceptions import ElementClickInterceptedException, NoSuchElementException
 import re
-from Functions import HTMLTableParser
+from Code.Functions import HTMLTableParser
 hp = HTMLTableParser()
 
 # First, we set the season, current gameweek and previous gameweek variables
 season = '21'
-current_GW = '19'
+current_GW = '20'
 
 # Setting driver
 driver = webdriver.Chrome(r'C:\Users\nirgo\PycharmProjects\Fantasy\Browsers\chromedriver.exe')
@@ -70,7 +70,7 @@ for elem in scraping_lst:
     exec(clk)
     page = 0
     # while page <= 19:
-    #     raw = hp.parse_html(driver)
+    #     raw = hp.parse_html(driver=driver)
     #     temp = hp.arrange_html(raw)
     #     category_df.append(temp)
     #     next_page.click()
@@ -142,7 +142,7 @@ team_apply = driver.find_element_by_xpath('/html/body/div[1]/div[3]/div[3]/div/d
 team_apply.click()
 
 # Parsing the first page
-raw_PLT = hp.parse_html()
+raw_PLT = hp.parse_html(driver=driver)
 
 # Arranging the Premier league table
 PLT = hp.arrange_html(raw_PLT).iloc[0:20]
@@ -219,7 +219,7 @@ players_pages = list(range(2, 6)) + [5] * 45 + [6, 7]
 players_pages = [str(i) for i in players_pages]
 
 for i in players_pages:
-    raw_players = hp.parse_html()
+    raw_players = hp.parse_html(driver=driver)
     temp_players = hp.arrange_html(raw_players)
     temp_players = temp_players.iloc[20:len(temp_players) - 1]
     players_df.append(temp_players)
