@@ -16,7 +16,7 @@ Which are the players who makes the maximum from their goaling opportunities? Th
 Fantasy players deal with tight budget constraint, and as so it is of great importance to pick cheap players that produce many points. As before, It can be learned by scatterplotting the two parameters (cost and points) and checking who is above the regression line (high value) and who is under it (low value). Here we can see, for example, that although Moe Salah is the most expensive player in the game he is still of great value. On the other hand, the disappointing season of Aubameyang is reflected in this chart as well, as he is one of the most expensive players in the game but doesn't produce that many points. 
 
 <p align="center">
-  <img src="/Visualizations/Cost_Pts.png" width="900"/>
+  <img src="/Visualizations/Cost_Pts.png" width="600"/>
 </p>
 
 ### *Stability*
@@ -26,10 +26,9 @@ Another feature which fantasy players are highly interested in is stability, or 
   <img src="/Visualizations/Stability.png" width="900"/>
 </p>
 
-### *are xG and xA stats good predictors?*
-xG (expected goals) is an advanced soccer stat produced by training deep learning models on goaling opportunities that became very popular in the last years.  (and the same goes for xA for Assists). But are these stats really good in predicting the number of goals and assists of a player in a given game? let's check this question by examining a scatterplot of the xG stats and the actual goals scored, and the correlation between them.
-
 ### *Head 2 Head Comparison*
+Head to head comparison between two player is often required, and therefore it is handy to be able to easily compare them along several parameters. To that end, a radar plot is absolutely perfect. This one, for example, compares between two of the best players in the English Premier League: Moe Salah and Kevin De Bruyne. The plot - presenting data until Gameweek 19 - shows clearly that while Salah scores more and has more fantasy points, De Bruyne assists more and is more stable. This allows the Fantasy player to decide which goals, and make an informative decision which of the players is better suited to reach these goals.
+
 <p align="center">
   <img src="/Visualizations/Radar.png" width="750"/>
 </p>
