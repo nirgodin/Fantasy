@@ -4,8 +4,8 @@ import re
 
 # First, we set the season, current gameweek and previous gameweek variables
 season = '21'
-previous_GW = '19'
-current_GW = '20'
+previous_GW = '20'
+current_GW = '21'
 
 # Import the previous and this week cumulative dataframes
 cum_prev_df = pd.read_csv(r'Data\FPL\FPL_S' + season + '_GW1_' + previous_GW + '.csv')
