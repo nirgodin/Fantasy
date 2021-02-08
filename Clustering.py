@@ -91,7 +91,7 @@ for i in range(0, clusters_num):
 
 # Add country name to each point
 for j, name in names.iteritems():
-    km_ax.annotate(name, (fantasy[j][0], fantasy[j][1]), fontsize=8)
+    km_ax.annotate(name, (fantasy[j][0], fantasy[j][1]), fontsize=9)
 
 # Plot KM cetnroids
 plt.scatter(km.cluster_centers_[:, 0],
