@@ -3,12 +3,15 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 import os
-from sklearn.preprocessing import MinMaxScaler
+from sklearn.preprocessing import StandardScaler, MinMaxScaler
+from sklearn.decomposition import PCA
+from sklearn.cluster import DBSCAN, KMeans
+from sklearn.impute import SimpleImputer
 import plotly.graph_objects as go
 
 # Setting variables which are relevant for the entire analysis
 season = '21'
-last_GW = '19'
+last_GW = '22'
 minutes_threshold = 200
 
 # Import data
@@ -365,7 +368,6 @@ team_radar.show()
 
 # Export plot
 team_radar.write_image('Visualizations/team_radar_' + name1 + '_' + name2 + '.png')
-
 
 
 #################                            SECTION 4 - STATISTICS ACCURACY                           #################
