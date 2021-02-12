@@ -10,10 +10,10 @@ hp = HTMLTableParser()
 
 # First, we set the season, current gameweek and previous gameweek variables
 season = '21'
-current_GW = '22'
+current_GW = '23'
 
 # Setting driver
-driver = webdriver.Chrome(r'C:\Users\nirgo\PycharmProjects\Fantasy\Browsers\chromedriver.exe')
+driver = webdriver.Chrome(r'Browsers\chromedriver.exe')
 
 # Enter the Fantasy Premier League site
 driver.get('https://fantasy.premierleague.com/statistics')
