@@ -32,3 +32,9 @@ Head to head comparison between two player is often required, and therefore it i
 <p align="center">
   <img src="/Visualizations/Radar.png" width="750"/>
 </p>
+
+### *Cluster Analysis*
+
+<p align="center">
+  <img src="/Visualizations/Fantasy Clustering.png" width="750"/>
+</p>
