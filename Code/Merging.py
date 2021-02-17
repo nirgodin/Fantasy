@@ -4,8 +4,8 @@ import re
 
 # First, we set the season, current gameweek and previous gameweek variables
 season = '21'
-previous_GW = '22'
-current_GW = '23'
+previous_GW = '23'
+current_GW = '24a'
 
 # Import the previous and this week cumulative dataframes
 cum_prev_df = pd.read_csv(r'Data\FPL\FPL_S' + season + '_GW1_' + previous_GW + '.csv')
@@ -256,7 +256,10 @@ GW.insert(1, 'Season', season)
 GW.insert(3, 'Opponent', 'nan')
 
 # Inserting the relevant opponents from the Schedule df
-GW['Opponent'] = [Schedule.loc[team, current_GW] for team in GW['Team']]
+try:
+    GW['Opponent'] = [Schedule.loc[team, current_GW] for team in GW['Team']]
+except KeyError:
+    GW['Opponent'] = [Schedule.loc[team, current_GW[:-1]] for team in GW['Team']]
 
 # Inserting Home column, which will contain a dummy variable: 1 for home game, 0 for away game
 # Classification to Home/Away games is done based on the opponent team's name being uppercase/lowercase
@@ -328,7 +331,10 @@ Model_Data.insert(1, 'Season', season)
 Model_Data.insert(3, 'Opponent', 'nan')
 
 # Inserting the relevant opponents from the Schedule df
-Model_Data['Opponent'] = [Schedule.loc[team, current_GW] for team in Model_Data['Team']]
+try:
+    Model_Data['Opponent'] = [Schedule.loc[team, current_GW] for team in Model_Data['Team']]
+except KeyError:
+    Model_Data['Opponent'] = [Schedule.loc[team, current_GW[:-1]] for team in Model_Data['Team']]
 
 # Inserting Home column, which will contain a dummy variable: 1 for home game, 0 for away game
 # Classification to Home/Away games is done based on the opponent team's name being uppercase/lowercase
