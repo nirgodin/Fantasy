@@ -10,7 +10,7 @@ hp = HTMLTableParser()
 
 # First, we set the season, current gameweek and previous gameweek variables
 season = '21'
-current_GW = '24a'
+current_GW = '25'
 
 # Setting driver
 driver = webdriver.Chrome(r'Browsers\chromedriver.exe')
@@ -215,7 +215,7 @@ player_apply.click()
 
 # Scraping
 players_df = []
-players_pages = list(range(2, 6)) + [5] * 45 + [6, 7]
+players_pages = list(range(2, 6)) + [5] * 50 + [6, 7]
 players_pages = [str(i) for i in players_pages]
 
 for i in players_pages:

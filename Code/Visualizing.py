@@ -11,7 +11,7 @@ import plotly.graph_objects as go
 
 # Setting variables which are relevant for the entire analysis
 season = '21'
-last_GW = '22'
+last_GW = '25'
 minutes_threshold = 200
 
 # Import data
@@ -385,9 +385,15 @@ sns.scatterplot(x='Player_xG',
 SGW_xG_corr = data.corr()._get_value('Goals scored', 'Player_xG')
 
 # Cumulative xG and goals
-sns.regplot(x='Player_xG',
-            y='Goals scored',
-            data=cum_data)
+g = sns.FacetGrid(col='Role',
+                  hue='Role',
+                  sharex=False,
+                  sharey=False,
+                  data=cum_data[cum_data['Role'] != 'GKP'])
+
+g.map_dataframe(sns.regplot,
+                x='Player_xG',
+                y='Goals scored')
 
 cum_xG_corr = cum_data.corr()._get_value('Goals scored', 'Player_xG')
 
@@ -420,11 +426,25 @@ sns.heatmap(xG_FPL.isnull(),
 # Histogram of the Fantasy points
 Pts_histogram = sns.displot(data['Pts.'], kde=True)
 
-# Scatterplot of the Fantasy Cost vs. Fantasy Points
-Cost_Pts_scatterplot = sns.jointplot(x='Cost',
-                                     y='Pts.',
-                                     data= data,
-                                     hue='Role')
+# Regplot of the Fantasy Cost vs. Fantasy Points
+role_lst = ['GKP', 'DEF', 'MID', 'FWD']
+
+# Add column caculating the points per gameweek
+cum_data['Points per gw'] = cum_data['Pts.']/int(last_GW)
+
+g = sns.lmplot(x='Cost',
+               y='Points per gw',
+               hue='Role',
+               col='Role',
+               col_wrap=2,
+               col_order=['GKP', 'DEF', 'MID', 'FWD'],
+               sharex=False,
+               data=cum_data)
+
+
+for ax, role in zip(g.axes.ravel(), role_lst):
+    for t, x, y in cum_data[cum_data['Role'] == role][['Player', 'Cost', 'Points per gw']].values.tolist():
+        ax.annotate(t, (x, y), fontsize=6)
 
 # Scatterplot of the cumulative xG vs. cumulative Goals
 xG_Goals_scatterplot = sns.jointplot(x='Player_xG',
