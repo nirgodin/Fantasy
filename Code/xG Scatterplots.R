@@ -11,7 +11,7 @@ setwd('C:/Users/nirgo/Documents/GitHub/Fantasy')
 
 # Loading data. SGW - Single Game Week (i.e, not cumulative). CUM - cumulative data until GW 19.
 sgw_data <- read.csv('Data/Final Data.csv')
-cum_data <- read.csv('Data/Cumulative Merged Data/CMD_S21_GW_25.csv')
+cum_data <- read.csv('Data/Cumulative Merged Data/CMD_S21_GW_26.csv')
 
 # Changing encoding for R doesn't catch well some of the latin players' names 
 Encoding(cum_data$Player) <- 'UTF-8'
@@ -78,7 +78,7 @@ ggplot(data = sgw_data[which(sgw_data$Player_xG >= 0 & sgw_data$Role != 'GKP'),]
 ggsave(filename = 'xG_Goals_Role_SGW.png',
        path = './Visualizations',
        width = 8,
-       height = 3.5)
+       height = 4.466666)
 
 
 ####################################         CUMULATIVE         ####################################
@@ -137,7 +137,7 @@ ggplot(data = cum_data[which(cum_data$Role != 'GKP'),],
 ggsave(filename = 'xG_Goals_Role_Cum.png',
        path = './Visualizations',
        width = 8,
-       height = 3.5)
+       height = 4.46666)
 
 
 ####################################         R SQUARED         ####################################
@@ -147,7 +147,7 @@ ggsave(filename = 'xG_Goals_Role_Cum.png',
 rsq <- function(x, y) summary(lm(y~x))$r.squared
 
 # Dataframe to append the each r2
-r2_df <- data.frame('GW' = c(5:25))
+r2_df <- data.frame('GW' = c(5:26))
 
 # Iterate different roles
 for (role in c('ALL', 'DEF', 'MID', 'FWD')) {
@@ -156,7 +156,7 @@ for (role in c('ALL', 'DEF', 'MID', 'FWD')) {
   r2_vec <- c()
   
   # Itertating through gameweeks
-  for (gw in c(5:25)){
+  for (gw in c(5:26)){
     
     # Load data
     players_path <- paste('Data/Cumulative Merged Data/CMD_S21_GW_', as.character(gw), '.csv',
@@ -172,6 +172,8 @@ for (role in c('ALL', 'DEF', 'MID', 'FWD')) {
       r2 <- rsq(data[which(data$Role == role), 'Player_xG'],
                 data[which(data$Role == role), 'Goals.scored'])
     }
+    
+    # Append calculated R2 to the r2_vec
     r2_vec <- append(r2_vec, r2)
   }
   
@@ -194,6 +196,7 @@ ggsave(filename = 'R2_Plot.png',
        path = './Visualizations',
        width = 8,
        height = 4.46666)
+
 
 # Transform R2 dataframe to long format
 r2_df <- pivot_longer(r2_df %>% select(-ALL),
@@ -224,7 +227,7 @@ ggplot(data = r2_df,
 ggsave(filename = 'R2_Role.png',
        path = './Visualizations',
        width = 8,
-       height = 3.5)
+       height = 4.4666)
 
 
 ####################################         OPPORTUNITIES SEIZURE         ####################################
@@ -240,21 +243,41 @@ best_scorer <- cum_data[cum_data$Seizure == max(cum_data$Seizure), 'Player']
 worst_scorer <- cum_data[cum_data$Seizure == min(cum_data$Seizure), 'Player']
 
 
-# + 
+ggplot(data = cum_data,
+       aes(x = Player_xG, y = Goals.scored)) +
+  geom_text(data = cum_data,
+            aes(label = Player, size = Goals.scored)) + 
+  scale_size(range = c(1, 3.5)) +  
+  geom_smooth(data = cum_data,
+              aes(x = Player_xG, y = Goals.scored),
+              method = 'lm',
+              formula = y ~ x,
+              se = F) +
+  stat_poly_eq(formula = y ~ x,
+               parse = T,
+               size = 5) + 
+  scale_x_continuous(name = 'xG') + 
+  scale_y_continuous(name = 'Goals Scored') +
+  guides(size = F) +
+  theme(legend.title.align = 0.5) +
+  geom_segment(aes(x = cum_data[Player == 'Son', 'Player_xG'],
+                   xend = cum_data[Player == 'Son', 'Player_xG'],
+                   y = cum_data[Player == 'Son', 'Goals.scored'],
+                   yend = cum_data[Player == 'Son', 'Predicted']),
+               linetype = 'dashed',
+               size = 1,
+               color = '#69B600') +
+  geom_segment(aes(x = cum_data[Player == worst_scorer, 'Player_xG'],
+                   xend = cum_data[Player == worst_scorer, 'Player_xG'],
+                   y = cum_data[Player == worst_scorer, 'Goals.scored'],
+                   yend = cum_data[Player == worst_scorer, 'Predicted']),
+               linetype = 'dashed',
+               size = 1,
+               color = '#F8766D')
 
-# geom_segment(aes(x = cum_data[Player == best_scorer, 'Player_xG'],
-#                  xend = cum_data[Player == best_scorer, 'Player_xG'],
-#                  y = cum_data[Player == best_scorer, 'Goals.scored'],
-#                  yend = cum_data[Player == best_scorer, 'Predicted']),
-#              linetype = 'dashed',
-#              color = 'red') + 
-# geom_segment(aes(x = cum_data[Player == worst_scorer, 'Player_xG'],
-#                  xend = cum_data[Player == worst_scorer, 'Player_xG'],
-#                  y = cum_data[Player == worst_scorer, 'Goals.scored'],
-#                  yend = cum_data[Player == worst_scorer, 'Predicted']),
-#              linetype = 'dashed',
-#              color = 'black') # + 
-# facet_wrap(~ Role, scales = 'free')
-
-
+# Export Plot
+ggsave(filename = 'Chances_Seizure.png',
+       path = './Visualizations',
+       width = 8,
+       height = 4.4666)
 
