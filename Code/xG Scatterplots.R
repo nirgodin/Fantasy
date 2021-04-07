@@ -11,7 +11,7 @@ setwd('C:/Users/nirgo/Documents/GitHub/Fantasy')
 
 # Loading data. SGW - Single Game Week (i.e, not cumulative). CUM - cumulative data until GW 19.
 sgw_data <- read.csv('Data/Final Data.csv')
-cum_data <- read.csv('Data/Cumulative Merged Data/CMD_S21_GW_26.csv')
+cum_data <- read.csv('Data/Cumulative Merged Data/CMD_S21_GW_29.csv')
 
 # Changing encoding for R doesn't catch well some of the latin players' names 
 Encoding(cum_data$Player) <- 'UTF-8'
@@ -147,7 +147,7 @@ ggsave(filename = 'xG_Goals_Role_Cum.png',
 rsq <- function(x, y) summary(lm(y~x))$r.squared
 
 # Dataframe to append the each r2
-r2_df <- data.frame('GW' = c(5:26))
+r2_df <- data.frame('GW' = c(5:29))
 
 # Iterate different roles
 for (role in c('ALL', 'DEF', 'MID', 'FWD')) {
@@ -156,7 +156,7 @@ for (role in c('ALL', 'DEF', 'MID', 'FWD')) {
   r2_vec <- c()
   
   # Itertating through gameweeks
-  for (gw in c(5:26)){
+  for (gw in c(5:29)){
     
     # Load data
     players_path <- paste('Data/Cumulative Merged Data/CMD_S21_GW_', as.character(gw), '.csv',
@@ -260,10 +260,10 @@ ggplot(data = cum_data,
   scale_y_continuous(name = 'Goals Scored') +
   guides(size = F) +
   theme(legend.title.align = 0.5) +
-  geom_segment(aes(x = cum_data[Player == 'Son', 'Player_xG'],
-                   xend = cum_data[Player == 'Son', 'Player_xG'],
-                   y = cum_data[Player == 'Son', 'Goals.scored'],
-                   yend = cum_data[Player == 'Son', 'Predicted']),
+  geom_segment(aes(x = cum_data[Player == best_scorer, 'Player_xG'],
+                   xend = cum_data[Player == best_scorer, 'Player_xG'],
+                   y = cum_data[Player == best_scorer, 'Goals.scored'],
+                   yend = cum_data[Player == best_scorer, 'Predicted']),
                linetype = 'dashed',
                size = 1,
                color = '#69B600') +
