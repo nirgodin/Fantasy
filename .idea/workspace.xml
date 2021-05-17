@@ -2,27 +2,52 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0d0d6c7f-7c70-44de-ad73-0d337eef8da5" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/Code/.Rhistory" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Data/Cumulative Merged Data/CMD_S21_GW_30.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Data/FPL/FPL_S21_GW1_30.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Data/Model Data/Single GW/MD_S21_GW1_30.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Data/PLT/PLT_S21_GW1_30.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Data/Single GW/SGW_S21_GW_30.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Data/Understat/xG_S21_GW1_30.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.Rhistory" beforeDir="false" afterPath="$PROJECT_DIR$/.Rhistory" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Data/Cumulative Merged Data/CMD_S21_GW_31.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Data/Cumulative Merged Data/CMD_S21_GW_32.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Data/Cumulative Merged Data/CMD_S21_GW_33.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Data/Cumulative Merged Data/CMD_S21_GW_34.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Data/Cumulative Merged Data/CMD_S21_GW_35.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Data/Cumulative Merged Data/CMD_S21_GW_35a.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Data/FPL/FPL_S21_GW1_31.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Data/FPL/FPL_S21_GW1_32.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Data/FPL/FPL_S21_GW1_33.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Data/FPL/FPL_S21_GW1_34.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Data/FPL/FPL_S21_GW1_35.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Data/FPL/FPL_S21_GW1_35a.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Data/FPL/FPL_S21_GW1_36.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Data/Model Data/Single GW/MD_S21_GW1_31.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Data/Model Data/Single GW/MD_S21_GW1_32.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Data/Model Data/Single GW/MD_S21_GW1_33.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Data/Model Data/Single GW/MD_S21_GW1_34.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Data/Model Data/Single GW/MD_S21_GW1_35.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Data/Model Data/Single GW/MD_S21_GW1_35a.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Data/PLT/PLT_S21_GW1_31.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Data/PLT/PLT_S21_GW1_32.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Data/PLT/PLT_S21_GW1_33.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Data/PLT/PLT_S21_GW1_34.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Data/PLT/PLT_S21_GW1_35.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Data/PLT/PLT_S21_GW1_35a.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Data/PLT/PLT_S21_GW1_36.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Data/Single GW/SGW_S21_GW_31.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Data/Single GW/SGW_S21_GW_32.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Data/Single GW/SGW_S21_GW_33.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Data/Single GW/SGW_S21_GW_34.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Data/Single GW/SGW_S21_GW_35.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Data/Single GW/SGW_S21_GW_35a.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Data/Understat/xG_S21_GW1_31.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Data/Understat/xG_S21_GW1_32.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Data/Understat/xG_S21_GW1_33.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Data/Understat/xG_S21_GW1_34.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Data/Understat/xG_S21_GW1_35.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Data/Understat/xG_S21_GW1_35a.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Data/Understat/xG_S21_GW1_36.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Browsers/chromedriver.exe" beforeDir="false" afterPath="$PROJECT_DIR$/Browsers/chromedriver.exe" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Code/Merging.py" beforeDir="false" afterPath="$PROJECT_DIR$/Code/Merging.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Code/Scraping.py" beforeDir="false" afterPath="$PROJECT_DIR$/Code/Scraping.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Code/xG Scatterplots.R" beforeDir="false" afterPath="$PROJECT_DIR$/Code/xG Scatterplots.R" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Data/Final Data.csv" beforeDir="false" afterPath="$PROJECT_DIR$/Data/Final Data.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Data/Model Data/Model Data - Final.csv" beforeDir="false" afterPath="$PROJECT_DIR$/Data/Model Data/Model Data - Final.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Visualizations/Chances_Seizure.png" beforeDir="false" afterPath="$PROJECT_DIR$/Visualizations/Chances_Seizure.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Visualizations/R2_Plot.png" beforeDir="false" afterPath="$PROJECT_DIR$/Visualizations/R2_Plot.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Visualizations/R2_Role.png" beforeDir="false" afterPath="$PROJECT_DIR$/Visualizations/R2_Role.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Visualizations/xG_Goals_Cum.png" beforeDir="false" afterPath="$PROJECT_DIR$/Visualizations/xG_Goals_Cum.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Visualizations/xG_Goals_Role_Cum.png" beforeDir="false" afterPath="$PROJECT_DIR$/Visualizations/xG_Goals_Role_Cum.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Visualizations/xG_Goals_Role_SGW.png" beforeDir="false" afterPath="$PROJECT_DIR$/Visualizations/xG_Goals_Role_SGW.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Visualizations/xG_Goals_SGW.png" beforeDir="false" afterPath="$PROJECT_DIR$/Visualizations/xG_Goals_SGW.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Data/xG_Goals_SGW.png" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
