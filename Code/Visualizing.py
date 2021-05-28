@@ -7,6 +7,7 @@ from sklearn.preprocessing import StandardScaler, MinMaxScaler
 from sklearn.decomposition import PCA
 from sklearn.cluster import DBSCAN, KMeans
 from sklearn.impute import SimpleImputer
+from sklearn.linear_model import LinearRegression
 import plotly.graph_objects as go
 
 # Setting variables which are relevant for the entire analysis
@@ -31,70 +32,216 @@ PLT_data.drop_duplicates()
 
 ######################                            SECTION 1 - FANTASY                            ######################
 
-# SECTION 1.a - PLAYER STABILITY
 
-# Which are the most stable players from the fantasy points aspect?
-# This question is answered by measuring the different players' fantasy points standard deviation
-# Low standard deviation indicates a stabler player
+class Visualizing:
+    """ Class for apply the data manipulations necessary for creating some of the insights we're interested in """
 
-# Merge the minutes played to the stable players df
-stable_players = pd.merge(data[['Gameweek', 'Player', 'Team', 'Pts.']],
-                          cum_data[['Player', 'Team', 'Minutes played']],
-                          on=['Player', 'Team'],
-                          how='inner')
+    def __init__(self, season, last_gw):
+        self.season = season
+        self.last_gw = last_gw
 
-# Subsetting players who played less minutes than the minutes threshold we defined
-stable_players = stable_players[stable_players['Minutes played'] >= minutes_threshold]
+    def stability_scores(self, ts_data, pts_thresh, minutes_thresh):
+        """ Create data frame containing fantasy points stability scores for all players.
+            These scores ranges from 0 (least stable) to 100 (most stable).
+            They are created using players' standard deviations which are passed to MinMax scaler """
 
-# Pivot the table
-stable_players = pd.pivot_table(stable_players.drop(columns=['Team', 'Minutes played']),
-                                index='Player',
-                                columns='Gameweek',
-                                values='Pts.')
+        # Calculate the cumulative number of minutes each player played
+        cum_minutes = ts_data.groupby(by='Player').agg({'Minutes played': [sum]})
+        cum_minutes.columns = list(map(''.join, cum_minutes.columns.values))
 
-# Calculating the Mean and Standard Deviation for each player
-stable_players['Mean'] = stable_players.mean(axis=1,
-                                             skipna=True)
-stable_players['Std'] = stable_players.std(axis=1,
-                                           skipna=True)
+        # Drop players who didn't play the average minutes per game defined in the minutes threshold
+        cum_minutes = cum_minutes[cum_minutes['Minutes playedsum'] >= minutes_thresh*self.last_gw]
+        ts_data = ts_data[ts_data['Player'].isin(cum_minutes.index.tolist())]
 
-# Drop players with Std = 0
-stable_players = stable_players[stable_players['Std'] != 0]
+        # Pivot the time series data
+        pvt_data = pd.pivot_table(ts_data[['Player', 'Gameweek', 'Pts.']],
+                                  index='Player',
+                                  columns='Gameweek',
+                                  values='Pts.')
 
-# Multiply the Std column by -1 to assign the lowest std (i.e the most stable player) the highest value
-stable_players['Minus Std'] = stable_players['Std']*(-1)
+        # Calculating the Mean and Standard Deviation for each player
+        pvt_data['Mean'] = pvt_data.mean(axis=1,
+                                         skipna=True)
+        pvt_data['Std'] = pvt_data.std(axis=1,
+                                       skipna=True)
 
-# Use the MinMax scaler to produce a score ranging from 0 to 1 (where 0 is the most unstable player)
-scaler = MinMaxScaler()
-stable_players['Stability'] = scaler.fit_transform(stable_players['Minus Std'].values.reshape(-1, 1))
-stable_players = stable_players.drop(index='Dawson')
-# Get rid from players with mean points less than 4, and sort the dataframe by stability
-top_stable_players = stable_players[stable_players['Mean'] > 4].sort_values(by='Stability',
-                                                                            ascending=False).head(20)
+        # Drop players with Std = 0
+        pvt_data = pvt_data[pvt_data['Std'] != 0]
 
-# Delete irrelevant columns and round numbers
-top_stable_players = top_stable_players[['Stability', 'Mean']].round(2)
+        # Multiply the Std column by -1 to assign the lowest std (i.e the most stable player) the highest value
+        pvt_data['Minus Std'] = pvt_data['Std']*(-1)
 
-# Create table
-stable_table = go.Figure(data=[go.Table(
-             header=dict(values=['Player', 'Stability', 'Points per game'],
-                         fill_color='paleturquoise'),
-             cells=dict(values=[top_stable_players.index, top_stable_players.Stability, top_stable_players.Mean],
-                        fill_color='lavender'))
-])
+        # Use the MinMax scaler to produce a score ranging from 0 to 1 (where 0 is the most unstable player)
+        scaler = MinMaxScaler()
+        pvt_data['Stability'] = scaler.fit_transform(pvt_data['Minus Std'].values.reshape(-1, 1))
 
-# # Update layout and size
-# stable_table.update_layout_images(width=600,
-#                                   height=335)
+        # Multiply the Stability index with 100 to create stability score ranging from 0 to 100
+        pvt_data['Stability'] = pvt_data['Stability']*100
 
-# Show table on browser
-stable_table.show()
+        # Drop players which their mean points per game is lower than the points threshold defined and sort by stability
+        stability_data = pvt_data[pvt_data['Mean'] >= pts_thresh].sort_values(by='Stability',
+                                                                              ascending=False)
 
-# Export
-stable_table.write_image('Visualizations/Stability.png')
+        # Delete irrelevant columns and round numbers
+        stability_data = stability_data[['Stability', 'Mean']].round(2)
+
+        return stability_data
+
+    def value_for_money(self, ts_data, role_relative=True):
+        """ This function computes the value each player delivered relative to his cost.
+            This is computed using a linear regression model, where value is calculated as the player's residual """
+
+        # Pivot the time series data
+        pvt_data = pd.pivot_table(ts_data[['Player', 'Gameweek', 'Role', 'Pts.', 'Cost']],
+                                  index=['Player', 'Role'],
+                                  columns='Gameweek',
+                                  values=['Pts.', 'Cost'])
+
+        # Compute mean points and cost per game
+        pvt_data['Sum pts.'] = pvt_data.filter(like='Pts').sum(axis=1,
+                                                                skipna=True)
+
+        pvt_data['Mean cost'] = pvt_data.filter(like='Cost').mean(axis=1,
+                                                                  skipna=True)
+
+        # Subset only player names and roles
+        reg_data = pd.DataFrame({'Player': pvt_data.index.get_level_values(0),
+                                 'Role': pvt_data.index.get_level_values(1),
+                                 'Pts.': pvt_data['Sum pts.'],
+                                 'Cost': pvt_data['Mean cost']}).dropna().reset_index(drop=True)
+
+        # Create linear regression model
+        lm = LinearRegression()
+
+        # For each role create a regression object and return vector of residuals
+        resid_lst = []
+
+        if role_relative == True:
+
+            for role in reg_data['Role'].unique():
+    
+                # Subset only current role data
+                role_data = reg_data[reg_data['Role'] == role].reset_index(drop=True)
+    
+                # Create X and y vectors
+                X = role_data['Cost'].values.reshape(-1, 1)
+                y = role_data['Pts.'].values.reshape(-1, 1)
+    
+                # Fit regression
+                reg = lm.fit(X, y)
+    
+                # Append results to list
+                resid_lst.append(pd.DataFrame({'Player': role_data['Player'],
+                                               'Cost': role_data['Cost'],
+                                               'Pts.': role_data['Pts.'],
+                                               'Value': (y - reg.predict(X)).ravel()}))
+    
+            # Concatenate all data frames (one df for each role) to big final residuals data frame
+            residuals = pd.concat(resid_lst).sort_values(by='Value',
+                                                         ascending=False).reset_index(drop=True)
+
+        elif role_relative == False:
+
+            # Create X and y vectors
+            X = reg_data['Cost'].values.reshape(-1, 1)
+            y = reg_data['Pts.'].values.reshape(-1, 1)
+
+            # Fit regression
+            reg = lm.fit(X, y)
+
+            # Append results to list
+            resid_lst.append(pd.DataFrame({'Player': reg_data['Player'],
+                                           'Cost': reg_data['Cost'],
+                                           'Pts.': reg_data['Pts.'],
+                                           'Value': (y - reg.predict(X)).ravel()}))
+
+            # Concatenate all data frames (one df for each role) to big final residuals data frame
+            residuals = pd.concat(resid_lst).sort_values(by='Value',
+                                                         ascending=False).reset_index(drop=True)
+
+        return residuals
+
+    def opportunity_seizure(self, cum_data, role_relative=True):
+        """ This function computes the opportunity seizure of each player.
+            This is computed using a linear regression model, where expected goals are regressed against actual goals.
+            Opportunity seizure is calculated as the player's residual """
+
+        # Pivot the time series data
+        pvt_data = pd.pivot_table(cum_data[['Player', 'Gameweek', 'Role', 'Goals scored', 'Player_xG']],
+                                  index=['Player', 'Role'],
+                                  columns='Gameweek',
+                                  values=['Goals scored', 'Player_xG'])
+
+        # Subset only player names and roles
+        reg_data = pd.DataFrame({'Player': pvt_data.index.get_level_values(0),
+                                 'Role': pvt_data.index.get_level_values(1),
+                                 'Goals': pvt_data['Goals scored'],
+                                 'xG': pvt_data['Player_xG']}).dropna().reset_index(drop=True)
+
+        # Create linear regression model
+        lm = LinearRegression()
+
+        # For each role create a regression object and return vector of residuals
+        resid_lst = []
+
+        if role_relative == True:
+
+            for role in reg_data['Role'].unique():
+
+                # Subset only current role data
+                role_data = reg_data[reg_data['Role'] == role].reset_index(drop=True)
+
+                # Create X and y vectors
+                X = role_data['xG'].values.reshape(-1, 1)
+                y = role_data['Goals'].values.reshape(-1, 1)
+
+                # Fit regression
+                reg = lm.fit(X, y)
+
+                # Append results to list
+                resid_lst.append(pd.DataFrame({'Player': role_data['Player'],
+                                               'xG': role_data['xG'],
+                                               'Goals': role_data['Goals'],
+                                               'Seizure': (y - reg.predict(X)).ravel()}))
+
+            # Concatenate all data frames (one df for each role) to big final residuals data frame
+            residuals = pd.concat(resid_lst).sort_values(by='Seizure',
+                                                         ascending=False).reset_index(drop=True)
+        elif role_relative == False:
+
+            # Create X and y vectors
+            X = reg_data['xG'].values.reshape(-1, 1)
+            y = reg_data['Goals'].values.reshape(-1, 1)
+
+            # Fit regression
+            reg = lm.fit(X, y)
+
+            # Append results to list
+            resid_lst.append(pd.DataFrame({'Player': reg_data['Player'],
+                                           'xG': reg_data['xG'],
+                                           'Goals': reg_data['Goals'],
+                                           'Seizure': (y - reg.predict(X)).ravel()}))
+
+            # Concatenate all data frames (one df for each role) to big final residuals data frame
+            residuals = pd.concat(resid_lst).sort_values(by='Seizure',
+                                                         ascending=False).reset_index(drop=True)
+
+        return residuals
+
+    def team_pts(self, ts_data):
+        """ Calculate the sum of fantasy points each team scored during the season """
+
+        # Group by teams and sum the points
+        team_pts = ts_data.groupby(by='Team').agg({'Pts.': [sum]})
+
+        # Change column names
+        team_pts.columns = list(map(''.join, team_pts.columns.values))
+        team_pts.columns = ['Pts.']
+
+        return team_pts.sort_values(by='Pts.',
+                                    ascending=False)
 
 
-########################################
 
 
 # SECTION 1.b - PLAYER VALUE FOR MONEY
