@@ -57,7 +57,7 @@ category_lst = ['Player',
                 'Price rise',
                 'Price fall']
 
-# The first six elements in category_lst appears in all the pages, so we don't need to scrape them seperately.
+# The first six elements in category_lst appears in all the pages, so we don't need to scrape them separately.
 # Therefore we'll create a different scraping list
 scraping_lst = [elem for elem in category_lst if elem not in ['Player', 'Cost', 'Sel.', 'Form', 'Pts.']]
 
