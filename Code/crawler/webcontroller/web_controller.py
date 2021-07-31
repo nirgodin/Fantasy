@@ -1,6 +1,11 @@
+from typing import List
+from pandas import DataFrame
+from selenium.common.exceptions import ElementClickInterceptedException
 from selenium.webdriver.chrome.webdriver import WebDriver
 from selenium.webdriver.support.select import Select
 from selenium.webdriver.remote.webelement import WebElement
+
+from Code.crawler.consts import FPL_NEXT_PAGE_XPATH
 from Code.crawler.table_parser.html_table_parser import HTMLTableParser
 
 
@@ -9,6 +14,20 @@ class WebController(HTMLTableParser):
     def __init__(self, chromedriver: WebDriver):
         super(WebController).__init__()
         self._driver = chromedriver
+        self._next_page_button = self._get_next_page_button(FPL_NEXT_PAGE_XPATH)
+
+    def _parse_multiple_pages(self) -> List[DataFrame]:
+        dataframes = []
+
+        while True:
+            try:
+                page_stats = self._parse_single_page()
+                dataframes.append(page_stats)
+                self._click_next_page_button(self._next_page_button)
+            except ElementClickInterceptedException as error:
+                break
+
+        return dataframes
 
     def _parse_single_page(self):
         parsed_html = self._parse_html(self._driver)

@@ -1,3 +1,8 @@
+from bs4 import BeautifulSoup
+from pandas import DataFrame
+from selenium.webdriver.chrome.webdriver import WebDriver
+
+
 class HTMLTableParser:
     """
     Parse html tables and arrange them in pandas data frame format.
@@ -6,7 +11,7 @@ class HTMLTableParser:
     """
 
     @staticmethod
-    def _parse_html(driver):
+    def _parse_html(driver: WebDriver) -> BeautifulSoup:
         """ Function that parses html using BeautifulSoup """
 
         # Import relevant packages
@@ -16,7 +21,7 @@ class HTMLTableParser:
         return BeautifulSoup(sourcecode, 'lxml')
 
     @staticmethod
-    def _arrange_html(table):
+    def _arrange_html(table: BeautifulSoup) -> DataFrame:
         """ Function that arranges the parsed html in a pandas data frame object """
 
         import pandas as pd
