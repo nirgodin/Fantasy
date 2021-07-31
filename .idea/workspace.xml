@@ -2,6 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0d0d6c7f-7c70-44de-ad73-0d337eef8da5" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/Code/crawler/fantasy_crawler.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Code/crawler/table_parser/html_table_parser.py" beforeDir="false" afterPath="$PROJECT_DIR$/Code/crawler/table_parser/html_table_parser.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Code/crawler/webcontroller/web_controller.py" beforeDir="false" afterPath="$PROJECT_DIR$/Code/crawler/webcontroller/web_controller.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />

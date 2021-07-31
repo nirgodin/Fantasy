@@ -1,14 +1,23 @@
 from selenium.webdriver.chrome.webdriver import WebDriver
 from selenium.webdriver.support.select import Select
+from selenium.webdriver.remote.webelement import WebElement
+from Code.crawler.table_parser.html_table_parser import HTMLTableParser
 
 
-class WebController:
+class WebController(HTMLTableParser):
 
     def __init__(self, chromedriver: WebDriver):
+        super(WebController).__init__()
         self._driver = chromedriver
 
+    def _parse_single_page(self):
+        parsed_html = self._parse_html(self._driver)
+        arranged_html = self._arrange_html(parsed_html)
+
+        return arranged_html
+
     @staticmethod
-    def _click_next_page_button(next_page_button) -> None:
+    def _click_next_page_button(next_page_button: WebElement) -> None:
         next_page_button.click()
 
         return None

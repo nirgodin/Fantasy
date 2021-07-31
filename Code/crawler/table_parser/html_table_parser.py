@@ -6,7 +6,7 @@ class HTMLTableParser:
     """
 
     @staticmethod
-    def parse_html(driver):
+    def _parse_html(driver):
         """ Function that parses html using BeautifulSoup """
 
         # Import relevant packages
@@ -16,7 +16,7 @@ class HTMLTableParser:
         return BeautifulSoup(sourcecode, 'lxml')
 
     @staticmethod
-    def arrange_html(table):
+    def _arrange_html(table):
         """ Function that arranges the parsed html in a pandas data frame object """
 
         import pandas as pd
