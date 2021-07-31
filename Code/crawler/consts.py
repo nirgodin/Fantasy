@@ -2,7 +2,7 @@ CHROMEDRIVER_PATH = r'Browsers\chromedriver.exe'
 FPL_STATISTICS_URL = 'https://fantasy.premierleague.com/statistics'
 
 FPL_NEXT_PAGE_XPATH = '//*[@id="root"]/div[2]/div/div/div[3]/button[3]'
-FPL_SELECT_MENU_XPATH = '/html/body/main/div/div[2]/div/div/form/div/div[2]/div/div/select'
+FPL_DROPDOWN_MENU_XPATH = '/html/body/main/div/div[2]/div/div/form/div/div[2]/div/div/select'
 
 FPL_CATEGORIES = ['Player',
                   'Cost',
