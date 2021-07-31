@@ -8,12 +8,23 @@ class WebController:
         self._driver = chromedriver
 
     @staticmethod
-    def _click_dropdown_menu(select_menu_button: Select, category_name: str) -> None:
-        select_menu_button.select_by_visible_text(category_name)
+    def _click_next_page_button(next_page_button) -> None:
+        next_page_button.click()
 
         return None
 
-    def _get_select_menu_button(self, select_menu_xpath: str):
-        select_menu_button = self._driver.find_element_by_xpath(select_menu_xpath)
+    @staticmethod
+    def _click_dropdown_menu(dropdown_menu_button: Select, category_name: str) -> None:
+        dropdown_menu_button.select_by_visible_text(category_name)
 
-        return select_menu_button
+        return None
+
+    def _get_dropdown_menu_button(self, dropdown_menu_xpath: str) -> Select:
+        dropdown_menu_button = self._driver.find_element_by_xpath(dropdown_menu_xpath)
+
+        return dropdown_menu_button
+
+    def _get_next_page_button(self, next_page_xpath: str):
+        next_page_button = self._driver.find_element_by_xpath(next_page_xpath)
+
+        return next_page_button
