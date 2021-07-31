@@ -9,8 +9,8 @@ from Code.Functions import HTMLTableParser
 hp = HTMLTableParser()
 
 # First, we set the season, current gameweek and previous gameweek variables
-season = '21'
-current_GW = '38'
+season = '22'
+current_GW = '0'
 
 # Setting driver
 driver = webdriver.Chrome(r'Browsers\chromedriver.exe')
@@ -69,21 +69,21 @@ for elem in scraping_lst:
     clk = 'menu.select_by_visible_text' + '(' + '"' + elem + '"' + ')'
     exec(clk)
     page = 1
-    while page <= 24:
-        raw = hp.parse_html(driver=driver)
-        temp = hp.arrange_html(raw)
-        category_df.append(temp)
-        next_page.click()
-        page += 1
+    # while page <= 24:
+    #     raw = hp.parse_html(driver=driver)
+    #     temp = hp.arrange_html(raw)
+    #     category_df.append(temp)
+    #     next_page.click()
+    #     page += 1
 
-    # while (True):
-    #     try:
-    #         raw = hp.parse_html(driver=driver)
-    #         temp = hp.arrange_html(raw)
-    #         category_df.append(temp)
-    #         next_page.click()
-    #     except ElementClickInterceptedException as error:
-    #         break
+    while (True):
+        try:
+            raw = hp.parse_html(driver=driver)
+            temp = hp.arrange_html(raw)
+            category_df.append(temp)
+            next_page.click()
+        except ElementClickInterceptedException as error:
+            break
     final = pd.concat(category_df)
     final.rename(columns={'**': elem}, inplace=True)
     df_lst.append(final)
