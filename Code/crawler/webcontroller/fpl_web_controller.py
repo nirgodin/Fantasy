@@ -6,15 +6,14 @@ from selenium.common.exceptions import ElementClickInterceptedException
 from selenium.webdriver.chrome.webdriver import WebDriver
 from selenium.webdriver.support.select import Select
 from selenium.webdriver.remote.webelement import WebElement
-
-from Code.crawler.consts import FPL_NEXT_PAGE_XPATH, FPL_DROPDOWN_MENU_XPATH
+from Code.crawler.fpl_consts import FPL_NEXT_PAGE_XPATH, FPL_DROPDOWN_MENU_XPATH
 from Code.crawler.table_parser.html_table_parser import HTMLTableParser
 
 
-class WebController(HTMLTableParser):
+class FPLWebController(HTMLTableParser):
 
     def __init__(self, chromedriver: WebDriver):
-        super(WebController).__init__()
+        super(FPLWebController).__init__()
         self._driver = chromedriver
         self._next_page_button = self._get_next_page_button(FPL_NEXT_PAGE_XPATH)
         self._dropdown_menu_button = self._get_dropdown_menu_button(FPL_DROPDOWN_MENU_XPATH)

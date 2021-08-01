@@ -1,12 +1,13 @@
 from time import sleep
 from typing import List
 from pandas import DataFrame
-from Code.crawler.webcontroller.web_controller import WebController
+from selenium.webdriver.chrome.webdriver import WebDriver
+from Code.crawler.webcontroller.fpl_web_controller import FPLWebController
 
 
-class FPLCrawler(WebController):
+class FPLCrawler(FPLWebController):
 
-    def __init__(self, chromedriver):
+    def __init__(self, chromedriver: WebDriver):
         super(FPLCrawler).__init__(chromedriver)
 
     def get_fpl_stats(self, categories: List[str]) -> List[DataFrame]:
