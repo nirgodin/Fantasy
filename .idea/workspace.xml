@@ -2,15 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0d0d6c7f-7c70-44de-ad73-0d337eef8da5" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/Code/crawler/understat_consts.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Code/crawler/understat_crawler.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Code/crawler/webcontroller/understat_web_controller.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.name" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.name" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Code/crawler/consts.py" beforeDir="false" afterPath="$PROJECT_DIR$/Code/crawler/fpl_consts.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Code/crawler/fantasy_crawler.py" beforeDir="false" afterPath="$PROJECT_DIR$/Code/crawler/fantasy_crawler.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Code/crawler/pre_processing.py" beforeDir="false" afterPath="$PROJECT_DIR$/Code/crawler/pre_processing.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Code/crawler/webcontroller/web_controller.py" beforeDir="false" afterPath="$PROJECT_DIR$/Code/crawler/webcontroller/fpl_web_controller.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Code/crawler/understat_consts.py" beforeDir="false" afterPath="$PROJECT_DIR$/Code/crawler/understat_consts.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Code/crawler/understat_crawler.py" beforeDir="false" afterPath="$PROJECT_DIR$/Code/crawler/understat_crawler.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Code/crawler/webcontroller/fpl_web_controller.py" beforeDir="false" afterPath="$PROJECT_DIR$/Code/crawler/webcontroller/web_controller.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Code/crawler/webcontroller/understat_web_controller.py" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -110,8 +107,26 @@
       <option name="project" value="LOCAL" />
       <updated>1627760052192</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="- Merge categories to one dataframe function&#10;- Understat classes initialization">
+      <created>1627836534888</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1627836534888</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
@@ -120,6 +135,7 @@
     <MESSAGE value="WebController - more functions" />
     <MESSAGE value="get_fpl_stats function" />
     <MESSAGE value="- pre processing class&#10;- split player names functions" />
-    <option name="LAST_COMMIT_MESSAGE" value="- pre processing class&#10;- split player names functions" />
+    <MESSAGE value="- Merge categories to one dataframe function&#10;- Understat classes initialization" />
+    <option name="LAST_COMMIT_MESSAGE" value="- Merge categories to one dataframe function&#10;- Understat classes initialization" />
   </component>
 </project>
