@@ -12,6 +12,12 @@ class WebController(HTMLTableParser):
         super(WebController).__init__()
         self._driver = chromedriver
 
+    def _parse_single_understat_player_page(self) -> DataFrame:
+        arranged_html = self._parse_single_page()
+        players_stats = arranged_html[20, len(arranged_html) - 1]
+
+        return players_stats
+
     def _display_all_understat_categories(self,
                                           dropdown_menu_xpath: str,
                                           understat_categories_xapth_format: tuple,
@@ -29,21 +35,21 @@ class WebController(HTMLTableParser):
         return None
 
     def _parse_multiple_fpl_pages(self) -> DataFrame:
-        dataframes = []
+        players_stats = []
 
         while True:
             try:
-                page_stats = self._parse_single_fpl_page()
-                dataframes.append(page_stats)
+                page_stats = self._parse_single_page()
+                players_stats.append(page_stats)
                 self._click_web_element(FPL_NEXT_PAGE_XPATH)
             except ElementClickInterceptedException:
                 break
 
-        category_stats = pd.concat(dataframes)
+        category_stats = pd.concat(players_stats).drop_duplicates().reset_index(drop=True)
 
         return category_stats
 
-    def _parse_single_fpl_page(self):
+    def _parse_single_page(self) -> DataFrame:
         parsed_html = self._parse_html(self._driver)
         arranged_html = self._arrange_html(parsed_html)
 

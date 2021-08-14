@@ -5,9 +5,7 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Code/crawler/fantasy_crawler.py" beforeDir="false" afterPath="$PROJECT_DIR$/Code/crawler/fantasy_crawler.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Code/crawler/understat_consts.py" beforeDir="false" afterPath="$PROJECT_DIR$/Code/crawler/understat_consts.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Code/crawler/understat_crawler.py" beforeDir="false" afterPath="$PROJECT_DIR$/Code/crawler/understat_crawler.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Code/crawler/webcontroller/fpl_web_controller.py" beforeDir="false" afterPath="$PROJECT_DIR$/Code/crawler/webcontroller/web_controller.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Code/crawler/webcontroller/understat_web_controller.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Code/crawler/webcontroller/web_controller.py" beforeDir="false" afterPath="$PROJECT_DIR$/Code/crawler/webcontroller/web_controller.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -114,7 +112,14 @@
       <option name="project" value="LOCAL" />
       <updated>1627836534888</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="understat web controlling functions">
+      <created>1627923186599</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1627923186599</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -127,6 +132,7 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
@@ -136,6 +142,7 @@
     <MESSAGE value="get_fpl_stats function" />
     <MESSAGE value="- pre processing class&#10;- split player names functions" />
     <MESSAGE value="- Merge categories to one dataframe function&#10;- Understat classes initialization" />
-    <option name="LAST_COMMIT_MESSAGE" value="- Merge categories to one dataframe function&#10;- Understat classes initialization" />
+    <MESSAGE value="understat web controlling functions" />
+    <option name="LAST_COMMIT_MESSAGE" value="understat web controlling functions" />
   </component>
 </project>
