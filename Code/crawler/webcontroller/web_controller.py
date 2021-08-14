@@ -2,7 +2,7 @@ import pandas as pd
 from pandas import DataFrame
 from selenium.common.exceptions import ElementClickInterceptedException
 from selenium.webdriver.chrome.webdriver import WebDriver
-from Code.crawler.fpl_consts import FPL_NEXT_PAGE_XPATH
+from Code.crawler.consts.fpl_consts import FPL_NEXT_PAGE_XPATH
 from Code.crawler.table_parser.html_table_parser import HTMLTableParser
 
 

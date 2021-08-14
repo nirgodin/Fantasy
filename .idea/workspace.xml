@@ -2,9 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0d0d6c7f-7c70-44de-ad73-0d337eef8da5" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/Code/crawler/consts/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Code/crawler/main.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Code/crawler/fantasy_crawler.py" beforeDir="false" afterPath="$PROJECT_DIR$/Code/crawler/fantasy_crawler.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Code/crawler/understat_consts.py" beforeDir="false" afterPath="$PROJECT_DIR$/Code/crawler/understat_consts.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Code/crawler/fpl_consts.py" beforeDir="false" afterPath="$PROJECT_DIR$/Code/crawler/consts/fpl_consts.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Code/crawler/pre_processing.py" beforeDir="false" afterPath="$PROJECT_DIR$/Code/crawler/pre_processing.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Code/crawler/understat_consts.py" beforeDir="false" afterPath="$PROJECT_DIR$/Code/crawler/consts/understat_consts.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Code/crawler/understat_crawler.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Code/crawler/webcontroller/web_controller.py" beforeDir="false" afterPath="$PROJECT_DIR$/Code/crawler/webcontroller/web_controller.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -58,6 +63,7 @@
       <recent name="C:\Users\nirgo\Documents\עדי פינקלשטיין\תקציב המשכי" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\nirgo\Documents\GitHub\Fantasy\Code\crawler\consts" />
       <recent name="C:\Users\nirgo\Documents\GitHub\Fantasy\Code\crawler" />
     </key>
   </component>
@@ -119,7 +125,14 @@
       <option name="project" value="LOCAL" />
       <updated>1627923186599</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="Get understat stats functions">
+      <created>1628973879168</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1628973879168</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -143,6 +156,7 @@
     <MESSAGE value="- pre processing class&#10;- split player names functions" />
     <MESSAGE value="- Merge categories to one dataframe function&#10;- Understat classes initialization" />
     <MESSAGE value="understat web controlling functions" />
-    <option name="LAST_COMMIT_MESSAGE" value="understat web controlling functions" />
+    <MESSAGE value="Get understat stats functions" />
+    <option name="LAST_COMMIT_MESSAGE" value="Get understat stats functions" />
   </component>
 </project>

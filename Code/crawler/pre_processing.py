@@ -3,7 +3,7 @@ from typing import List
 import pandas as pd
 from pandas import DataFrame
 
-from Code.crawler.fpl_consts import PLAYER, ROLE, TEAM, COST, SELECTED, FORM, POINTS
+from Code.crawler.consts.fpl_consts import PLAYER, ROLE, TEAM, COST, SELECTED, FORM, POINTS
 
 
 class CrawlerPreProcessing:

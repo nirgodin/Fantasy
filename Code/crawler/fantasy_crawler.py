@@ -3,7 +3,7 @@ from typing import List, Tuple
 import pandas as pd
 from pandas import DataFrame
 from selenium.webdriver.chrome.webdriver import WebDriver
-from Code.crawler.fpl_consts import FPL_DROPDOWN_MENU_XPATH
+from Code.crawler.consts.fpl_consts import FPL_DROPDOWN_MENU_XPATH
 from Code.crawler.webcontroller.web_controller import WebController
 
 

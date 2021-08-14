@@ -85,3 +85,6 @@ UNDERSTAT_CATEGORIES = ['Player',
                         'NPxG90+xA90',
                         'xGChain90',
                         'xGBuildup90']
+
+
+UNDERSTAT_PAGES = list(range(2, 6)) + [5] * 50 + [6, 7]
