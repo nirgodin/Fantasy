@@ -3,7 +3,7 @@ from pandas import DataFrame
 from selenium.common.exceptions import ElementClickInterceptedException
 from selenium.webdriver.chrome.webdriver import WebDriver
 from selenium.webdriver.support.select import Select
-from Code.crawler.consts.fpl_consts import FPL_NEXT_PAGE_XPATH
+from Code.crawler.consts.fpl_consts import FPL_NEXT_PAGE_XPATH, FPL_TOTAL_NUMBER_PAGES_XPATH
 from Code.crawler.table_parser.html_table_parser import HTMLTableParser
 
 
@@ -37,14 +37,15 @@ class WebController(HTMLTableParser):
 
     def _parse_multiple_fpl_pages(self) -> DataFrame:
         players_stats = []
-
-        while True:
+        page = 1
+        while page <= self._get_total_number_of_players_stat_pages():
+            page_stats = self._parse_single_page()
+            players_stats.append(page_stats)
             try:
-                page_stats = self._parse_single_page()
-                players_stats.append(page_stats)
                 self._click_web_element(FPL_NEXT_PAGE_XPATH)
             except ElementClickInterceptedException:
                 break
+            page += 1
 
         category_stats = pd.concat(players_stats).drop_duplicates().reset_index(drop=True)
 
@@ -77,3 +78,9 @@ class WebController(HTMLTableParser):
         full_element_xpath = element_xpath_start + element_xpath_number + element_xpath_finish
 
         return full_element_xpath
+
+    def _get_total_number_of_players_stat_pages(self) -> int:
+        total_pages_element = self._driver.find_element_by_xpath(FPL_TOTAL_NUMBER_PAGES_XPATH)
+        total_pages_number = total_pages_element.text[-2:]
+
+        return int(total_pages_number)

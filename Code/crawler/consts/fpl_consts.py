@@ -3,6 +3,7 @@ FPL_STATISTICS_URL = 'https://fantasy.premierleague.com/statistics'
 
 FPL_NEXT_PAGE_XPATH = '//*[@id="root"]/div[2]/div/div/div[3]/button[3]'
 FPL_DROPDOWN_MENU_XPATH = '/html/body/main/div/div[2]/div/div/form/div/div[2]/div/div/select'
+FPL_TOTAL_NUMBER_PAGES_XPATH = '/html/body/main/div/div[2]/div/div[1]/div[3]/div'
 
 # Categories that doesn't appear in all stats pages. They appear only if selected in the dropdown menu
 FPL_NON_REPEATED_CATEGORIES = ['Minutes played',
