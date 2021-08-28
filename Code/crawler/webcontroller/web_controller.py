@@ -2,6 +2,7 @@ import pandas as pd
 from pandas import DataFrame
 from selenium.common.exceptions import ElementClickInterceptedException
 from selenium.webdriver.chrome.webdriver import WebDriver
+from selenium.webdriver.support.select import Select
 from Code.crawler.consts.fpl_consts import FPL_NEXT_PAGE_XPATH
 from Code.crawler.table_parser.html_table_parser import HTMLTableParser
 
@@ -62,7 +63,7 @@ class WebController(HTMLTableParser):
         return None
 
     def _click_select_element(self, select_element_xpath: str, visible_text: str) -> None:
-        select_element = self._driver.find_element_by_xpath(select_element_xpath)
+        select_element = Select(self._driver.find_element_by_xpath(select_element_xpath))
         select_element.select_by_visible_text(visible_text)
 
         return None

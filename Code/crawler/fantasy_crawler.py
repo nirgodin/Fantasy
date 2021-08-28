@@ -10,7 +10,7 @@ from Code.crawler.webcontroller.web_controller import WebController
 class FantasyCrawler(WebController):
 
     def __init__(self, chromedriver: WebDriver):
-        super(FantasyCrawler).__init__(chromedriver)
+        super(FantasyCrawler, self).__init__(chromedriver)
 
     def get_understat_player_stats(self,
                                    pages_numbers: List[int],

@@ -2,15 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0d0d6c7f-7c70-44de-ad73-0d337eef8da5" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/Code/crawler/consts/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Code/crawler/main.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Code/crawler/fantasy_crawler.py" beforeDir="false" afterPath="$PROJECT_DIR$/Code/crawler/fantasy_crawler.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Code/crawler/fpl_consts.py" beforeDir="false" afterPath="$PROJECT_DIR$/Code/crawler/consts/fpl_consts.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Code/crawler/pre_processing.py" beforeDir="false" afterPath="$PROJECT_DIR$/Code/crawler/pre_processing.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Code/crawler/understat_consts.py" beforeDir="false" afterPath="$PROJECT_DIR$/Code/crawler/consts/understat_consts.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Code/crawler/understat_crawler.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Code/crawler/webcontroller/web_controller.py" beforeDir="false" afterPath="$PROJECT_DIR$/Code/crawler/webcontroller/web_controller.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Code/crawler/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/Code/crawler/main.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -53,7 +46,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="com.intellij.ide.scratch.LRUPopupBuilder$1/New Scratch File" value="Python" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/Code" />
-    <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
+    <property name="settings.editor.selected.configurable" value="preferences.general" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -66,6 +59,29 @@
       <recent name="C:\Users\nirgo\Documents\GitHub\Fantasy\Code\crawler\consts" />
       <recent name="C:\Users\nirgo\Documents\GitHub\Fantasy\Code\crawler" />
     </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="main" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
+      <module name="Fantasy" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="C:\Users\nirgo\anaconda3\envs\Fantasy\python.exe" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Code/crawler/main.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">

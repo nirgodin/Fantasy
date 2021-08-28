@@ -5,9 +5,10 @@ from Code.crawler.consts.understat_consts import UNDERSTAT_PAGES, UNDERSTAT_PLAY
 from Code.crawler.fantasy_crawler import FantasyCrawler
 
 SEASON = '22'
-CURRENT_GW = '1'
+CURRENT_GW = '3'
 EXPORT = True
-
+# total_pages = driver.find_element_by_xpath('/html/body/main/div/div[2]/div/div[1]/div[3]/div')
+# while page <= int(total_pages.text[-2:]):
 
 if __name__ == '__main__':
 
