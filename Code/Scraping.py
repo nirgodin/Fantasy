@@ -9,8 +9,8 @@ from Code.Functions import HTMLTableParser
 hp = HTMLTableParser()
 
 # First, we set the season, current gameweek and previous gameweek variables
-season = '21'
-current_GW = '38'
+season = '22'
+current_GW = '2'
 
 # Setting driver
 driver = webdriver.Chrome(r'Browsers\chromedriver.exe')
@@ -69,7 +69,8 @@ for elem in scraping_lst:
     clk = 'menu.select_by_visible_text' + '(' + '"' + elem + '"' + ')'
     exec(clk)
     page = 1
-    while page <= 24:
+    total_pages = driver.find_element_by_xpath('/html/body/main/div/div[2]/div/div[1]/div[3]/div')
+    while page <= int(total_pages.text[-2:]):
         raw = hp.parse_html(driver=driver)
         temp = hp.arrange_html(raw)
         category_df.append(temp)
@@ -154,6 +155,7 @@ for elem in ['xG', 'xGA', 'xPTS']:
 # Creating a dictionary to the team names in the PLT to three letters abbreviation
 team_dct = {'Arsenal': 'ARS',
             'Aston Villa': 'AVL',
+            'Brentford': 'BRE',
             'Brighton': 'BHA',
             'Burnley': 'BUR',
             'Chelsea': 'CHE',
@@ -166,9 +168,11 @@ team_dct = {'Arsenal': 'ARS',
             'Manchester City': 'MCI',
             'Manchester United': 'MUN',
             'Newcastle United': 'NEW',
+            'Norwich': 'NOR',
             'Sheffield United': 'SHU',
             'Southampton': 'SOU',
             'Tottenham': 'TOT',
+            'Watford': 'WAT',
             'West Bromwich Albion': 'WBA',
             'West Ham': 'WHU',
             'Wolverhampton Wanderers': 'WOL'}
