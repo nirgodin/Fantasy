@@ -51,3 +51,6 @@ FORM = 'Form'
 POINTS = 'Pts.'
 TEAM = 'Team'
 ROLE = 'Role'
+
+# FPL output file template
+FPL_EXPORT_PATH_TEMPLATE = (r'Data\FPL\FPL_S', '_GW1_')

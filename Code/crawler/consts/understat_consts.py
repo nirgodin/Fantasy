@@ -1,4 +1,5 @@
 UNDERSTAT_URL = 'https://understat.com/league/'
+UNDERSTAT_EPL_URL = 'https://understat.com/league/EPL'
 
 UNDERSTAT_LEAGUES = {'England': 'EPL',
                      'Spain': 'La_liga',
