@@ -1,9 +1,8 @@
+from functools import reduce
 from typing import List
-
 import pandas as pd
 from pandas import DataFrame
-
-from Code.crawler.consts.fpl_consts import PLAYER, ROLE, TEAM, COST, SELECTED, FORM, POINTS
+from Code.crawler.consts.fpl_consts import PLAYER, ROLE, TEAM, TWO_ASTERISKS, FPL_CATEGORIES, FPL_REPEATED_CATEGORIES
 
 
 class CrawlerPreProcessing:
@@ -36,10 +35,18 @@ class CrawlerPreProcessing:
         return player_details
 
     @staticmethod
-    def merge_categories(categories_stats: List[DataFrame]) -> DataFrame:
-        merged_data = pd.concat(categories_stats,
-                                axis=1,
-                                join='outer',
-                                keys=[PLAYER, COST, SELECTED, FORM, POINTS])
+    def subset_categories_columns(data: DataFrame):
+        return data[FPL_CATEGORIES]
 
-        return merged_data
+    @staticmethod
+    def merge_categories(categories_stats: List[DataFrame]) -> DataFrame:
+        return reduce(lambda left, right: pd.merge(left,
+                                                   right,
+                                                   on=FPL_REPEATED_CATEGORIES,
+                                                   how='outer'),
+                      categories_stats)
+
+    @staticmethod
+    def rename_asterisks_column_with_category(category_stats: DataFrame, category_name: str) -> DataFrame:
+        category_stats.rename(columns={TWO_ASTERISKS: category_name}, inplace=True)
+        return category_stats

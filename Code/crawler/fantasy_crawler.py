@@ -3,7 +3,9 @@ from typing import List, Tuple
 import pandas as pd
 from pandas import DataFrame
 from selenium.webdriver.chrome.webdriver import WebDriver
-from Code.crawler.consts.fpl_consts import FPL_DROPDOWN_MENU_XPATH
+from Code.crawler.consts.fpl_consts import FPL_DROPDOWN_MENU_XPATH, TWO_ASTERISKS
+from Code.crawler.pre_processing import CrawlerPreProcessing
+from Code.crawler.utils import FantasyCrawlerUtils
 from Code.crawler.webcontroller.web_controller import WebController
 
 
@@ -11,6 +13,7 @@ class FantasyCrawler(WebController):
 
     def __init__(self, chromedriver: WebDriver):
         super(FantasyCrawler, self).__init__(chromedriver)
+        self._preprocessor = CrawlerPreProcessing()
 
     def get_understat_player_stats(self,
                                    pages_numbers: List[int],
@@ -35,13 +38,21 @@ class FantasyCrawler(WebController):
 
         return teams_stats
 
-    def get_fpl_stats(self, categories: List[str]) -> List[DataFrame]:
+    def get_fpl_stats(self, categories: List[str]) -> DataFrame:
+        categories_stats = self._get_fpl_categories_stats(categories=categories)
+        fpl_stats = self._preprocessor.merge_categories(categories_stats=categories_stats)
+
+        return self._preprocessor.subset_categories_columns(data=fpl_stats)
+
+    def _get_fpl_categories_stats(self, categories: List[str]) -> List[DataFrame]:
         categories_stats = []
 
         for category in categories:
             self._click_select_element(FPL_DROPDOWN_MENU_XPATH, category)
             sleep(1)
             category_stats = self._parse_multiple_fpl_pages()
+            category_stats = self._preprocessor.rename_asterisks_column_with_category(category_stats=category_stats,
+                                                                                      category_name=category)
             categories_stats.append(category_stats)
 
         return categories_stats
