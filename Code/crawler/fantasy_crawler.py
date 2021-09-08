@@ -4,6 +4,10 @@ import pandas as pd
 from pandas import DataFrame
 from selenium.webdriver.chrome.webdriver import WebDriver
 from Code.crawler.consts.fpl_consts import FPL_DROPDOWN_MENU_XPATH, TWO_ASTERISKS
+from Code.crawler.consts.understat_consts import UNDERSTAT_TEAM_DROPDOWN_MENU_XPATH, \
+    UNDERSTAT_TEAM_CATEGORIES_XPATH_FORMAT, UNDERSTAT_TEAM_CATEGORIES, UNDERSTAT_TEAM_APPLY_CHANGES_BUTTON, \
+    UNDERSTAT_PLAYER_DROPDOWN_MENU_XPATH, UNDERSTAT_PLAYER_CATEGORIES_XPATH_FORMAT, UNDERSTAT_PLAYER_CATEGORIES, \
+    UNDERSTAT_PLAYER_APPLY_CHANGES_BUTTON, UNDERSTAT_PLAYER_NEXT_TABLE_XPATH_FORMAT
 from Code.crawler.pre_processing import CrawlerPreProcessing
 from Code.crawler.utils import FantasyCrawlerUtils
 from Code.crawler.webcontroller.web_controller import WebController
@@ -15,26 +19,33 @@ class FantasyCrawler(WebController):
         super(FantasyCrawler, self).__init__(chromedriver)
         self._preprocessor = CrawlerPreProcessing()
 
-    def get_understat_player_stats(self,
-                                   pages_numbers: List[int],
-                                   next_table_xpath_format: Tuple[str, str]) -> DataFrame:
+    def get_understat_player_stats(self) -> DataFrame:
+
+        self._display_all_understat_categories(
+            dropdown_menu_xpath=UNDERSTAT_PLAYER_DROPDOWN_MENU_XPATH,
+            understat_categories_xapth_format=UNDERSTAT_PLAYER_CATEGORIES_XPATH_FORMAT,
+            categories=UNDERSTAT_PLAYER_CATEGORIES,
+            apply_changes_button_xpath=UNDERSTAT_PLAYER_APPLY_CHANGES_BUTTON
+        )
+
         players_stats = []
 
-        for page_number in pages_numbers:
+        for page_number in self._get_understat_pages_xpath_numbers():
+            page_xpath = self._get_element_xpath(element_xpath_format=UNDERSTAT_PLAYER_NEXT_TABLE_XPATH_FORMAT,
+                                                 element_xpath_number=page_number)
+            self._click_web_element(web_element_xpath=page_xpath)
             current_table_stats = self._parse_single_understat_player_page()
             players_stats.append(current_table_stats)
 
-            page_xpath = self._get_element_xpath(element_xpath_format=next_table_xpath_format,
-                                                 element_xpath_number=page_number)
-            self._click_web_element(web_element_xpath=page_xpath)
-
-            all_stats = pd.concat(players_stats).drop_duplicates().reset_index(drop=True)
-
-            return all_stats
+        return pd.concat(players_stats).dropna().reset_index(drop=True)
 
     def get_understat_teams_stats(self) -> DataFrame:
+        self._display_all_understat_categories(dropdown_menu_xpath=UNDERSTAT_TEAM_DROPDOWN_MENU_XPATH,
+                                               understat_categories_xapth_format=UNDERSTAT_TEAM_CATEGORIES_XPATH_FORMAT,
+                                               categories=UNDERSTAT_TEAM_CATEGORIES,
+                                               apply_changes_button_xpath=UNDERSTAT_TEAM_APPLY_CHANGES_BUTTON)
         arranged_html = self._parse_single_page()
-        teams_stats = arranged_html[0:20]
+        teams_stats = arranged_html.iloc[:20]
 
         return teams_stats
 

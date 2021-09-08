@@ -88,4 +88,4 @@ UNDERSTAT_CATEGORIES = ['Player',
                         'xGBuildup90']
 
 
-UNDERSTAT_PAGES = list(range(2, 6)) + [5] * 50 + [6, 7]
+UNDERSTAT_TOTAL_NUMBER_PAGES_XPATH = '/html/body/div[1]/div[3]/div[4]/div/div[2]/div[1]/ul/li[7]/a'

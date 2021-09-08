@@ -1,8 +1,7 @@
 from time import sleep
 from selenium import webdriver
 from Code.crawler.consts.fpl_consts import FPL_STATISTICS_URL, CHROMEDRIVER_PATH, FPL_NON_REPEATED_CATEGORIES
-from Code.crawler.consts.understat_consts import UNDERSTAT_PAGES, UNDERSTAT_PLAYER_NEXT_TABLE_XPATH_FORMAT, \
-    UNDERSTAT_EPL_URL
+from Code.crawler.consts.understat_consts import UNDERSTAT_PLAYER_NEXT_TABLE_XPATH_FORMAT, UNDERSTAT_EPL_URL
 from Code.crawler.fantasy_crawler import FantasyCrawler
 from Code.crawler.utils import FantasyCrawlerUtils
 
@@ -24,15 +23,14 @@ if __name__ == '__main__':
     # Crawl FPL
     fpl_stats = crawler.get_fpl_stats(categories=FPL_NON_REPEATED_CATEGORIES)
 
-    # # Crawl Understat
-    # driver.get(UNDERSTAT_EPL_URL)
-    # sleep(5)
-    # understat_team_stats = crawler.get_understat_teams_stats()
-    # understat_player_stats = crawler.get_understat_player_stats(
-    #     pages_numbers=UNDERSTAT_PAGES,
-    #     next_table_xpath_format=UNDERSTAT_PLAYER_NEXT_TABLE_XPATH_FORMAT)
+    # Crawl Understat
+    driver.get(UNDERSTAT_EPL_URL)
+    sleep(5)
+    understat_team_stats = crawler.get_understat_teams_stats()
+    understat_player_stats = crawler.get_understat_player_stats()
 
     # Export
     if EXPORT:
-        fpl_stats.to_csv(utils.get_fpl_export_path(season=SEASON,
-                                                   gameweek=CURRENT_GW))
+        pass
+        # fpl_stats.to_csv(utils.get_fpl_export_path(season=SEASON,
+        #                                            gameweek=CURRENT_GW))
