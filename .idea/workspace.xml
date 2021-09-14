@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="0d0d6c7f-7c70-44de-ad73-0d337eef8da5" name="Default Changelist" comment="">
+    <list default="true" id="0d0d6c7f-7c70-44de-ad73-0d337eef8da5" name="Default Changelist" comment="- Separated UnderstatCrawler and FPLCrawler from each other and from WebController">
+      <change beforePath="$PROJECT_DIR$/.idea/.name" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.name" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Code/crawler/consts/fpl_consts.py" beforeDir="false" afterPath="$PROJECT_DIR$/Code/crawler/consts/fpl_consts.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Code/crawler/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/Code/crawler/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Code/crawler/webcontroller/web_controller.py" beforeDir="false" afterPath="$PROJECT_DIR$/Code/crawler/webcontroller/web_controller.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -157,7 +155,42 @@
       <option name="project" value="LOCAL" />
       <updated>1630178182719</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="- Export path function">
+      <created>1630744586169</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1630744586169</updated>
+    </task>
+    <task id="LOCAL-00011" summary="- More consts">
+      <created>1630744597194</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1630744597194</updated>
+    </task>
+    <task id="LOCAL-00012" summary="- Finalized FPL crawling steps">
+      <created>1630747773816</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1630747773816</updated>
+    </task>
+    <task id="LOCAL-00013" summary="- Finalized Understat crawling steps">
+      <created>1631131638975</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1631131638975</updated>
+    </task>
+    <task id="LOCAL-00014" summary="- Separated UnderstatCrawler and FPLCrawler from each other and from WebController">
+      <created>1631132959175</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1631132959175</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -183,15 +216,25 @@
     <MESSAGE value="understat web controlling functions" />
     <MESSAGE value="Get understat stats functions" />
     <MESSAGE value="- Super WebController class bug fix&#10;- Select element bug fix" />
-    <option name="LAST_COMMIT_MESSAGE" value="- Super WebController class bug fix&#10;- Select element bug fix" />
+    <MESSAGE value="- Export path function" />
+    <MESSAGE value="- More consts" />
+    <MESSAGE value="- Finalized FPL crawling steps" />
+    <MESSAGE value="- Finalized Understat crawling steps" />
+    <MESSAGE value="- Separated UnderstatCrawler and FPLCrawler from each other and from WebController" />
+    <option name="LAST_COMMIT_MESSAGE" value="- Separated UnderstatCrawler and FPLCrawler from each other and from WebController" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/Code/Scraping.py</url>
+          <line>92</line>
+          <option name="timeStamp" value="5" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/Code/crawler/main.py</url>
-          <line>28</line>
-          <option name="timeStamp" value="3" />
+          <line>34</line>
+          <option name="timeStamp" value="8" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
