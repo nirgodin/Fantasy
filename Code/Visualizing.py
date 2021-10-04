@@ -11,9 +11,9 @@ from sklearn.linear_model import LinearRegression
 import plotly.graph_objects as go
 
 # Setting variables which are relevant for the entire analysis
-season = '21'
-last_GW = '26'
-minutes_threshold = 200
+season = '22'
+last_GW = '5'
+minutes_threshold = 150
 
 # Import data
 # We'll use three kinds of data, presented by three different dfs, in this code
@@ -22,7 +22,7 @@ data = pd.read_csv(r'Data\Final Data.csv')
 data = data.drop_duplicates()
 
 # No 2. - Cumulative data
-cum_data = pd.read_csv(r'Data\Cumulative Merged Data\CMD_S' + season + '_GW_' + last_GW + '.csv')
+cum_data = pd.read_csv(r'Data\FPL\FPL_S' + season + '_GW1_' + last_GW + '.csv')
 cum_data.drop_duplicates()
 
 # No 3. - Teams data

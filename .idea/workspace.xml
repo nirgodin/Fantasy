@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="0d0d6c7f-7c70-44de-ad73-0d337eef8da5" name="Default Changelist" comment="m">
+    <list default="true" id="0d0d6c7f-7c70-44de-ad73-0d337eef8da5" name="Default Changelist" comment="GW 4 scraping">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Browsers/chromedriver.exe" beforeDir="false" afterPath="$PROJECT_DIR$/Browsers/chromedriver.exe" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Code/Scraping.py" beforeDir="false" afterPath="$PROJECT_DIR$/Code/Scraping.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Code/Visualizing.py" beforeDir="false" afterPath="$PROJECT_DIR$/Code/Visualizing.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -43,7 +46,9 @@
   <component name="PropertiesComponent">
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="com.intellij.ide.scratch.LRUPopupBuilder$1/New Scratch File" value="Python" />
+    <property name="com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File" value="Python" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/Code" />
     <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
   </component>
@@ -64,12 +69,31 @@
       <option name="presentableId" value="Default" />
       <updated>1603448968484</updated>
     </task>
+    <task id="LOCAL-00001" summary="GW 4 scraping">
+      <created>1631650064980</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1631650064980</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+    <MESSAGE value="GW 4 scraping" />
+    <option name="LAST_COMMIT_MESSAGE" value="GW 4 scraping" />
   </component>
 </project>

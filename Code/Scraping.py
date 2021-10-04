@@ -10,7 +10,7 @@ hp = HTMLTableParser()
 
 # First, we set the season, current gameweek and previous gameweek variables
 season = '22'
-current_GW = '4'
+current_GW = '7'
 
 # Setting driver
 driver = webdriver.Chrome(r'Browsers\chromedriver.exe')
@@ -71,11 +71,14 @@ for elem in scraping_lst:
     page = 1
     total_pages = driver.find_element_by_xpath('/html/body/main/div/div[2]/div/div[1]/div[3]/div')
     while page <= int(total_pages.text[-2:]):
-        raw = hp.parse_html(driver=driver)
-        temp = hp.arrange_html(raw)
-        category_df.append(temp)
-        next_page.click()
-        page += 1
+        try:
+            raw = hp.parse_html(driver=driver)
+            temp = hp.arrange_html(raw)
+            category_df.append(temp)
+            next_page.click()
+            page += 1
+        except ElementClickInterceptedException as error:
+            break
 
     # while (True):
     #     try:
