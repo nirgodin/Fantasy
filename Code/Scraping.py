@@ -10,7 +10,7 @@ hp = HTMLTableParser()
 
 # First, we set the season, current gameweek and previous gameweek variables
 season = '22'
-current_GW = '7'
+current_GW = '8'
 
 # Setting driver
 driver = webdriver.Chrome(r'Browsers\chromedriver.exe')

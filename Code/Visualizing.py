@@ -12,8 +12,8 @@ import plotly.graph_objects as go
 
 # Setting variables which are relevant for the entire analysis
 season = '22'
-last_GW = '5'
-minutes_threshold = 150
+last_GW = '7'
+minutes_threshold = 210
 
 # Import data
 # We'll use three kinds of data, presented by three different dfs, in this code
