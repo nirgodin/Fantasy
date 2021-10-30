@@ -6,7 +6,8 @@ from selenium.webdriver.chrome.webdriver import WebDriver
 from Code.crawler.consts.understat_consts import UNDERSTAT_PLAYER_NEXT_TABLE_XPATH_FORMAT, \
     UNDERSTAT_PLAYER_DROPDOWN_MENU_XPATH, UNDERSTAT_PLAYER_CATEGORIES_XPATH_FORMAT, UNDERSTAT_PLAYER_CATEGORIES, \
     UNDERSTAT_PLAYER_APPLY_CHANGES_BUTTON, UNDERSTAT_TEAM_DROPDOWN_MENU_XPATH, UNDERSTAT_TEAM_CATEGORIES_XPATH_FORMAT, \
-    UNDERSTAT_TEAM_CATEGORIES, UNDERSTAT_TEAM_APPLY_CHANGES_BUTTON, UNDERSTAT_TOTAL_NUMBER_PAGES_XPATH
+    UNDERSTAT_TEAM_CATEGORIES, UNDERSTAT_TEAM_APPLY_CHANGES_BUTTON, UNDERSTAT_TOTAL_NUMBER_PAGES_XPATH, \
+    TEAM_RANKING_COLUMN_NAME, PLAYER_NAME_COLUMN_NAME
 from Code.crawler.pre_processor import CrawlerPreProcessor
 from Code.crawler.webcontroller.web_controller import WebController
 
@@ -35,7 +36,10 @@ class UnderstatCrawler(WebController):
             current_table_stats = self._parse_single_understat_player_page()
             players_stats.append(current_table_stats)
 
-        return pd.concat(players_stats).dropna().reset_index(drop=True)
+        players_stats_df = pd.concat(players_stats).dropna().reset_index(drop=True)
+        players_stats_df.rename(columns={players_stats_df.columns[0]: PLAYER_NAME_COLUMN_NAME}, inplace=True)
+
+        return players_stats_df
 
     def get_understat_teams_stats(self) -> DataFrame:
         self._display_all_understat_categories(dropdown_menu_xpath=UNDERSTAT_TEAM_DROPDOWN_MENU_XPATH,
@@ -44,6 +48,7 @@ class UnderstatCrawler(WebController):
                                                apply_changes_button_xpath=UNDERSTAT_TEAM_APPLY_CHANGES_BUTTON)
         arranged_html = self._parse_single_page()
         teams_stats = arranged_html.iloc[:20]
+        teams_stats.rename(columns={teams_stats.columns[0]: TEAM_RANKING_COLUMN_NAME}, inplace=True)
 
         return teams_stats
 

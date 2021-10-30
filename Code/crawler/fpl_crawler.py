@@ -18,8 +18,9 @@ class FPLCrawler(WebController):
     def get_fpl_stats(self, categories: List[str]) -> DataFrame:
         categories_stats = self._get_fpl_categories_stats(categories=categories)
         fpl_stats = self._preprocessor.merge_categories(categories_stats=categories_stats)
+        subsetted_categories_stats = self._preprocessor.subset_categories_columns(data=fpl_stats)
 
-        return self._preprocessor.subset_categories_columns(data=fpl_stats)
+        return self._preprocessor.get_player_name_team_and_role(subsetted_categories_stats)
 
     def _get_fpl_categories_stats(self, categories: List[str]) -> List[DataFrame]:
         categories_stats = []

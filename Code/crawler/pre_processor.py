@@ -6,7 +6,7 @@ from Code.crawler.consts.fpl_consts import PLAYER, ROLE, TEAM, TWO_ASTERISKS, FP
 
 
 class CrawlerPreProcessor:
-    
+
     def __init__(self):
         pass
 
@@ -17,7 +17,7 @@ class CrawlerPreProcessor:
 
         organized_data = scraped_data.copy()
         organized_data[PLAYER] = players
-        organized_data.insert(2, ROLE, roles)
+        organized_data.insert(1, ROLE, roles)
         organized_data.insert(1, TEAM, teams)
 
         return organized_data

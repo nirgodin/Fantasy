@@ -87,6 +87,8 @@ UNDERSTAT_CATEGORIES = ['Player',
                         'xGChain90',
                         'xGBuildup90']
 
+TEAM_RANKING_COLUMN_NAME = "Team_Ranking"
+PLAYER_NAME_COLUMN_NAME = "Player"
 
 UNDERSTAT_TOTAL_NUMBER_PAGES_XPATH = '/html/body/div[1]/div[3]/div[4]/div/div[2]/div[1]/ul/li[7]/a'
 
