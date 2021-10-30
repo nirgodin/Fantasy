@@ -3,7 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="0d0d6c7f-7c70-44de-ad73-0d337eef8da5" name="Default Changelist" comment="GW 4 scraping">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Code/Visualizing.py" beforeDir="false" afterPath="$PROJECT_DIR$/Code/Visualizing.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Code/Scraping.py" beforeDir="false" afterPath="$PROJECT_DIR$/Code/Scraping.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
