@@ -2,7 +2,7 @@ from functools import reduce
 from typing import List
 import pandas as pd
 from pandas import DataFrame
-from Code.crawler.consts.fpl_consts import PLAYER, ROLE, TEAM, TWO_ASTERISKS, FPL_CATEGORIES, FPL_REPEATED_CATEGORIES
+from Code.consts.fpl_consts import PLAYER, ROLE, TEAM, TWO_ASTERISKS, FPL_CATEGORIES, FPL_REPEATED_CATEGORIES
 
 
 class CrawlerPreProcessor:

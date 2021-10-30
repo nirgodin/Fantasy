@@ -1,5 +1,5 @@
-from Code.crawler.consts.fpl_consts import FPL_EXPORT_PATH_TEMPLATE
-from Code.crawler.consts.understat_consts import UNDERSTAT_PLAYERS_EXPORT_PATH_TEMPLATE, \
+from Code.consts.fpl_consts import FPL_EXPORT_PATH_TEMPLATE
+from Code.consts.understat_consts import UNDERSTAT_PLAYERS_EXPORT_PATH_TEMPLATE, \
     UNDERSTAT_TEAMS_EXPORT_PATH_TEMPLATE
 
 

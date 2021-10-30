@@ -1,4 +1,4 @@
-from Code.Functions import PreProcessing, Insights
+from Code.old_versions.v1.Functions import PreProcessing, Insights
 
 ins = Insights(last_gw=38,
                season=21)

@@ -1,7 +1,7 @@
 from time import sleep
 from selenium import webdriver
-from Code.crawler.consts.fpl_consts import FPL_STATISTICS_URL, CHROMEDRIVER_PATH, FPL_NON_REPEATED_CATEGORIES
-from Code.crawler.consts.understat_consts import UNDERSTAT_PLAYER_NEXT_TABLE_XPATH_FORMAT, UNDERSTAT_EPL_URL
+from Code.consts.fpl_consts import FPL_STATISTICS_URL, CHROMEDRIVER_PATH, FPL_NON_REPEATED_CATEGORIES
+from Code.consts.understat_consts import UNDERSTAT_EPL_URL
 from Code.crawler.fpl_crawler import FPLCrawler
 from Code.crawler.understat_crawler import UnderstatCrawler
 from Code.crawler.utils import FantasyCrawlerUtils

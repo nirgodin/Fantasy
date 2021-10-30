@@ -1,15 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="0d0d6c7f-7c70-44de-ad73-0d337eef8da5" name="Default Changelist" comment="Updated Chromedriver">
-      <change afterPath="$PROJECT_DIR$/Data/FPL/FPL_S22_GW1_19.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Data/PLT/PLT_S22_GW1_19.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Data/Understat/xG_S22_GW1_19.csv" afterDir="false" />
+    <list default="true" id="0d0d6c7f-7c70-44de-ad73-0d337eef8da5" name="Default Changelist" comment="Finalized data scraping process">
+      <change afterPath="$PROJECT_DIR$/Code/webcontroller/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.Rhistory" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Code/crawler/consts/understat_consts.py" beforeDir="false" afterPath="$PROJECT_DIR$/Code/crawler/consts/understat_consts.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Clustering.py" beforeDir="false" afterPath="$PROJECT_DIR$/Code/old_versions/v1/Clustering.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Code/.Rhistory" beforeDir="false" afterPath="$PROJECT_DIR$/Code/table_parser/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Code/Cost-Utility.R" beforeDir="false" afterPath="$PROJECT_DIR$/Code/old_versions/v1/Cost-Utility.R" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Code/Executing.py" beforeDir="false" afterPath="$PROJECT_DIR$/Code/old_versions/v1/Executing.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Code/Football Leagues Scraping.py" beforeDir="false" afterPath="$PROJECT_DIR$/Code/old_versions/v1/Football Leagues Scraping.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Code/Functions.py" beforeDir="false" afterPath="$PROJECT_DIR$/Code/old_versions/v1/Functions.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Code/Merging.py" beforeDir="false" afterPath="$PROJECT_DIR$/Code/old_versions/v1/Merging.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Code/S21 Summary.py" beforeDir="false" afterPath="$PROJECT_DIR$/Code/old_versions/v1/S21 Summary.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Code/Scraping.py" beforeDir="false" afterPath="$PROJECT_DIR$/Code/old_versions/v1/Scraping.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Code/Uploading.py" beforeDir="false" afterPath="$PROJECT_DIR$/Code/old_versions/v1/Uploading.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Code/Visualizing.py" beforeDir="false" afterPath="$PROJECT_DIR$/Code/old_versions/v1/Visualizing.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Code/crawler/consts/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/Code/consts/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Code/crawler/consts/fpl_consts.py" beforeDir="false" afterPath="$PROJECT_DIR$/Code/consts/fpl_consts.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Code/crawler/consts/understat_consts.py" beforeDir="false" afterPath="$PROJECT_DIR$/Code/consts/understat_consts.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Code/crawler/fpl_crawler.py" beforeDir="false" afterPath="$PROJECT_DIR$/Code/crawler/fpl_crawler.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Code/crawler/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/Code/main.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Code/crawler/pre_processor.py" beforeDir="false" afterPath="$PROJECT_DIR$/Code/crawler/pre_processor.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Code/crawler/table_parser/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/Code/old_versions/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Code/crawler/table_parser/html_table_parser.py" beforeDir="false" afterPath="$PROJECT_DIR$/Code/table_parser/html_table_parser.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Code/crawler/understat_crawler.py" beforeDir="false" afterPath="$PROJECT_DIR$/Code/crawler/understat_crawler.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Code/crawler/utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/Code/crawler/utils.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Code/crawler/webcontroller/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/Code/old_versions/v1/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Code/crawler/webcontroller/web_controller.py" beforeDir="false" afterPath="$PROJECT_DIR$/Code/webcontroller/web_controller.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Code/df_2_sql.py" beforeDir="false" afterPath="$PROJECT_DIR$/Code/old_versions/v1/df_2_sql.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Code/xA Scatterplots.R" beforeDir="false" afterPath="$PROJECT_DIR$/Code/old_versions/v1/xA Scatterplots.R" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Code/xG Scatterplots.R" beforeDir="false" afterPath="$PROJECT_DIR$/Code/old_versions/v1/xG Scatterplots.R" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/debug.log" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -62,8 +84,11 @@
       <recent name="C:\Users\nirgo\Documents\עדי פינקלשטיין\תקציב המשכי" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\nirgo\Documents\GitHub\Fantasy\Code\crawler\consts" />
+      <recent name="C:\Users\nirgo\Documents\GitHub\Fantasy\Code\old_versions\v1" />
       <recent name="C:\Users\nirgo\Documents\GitHub\Fantasy\Code\crawler" />
+      <recent name="C:\Users\nirgo\Documents\GitHub\Fantasy\Code" />
+      <recent name="C:\Users\nirgo\Documents\GitHub\Fantasy\Code\old_versions" />
+      <recent name="C:\Users\nirgo\Documents\GitHub\Fantasy\Code\crawler\consts" />
     </key>
   </component>
   <component name="RunManager">
@@ -79,7 +104,7 @@
       <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Code/crawler/main.py" />
+      <option name="SCRIPT_NAME" value="C:\Users\nirgo\Documents\GitHub\Fantasy\Code\main.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -210,7 +235,14 @@
       <option name="project" value="LOCAL" />
       <updated>1635625723707</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="Finalized data scraping process">
+      <created>1635626895332</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1635626895332</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -243,18 +275,19 @@
     <MESSAGE value="- Separated UnderstatCrawler and FPLCrawler from each other and from WebController" />
     <MESSAGE value="Added Understat export functions" />
     <MESSAGE value="Updated Chromedriver" />
-    <option name="LAST_COMMIT_MESSAGE" value="Updated Chromedriver" />
+    <MESSAGE value="Finalized data scraping process" />
+    <option name="LAST_COMMIT_MESSAGE" value="Finalized data scraping process" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/Code/Scraping.py</url>
+          <url>file://$PROJECT_DIR$/Code/old_versions/v1/Scraping.py</url>
           <line>92</line>
           <option name="timeStamp" value="5" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/Code/crawler/main.py</url>
+          <url>file://$PROJECT_DIR$/Code/main.py</url>
           <line>34</line>
           <option name="timeStamp" value="8" />
         </line-breakpoint>

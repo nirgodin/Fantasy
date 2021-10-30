@@ -1,7 +1,7 @@
 from pandas import DataFrame
 from selenium.webdriver.chrome.webdriver import WebDriver
 from selenium.webdriver.support.select import Select
-from Code.crawler.table_parser.html_table_parser import HTMLTableParser
+from Code.table_parser.html_table_parser import HTMLTableParser
 
 
 class WebController(HTMLTableParser):

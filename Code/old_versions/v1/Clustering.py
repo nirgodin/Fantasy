@@ -8,7 +8,7 @@ from sklearn.cluster import DBSCAN, KMeans
 from sklearn.impute import SimpleImputer
 
 # Import data
-data = pd.read_csv(r'Data\Final Data.csv')
+data = pd.read_csv(r'../../../Data/Final Data.csv')
 data = data.drop_duplicates()
 data = data.dropna()
 

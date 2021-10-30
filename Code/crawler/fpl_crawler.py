@@ -4,9 +4,9 @@ import pandas as pd
 from pandas import DataFrame
 from selenium.common.exceptions import ElementClickInterceptedException
 from selenium.webdriver.chrome.webdriver import WebDriver
-from Code.crawler.consts.fpl_consts import FPL_DROPDOWN_MENU_XPATH, FPL_TOTAL_NUMBER_PAGES_XPATH, FPL_NEXT_PAGE_XPATH
+from Code.consts.fpl_consts import FPL_DROPDOWN_MENU_XPATH, FPL_TOTAL_NUMBER_PAGES_XPATH, FPL_NEXT_PAGE_XPATH
 from Code.crawler.pre_processor import CrawlerPreProcessor
-from Code.crawler.webcontroller.web_controller import WebController
+from Code.webcontroller.web_controller import WebController
 
 
 class FPLCrawler(WebController):

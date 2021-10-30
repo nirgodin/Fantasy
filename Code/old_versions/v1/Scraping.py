@@ -1,11 +1,10 @@
 import pandas as pd
-import numpy as np
 from time import sleep
 from selenium import webdriver
 from selenium.webdriver.support.ui import Select
-from selenium.common.exceptions import ElementClickInterceptedException, NoSuchElementException
+from selenium.common.exceptions import ElementClickInterceptedException
 import re
-from Code.Functions import HTMLTableParser
+from Code.old_versions.v1.Functions import HTMLTableParser
 hp = HTMLTableParser()
 
 # First, we set the season, current gameweek and previous gameweek variables

@@ -3,13 +3,13 @@ from typing import List
 import pandas as pd
 from pandas import DataFrame
 from selenium.webdriver.chrome.webdriver import WebDriver
-from Code.crawler.consts.understat_consts import UNDERSTAT_PLAYER_NEXT_TABLE_XPATH_FORMAT, \
+from Code.consts.understat_consts import UNDERSTAT_PLAYER_NEXT_TABLE_XPATH_FORMAT, \
     UNDERSTAT_PLAYER_DROPDOWN_MENU_XPATH, UNDERSTAT_PLAYER_CATEGORIES_XPATH_FORMAT, UNDERSTAT_PLAYER_CATEGORIES, \
     UNDERSTAT_PLAYER_APPLY_CHANGES_BUTTON, UNDERSTAT_TEAM_DROPDOWN_MENU_XPATH, UNDERSTAT_TEAM_CATEGORIES_XPATH_FORMAT, \
     UNDERSTAT_TEAM_CATEGORIES, UNDERSTAT_TEAM_APPLY_CHANGES_BUTTON, UNDERSTAT_TOTAL_NUMBER_PAGES_XPATH, \
     TEAM_RANKING_COLUMN_NAME, PLAYER_NAME_COLUMN_NAME
 from Code.crawler.pre_processor import CrawlerPreProcessor
-from Code.crawler.webcontroller.web_controller import WebController
+from Code.webcontroller.web_controller import WebController
 
 
 class UnderstatCrawler(WebController):
