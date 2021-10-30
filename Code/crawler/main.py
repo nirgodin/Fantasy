@@ -7,8 +7,8 @@ from Code.crawler.understat_crawler import UnderstatCrawler
 from Code.crawler.utils import FantasyCrawlerUtils
 
 SEASON = '22'
-CURRENT_GW = '4'
-EXPORT = False
+CURRENT_GW = '19'
+EXPORT = True
 
 if __name__ == '__main__':
 
@@ -33,5 +33,11 @@ if __name__ == '__main__':
 
     # Export
     if EXPORT:
-        fpl_stats.to_csv(utils.get_fpl_export_path(season=SEASON,
-                                                   gameweek=CURRENT_GW))
+        fpl_stats.to_csv(utils.get_fpl_export_path(season=SEASON, gameweek=CURRENT_GW),
+                         index=False)
+
+        understat_team_stats.to_csv(utils.get_understat_teams_export_path(season=SEASON, gameweek=CURRENT_GW),
+                                    index=False)
+
+        understat_player_stats.to_csv(utils.get_understat_players_export_path(season=SEASON, gameweek=CURRENT_GW),
+                                      index=False)

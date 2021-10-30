@@ -89,3 +89,7 @@ UNDERSTAT_CATEGORIES = ['Player',
 
 
 UNDERSTAT_TOTAL_NUMBER_PAGES_XPATH = '/html/body/div[1]/div[3]/div[4]/div/div[2]/div[1]/ul/li[7]/a'
+
+# Understat output file template
+UNDERSTAT_PLAYERS_EXPORT_PATH_TEMPLATE = (r'Data\Understat\xG_S', '_GW1_')
+UNDERSTAT_TEAMS_EXPORT_PATH_TEMPLATE = (r'Data\PLT\PLT_S', '_GW1_')
