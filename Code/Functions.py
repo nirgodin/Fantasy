@@ -4,7 +4,7 @@ import pandas as pd
 from sklearn.preprocessing import MinMaxScaler
 from sklearn.linear_model import LinearRegression
 import numpy as np
-import Code.Credentials
+# import Code.Credentials
 
 
 # Defining the class and two functions that will allow us scraping the data and arranging it in a dataframe.
