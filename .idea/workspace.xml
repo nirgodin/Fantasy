@@ -1,10 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="0d0d6c7f-7c70-44de-ad73-0d337eef8da5" name="Default Changelist" comment="Deprecated v1">
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_31_07_2021_19_11__Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_31_07_2021_19_11__Default_Changelist_.xml" afterDir="false" />
+    <list default="true" id="0d0d6c7f-7c70-44de-ad73-0d337eef8da5" name="Default Changelist" comment="- Update chromedriver version&#10;- GW 25 scraping">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Code/Functions.py" beforeDir="false" afterPath="$PROJECT_DIR$/Code/Functions.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Code/Scraping.py" beforeDir="false" afterPath="$PROJECT_DIR$/Code/Scraping.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -35,6 +33,9 @@
       <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
     </file-type-list>
   </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
   <component name="ProjectId" id="1jH73tr5CViBxvHvHMbLpynWAvo" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
@@ -59,6 +60,9 @@
       <recent name="C:\Users\nirgo\Documents\GitHub\Fantasy\Fantasy" />
       <recent name="C:\Users\nirgo\Documents\עדי פינקלשטיין\תקציב המשכי" />
     </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\nirgo\Documents\GitHub\Fantasy\Browsers" />
+    </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -76,7 +80,77 @@
       <option name="project" value="LOCAL" />
       <updated>1631650064980</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="- Updated webdriver&#10;- Gameweek 12 scraping">
+      <created>1637618425072</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1637618425072</updated>
+    </task>
+    <task id="LOCAL-00003" summary="GW 16 scraping">
+      <created>1639432834075</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1639432834075</updated>
+    </task>
+    <task id="LOCAL-00004" summary="GW 17 scraping">
+      <created>1639820578715</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1639820578715</updated>
+    </task>
+    <task id="LOCAL-00005" summary="GW 18 scraping">
+      <created>1640028289386</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1640028289386</updated>
+    </task>
+    <task id="LOCAL-00006" summary="GW 19-21 scraping">
+      <created>1641328625900</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1641328625900</updated>
+    </task>
+    <task id="LOCAL-00007" summary="GW 21a scraping">
+      <created>1642081974996</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1642081974996</updated>
+    </task>
+    <task id="LOCAL-00008" summary="GW 22-22a scraping">
+      <created>1642709670758</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1642709670758</updated>
+    </task>
+    <task id="LOCAL-00009" summary="GW 23 scraping">
+      <created>1644298860016</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1644298860016</updated>
+    </task>
+    <task id="LOCAL-00010" summary="GW 24 scraping">
+      <created>1644569715307</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1644569715307</updated>
+    </task>
+    <task id="LOCAL-00011" summary="- Update chromedriver version&#10;- GW 25 scraping">
+      <created>1645031931250</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1645031931250</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -89,11 +163,20 @@
         </entry>
       </map>
     </option>
-    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="GW 4 scraping" />
-    <option name="LAST_COMMIT_MESSAGE" value="GW 4 scraping" />
+    <MESSAGE value="- Updated webdriver&#10;- Gameweek 12 scraping" />
+    <MESSAGE value="GW 16 scraping" />
+    <MESSAGE value="GW 17 scraping" />
+    <MESSAGE value="GW 18 scraping" />
+    <MESSAGE value="GW 19-21 scraping" />
+    <MESSAGE value="GW 21a scraping" />
+    <MESSAGE value="GW 22-22a scraping" />
+    <MESSAGE value="GW 23 scraping" />
+    <MESSAGE value="GW 24 scraping" />
+    <MESSAGE value="- Update chromedriver version&#10;- GW 25 scraping" />
+    <option name="LAST_COMMIT_MESSAGE" value="- Update chromedriver version&#10;- GW 25 scraping" />
   </component>
 </project>
