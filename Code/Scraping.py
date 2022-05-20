@@ -10,7 +10,7 @@ hp = HTMLTableParser()
 
 # First, we set the season, current gameweek and previous gameweek variables
 season = '22'
-current_GW = '34'
+current_GW = '37'
 
 # Setting driver
 driver = webdriver.Chrome(r'Browsers\chromedriver.exe')
@@ -121,7 +121,7 @@ final_df.to_csv(r'Data\FPL\FPL_S' + season + '_GW1_' + current_GW + '.csv', inde
 ###############################################################################
 
 # Entering the site
-driver.get('https://understat.com/league/EPL/2020')
+driver.get('https://understat.com/league/EPL/2021')
 sleep(5)
 
 # Expanding the table to include more data
@@ -212,6 +212,7 @@ player_labels_dct = {'N': '1',
                      'NPxG90 + xA90': '18',
                      'xGChain90': '19',
                      'xGBuildup90': '20'}
+
 
 for label in player_labels_dct.values():
     label_button = driver.find_element_by_xpath(
