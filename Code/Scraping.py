@@ -10,16 +10,19 @@ hp = HTMLTableParser()
 
 # First, we set the season, current gameweek and previous gameweek variables
 season = '22'
-current_GW = '37'
+current_GW = '38'
 
 # Setting driver
 driver = webdriver.Chrome(r'Browsers\chromedriver.exe')
 
 # Enter the Fantasy Premier League site
 driver.get('https://fantasy.premierleague.com/statistics')
-sleep(5)
-accept_cookies = driver.find_element_by_xpath('/html/body/div[2]/div/div/div[1]/div[5]/button[1]')
-accept_cookies.click()
+sleep(20)
+try:
+    accept_cookies = driver.find_element_by_xpath('/html/body/div[2]/div/div/div[1]/div[5]/button[1]')
+    accept_cookies.click()
+except:
+    pass
 
 # Setting the path to the next page button, to scroll between pages online
 next_page = driver.find_element_by_xpath('//*[@id="root"]/div[2]/div/div/div[3]/button[3]')
