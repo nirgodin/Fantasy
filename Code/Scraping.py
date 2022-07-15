@@ -9,8 +9,8 @@ from Code.Functions import HTMLTableParser
 hp = HTMLTableParser()
 
 # First, we set the season, current gameweek and previous gameweek variables
-season = '22'
-current_GW = '38'
+season = '23'
+current_GW = '1'
 
 # Setting driver
 driver = webdriver.Chrome(r'Browsers\chromedriver.exe')
@@ -124,7 +124,7 @@ final_df.to_csv(r'Data\FPL\FPL_S' + season + '_GW1_' + current_GW + '.csv', inde
 ###############################################################################
 
 # Entering the site
-driver.get('https://understat.com/league/EPL/2021')
+driver.get('https://understat.com/league/EPL/2022')
 sleep(5)
 
 # Expanding the table to include more data
