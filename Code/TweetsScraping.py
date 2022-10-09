@@ -34,22 +34,23 @@ class TweetsScraper:
         end_date = self._normalize_date_to_api_format(self._end_date)
 
         while should_stop_scraping is False:
+            time.sleep(2)  # Limit: 30 requests per minute
             query_results = list(self._perform_single_query(screen_name, end_date))
 
             if not query_results:
                 end_date = self._force_end_date_to_subtract(end_date)
 
             else:
-                last_record_date = query_results[0]['created_at']
-                self._save_query_results(query_results, last_record_date)
-                end_date = last_record_date
+                earliest_record_date = query_results[-1]['created_at']
+                self._save_query_results(query_results, earliest_record_date)
+                end_date = earliest_record_date
 
             should_stop_scraping = self._should_stop_scraping(query_results, end_date)
 
     def _perform_single_query(self, screen_name: str, end_date: str) -> Generator[dict, None, None]:
         response: List[Status] = self._api.search_full_archive(
             label='dev',
-            query=screen_name,
+            query=f'from:{screen_name} #FPLSU',
             fromDate=self._normalized_start_date,
             toDate=end_date,
             maxResults=self._max_results
@@ -70,10 +71,10 @@ class TweetsScraper:
         return self._normalize_date_to_api_format(advanced_start_date)
 
     @staticmethod
-    def _save_query_results(query_results: List[dict], last_record_date: str) -> None:
-        first_record_date = query_results[-1]['created_at']
-        output_path = OUTPUT_PATH_FORMAT.format(first_record_date, last_record_date)
-        print(f'Saving query results from start date `{first_record_date}` to end date {last_record_date}')
+    def _save_query_results(query_results: List[dict], earliest_record_date: str) -> None:
+        latest_record_date = query_results[0]['created_at']
+        output_path = OUTPUT_PATH_FORMAT.format(latest_record_date, latest_record_date)
+        print(f'Saving query results from start date `{earliest_record_date}` to end date {latest_record_date}')
 
         with open(output_path, 'w') as f:
             json.dump(query_results, f)
