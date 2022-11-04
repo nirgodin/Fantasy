@@ -1,3 +1,5 @@
+import asyncio
+
 import pandas as pd
 import numpy as np
 from time import sleep
@@ -6,11 +8,13 @@ from selenium.webdriver.support.ui import Select
 from selenium.common.exceptions import ElementClickInterceptedException, NoSuchElementException
 import re
 from Code.Functions import HTMLTableParser
+from Code.managers_picks.top_teams_picks_manager import TopTeamsPicksManager
+
 hp = HTMLTableParser()
 
 # First, we set the season, current gameweek and previous gameweek variables
 season = '23'
-current_GW = '13'
+current_GW = '14'
 
 # Setting driver
 options = webdriver.ChromeOptions()
@@ -295,3 +299,10 @@ for elem in ['Player_xG', 'Player_NPxG', 'Player_xA']:
 # Exporting the final_players df to csv file
 final_players.to_csv(r'Data\Understat\xG_S' + season + '_GW1_' + current_GW + '.csv', index=False)
 
+###############################################################################
+
+# Scrape managers picks
+picks_manager = TopTeamsPicksManager(season=int(season), gameweek=int(current_GW))
+
+loop = asyncio.get_event_loop()
+loop.run_until_complete(picks_manager.collect_picks_data())
