@@ -1,4 +1,5 @@
 import asyncio
+import os
 
 import pandas as pd
 import numpy as np
@@ -8,13 +9,23 @@ from selenium.webdriver.support.ui import Select
 from selenium.common.exceptions import ElementClickInterceptedException, NoSuchElementException
 import re
 from Code.Functions import HTMLTableParser
+from Code.database_manager.db_manager import DBManager
+from Code.database_manager.db_uploader import DBUploader
 from Code.managers_picks.top_teams_picks_manager import TopTeamsPicksManager
-
-hp = HTMLTableParser()
 
 # First, we set the season, current gameweek and previous gameweek variables
 season = '23'
-current_GW = '14'
+current_GW = '16'
+
+# Setting helping classes
+hp = HTMLTableParser()
+connection_url = os.environ['CONNECTION_URL']
+db_manager = DBManager(connection_url)
+db_uploader = DBUploader(
+    db_manager=db_manager,
+    season=int(season),
+    gameweek=int(current_GW)
+)
 
 # Setting driver
 options = webdriver.ChromeOptions()
@@ -126,6 +137,7 @@ final_df.insert(1, 'Team', Team)
 
 # Export the final dataframe to a csv file
 final_df.to_csv(r'Data\FPL\FPL_S' + season + '_GW1_' + current_GW + '.csv', index=False)
+# db_uploader.upload_data(final_df, 'fpl')
 
 ###############################################################################
 
@@ -204,6 +216,7 @@ PLT.rename(columns={'Team_Team': 'Team', 'Team_№': 'Team_Ranking'},
 
 # Export the final dataframe to a csv file
 PLT.to_csv(r'Data\PLT\PLT_S' + season + '_GW1_' + current_GW + '.csv', index=False)
+# db_uploader.upload_data(PLT, 'plt')
 
 ###############################################################################
 
@@ -298,6 +311,7 @@ for elem in ['Player_xG', 'Player_NPxG', 'Player_xA']:
 
 # Exporting the final_players df to csv file
 final_players.to_csv(r'Data\Understat\xG_S' + season + '_GW1_' + current_GW + '.csv', index=False)
+# db_uploader.upload_data(final_players, 'xg')
 
 ###############################################################################
 
