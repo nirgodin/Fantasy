@@ -15,17 +15,17 @@ from Code.managers_picks.top_teams_picks_manager import TopTeamsPicksManager
 
 # First, we set the season, current gameweek and previous gameweek variables
 season = '23'
-current_GW = '16'
+current_GW = '23'
 
 # Setting helping classes
 hp = HTMLTableParser()
-connection_url = os.environ['CONNECTION_URL']
-db_manager = DBManager(connection_url)
-db_uploader = DBUploader(
-    db_manager=db_manager,
-    season=int(season),
-    gameweek=int(current_GW)
-)
+# connection_url = os.environ['CONNECTION_URL']
+# db_manager = DBManager(connection_url)
+# db_uploader = DBUploader(
+#     db_manager=db_manager,
+#     season=int(season),
+#     gameweek=int(current_GW)
+# )
 
 # Setting driver
 options = webdriver.ChromeOptions()
@@ -143,7 +143,7 @@ final_df.to_csv(r'Data\FPL\FPL_S' + season + '_GW1_' + current_GW + '.csv', inde
 
 # Entering the site
 driver.get('https://understat.com/league/EPL/2022')
-sleep(5)
+sleep(20)
 
 # Expanding the table to include more data
 # Opening the options menu
