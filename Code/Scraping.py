@@ -15,7 +15,7 @@ from Code.managers_picks.top_teams_picks_manager import TopTeamsPicksManager
 
 # First, we set the season, current gameweek and previous gameweek variables
 season = '23'
-current_GW = '23'
+current_GW = '26'
 
 # Setting helping classes
 hp = HTMLTableParser()
