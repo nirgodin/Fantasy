@@ -15,7 +15,7 @@ from Code.managers_picks.top_teams_picks_manager import TopTeamsPicksManager
 
 # First, we set the season, current gameweek and previous gameweek variables
 season = '23'
-current_GW = '26'
+current_GW = '28'
 
 # Setting helping classes
 hp = HTMLTableParser()
@@ -36,7 +36,7 @@ driver = webdriver.Chrome(r'Browsers\chromedriver.exe', options=options)
 driver.get('https://fantasy.premierleague.com/statistics')
 sleep(20)
 try:
-    accept_cookies = driver.find_element_by_xpath('/html/body/div[2]/div/div/div[1]/div[5]/button[1]')
+    accept_cookies = driver.find_element_by_xpath('/html/body/div[2]/div[2]/div/div/div[2]/div/div/button')
     accept_cookies.click()
 except:
     pass
