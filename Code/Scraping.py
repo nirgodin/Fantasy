@@ -14,8 +14,8 @@ from Code.database_manager.db_uploader import DBUploader
 from Code.managers_picks.top_teams_picks_manager import TopTeamsPicksManager
 
 # First, we set the season, current gameweek and previous gameweek variables
-season = '23'
-current_GW = '38'
+season = '24'
+current_GW = '1'
 
 # Setting helping classes
 hp = HTMLTableParser()
@@ -142,7 +142,7 @@ final_df.to_csv(r'Data\FPL\FPL_S' + season + '_GW1_' + current_GW + '.csv', inde
 ###############################################################################
 
 # Entering the site
-driver.get('https://understat.com/league/EPL/2022')
+driver.get(f'https://understat.com/league/EPL/20{int(season)-1}')
 sleep(20)
 
 # Expanding the table to include more data
@@ -179,31 +179,34 @@ for elem in ['xG', 'xGA', 'xPTS']:
     PLT[elem] = [re.split('[-+]', PLT[elem][i])[0] for i in range(0, len(PLT))]
 
 # Creating a dictionary to the team names in the PLT to three letters abbreviation
-team_dct = {'Arsenal': 'ARS',
-            'Aston Villa': 'AVL',
-            'Bournemouth': 'BOU',
-            'Brentford': 'BRE',
-            'Brighton': 'BHA',
-            'Burnley': 'BUR',
-            'Chelsea': 'CHE',
-            'Crystal Palace': 'CRY',
-            'Everton': 'EVE',
-            'Fulham': 'FUL',
-            'Leeds': 'LEE',
-            'Leicester': 'LEI',
-            'Liverpool': 'LIV',
-            'Manchester City': 'MCI',
-            'Manchester United': 'MUN',
-            'Newcastle United': 'NEW',
-            'Norwich': 'NOR',
-            'Nottingham Forest': 'NFO',
-            'Sheffield United': 'SHU',
-            'Southampton': 'SOU',
-            'Tottenham': 'TOT',
-            'Watford': 'WAT',
-            'West Bromwich Albion': 'WBA',
-            'West Ham': 'WHU',
-            'Wolverhampton Wanderers': 'WOL'}
+team_dct = {
+    'Arsenal': 'ARS',
+    'Aston Villa': 'AVL',
+    'Bournemouth': 'BOU',
+    'Brentford': 'BRE',
+    'Brighton': 'BHA',
+    'Burnley': 'BUR',
+    'Chelsea': 'CHE',
+    'Crystal Palace': 'CRY',
+    'Everton': 'EVE',
+    'Fulham': 'FUL',
+    'Leeds': 'LEE',
+    'Leicester': 'LEI',
+    'Liverpool': 'LIV',
+    'Luton': 'LUT',
+    'Manchester City': 'MCI',
+    'Manchester United': 'MUN',
+    'Newcastle United': 'NEW',
+    'Norwich': 'NOR',
+    'Nottingham Forest': 'NFO',
+    'Sheffield United': 'SHU',
+    'Southampton': 'SOU',
+    'Tottenham': 'TOT',
+    'Watford': 'WAT',
+    'West Bromwich Albion': 'WBA',
+    'West Ham': 'WHU',
+    'Wolverhampton Wanderers': 'WOL'
+}
 
 # Converting team names in the PLT to three letter abbreviation
 PLT['Team'] = [team_dct[team] for team in PLT['Team']]
