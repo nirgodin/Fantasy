@@ -5,17 +5,21 @@ import pandas as pd
 import numpy as np
 from time import sleep
 from selenium import webdriver
+from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import Select
 from selenium.common.exceptions import ElementClickInterceptedException, NoSuchElementException
 import re
+
+from webdriver_manager.chrome import ChromeDriverManager
+
 from Code.Functions import HTMLTableParser
-from Code.database_manager.db_manager import DBManager
-from Code.database_manager.db_uploader import DBUploader
+# from Code.database_manager.db_manager import DBManager
+# from Code.database_manager.db_uploader import DBUploader
 from Code.managers_picks.top_teams_picks_manager import TopTeamsPicksManager
 
 # First, we set the season, current gameweek and previous gameweek variables
 season = '24'
-current_GW = '1'
+current_GW = '37'
 
 # Setting helping classes
 hp = HTMLTableParser()
@@ -30,21 +34,21 @@ hp = HTMLTableParser()
 # Setting driver
 options = webdriver.ChromeOptions()
 options.add_argument("--start-maximized")
-driver = webdriver.Chrome(r'Browsers\chromedriver.exe', options=options)
+driver = webdriver.Chrome(options=options)
 
 # Enter the Fantasy Premier League site
 driver.get('https://fantasy.premierleague.com/statistics')
 sleep(20)
 try:
-    accept_cookies = driver.find_element_by_xpath('/html/body/div[2]/div[2]/div/div/div[2]/div/div/button')
+    accept_cookies = driver.find_element(by=By.XPATH, value='/html/body/div[2]/div[2]/div/div/div[2]/div/div/button')
     accept_cookies.click()
-except:
-    pass
+except Exception as e:
+    print(e)
 
 # Setting the path to the next page button, to scroll between pages online
-next_page = driver.find_element_by_xpath('//*[@id="root"]/div[2]/div/div/div[3]/button[3]')
+next_page = driver.find_element(by=By.XPATH, value='//*[@id="root"]/div[2]/div/div/div[3]/button[3]')
 # Setting the path to the menu button, to switch between summaries of different stats
-menu = Select(driver.find_element_by_xpath('/html/body/main/div/div[2]/div/div/form/div/div[2]/div/div/select'))
+menu = Select(driver.find_element(by=By.XPATH, value='/html/body/main/div/div[2]/div/div/form/div/div[2]/div/div/select'))
 
 # Creating a list containing the full list of the stats we're interested in
 category_lst = ['Player',
@@ -91,7 +95,7 @@ for elem in scraping_lst:
     clk = 'menu.select_by_visible_text' + '(' + '"' + elem + '"' + ')'
     exec(clk)
     page = 1
-    total_pages = driver.find_element_by_xpath('/html/body/main/div/div[2]/div/div[1]/div[3]/div')
+    total_pages = driver.find_element(by=By.XPATH, value='/html/body/main/div/div[2]/div/div[1]/div[3]/div')
     while page <= int(total_pages.text[-2:]):
         try:
             raw = hp.parse_html(driver=driver)
@@ -122,6 +126,9 @@ for i in range(1, len(df_lst)):
     temp_df = pd.merge(temp_df, df_lst[i],
                        on=['Player', 'Cost', 'Sel.', 'Form', 'Pts.'],
                        how='outer')
+    for col in temp_df.columns:
+        if col.endswith("_x") or col.endswith("_y"):
+            temp_df.drop(col, axis=1, inplace=True)
 
 final_df = temp_df[category_lst].copy()
 
@@ -147,7 +154,7 @@ sleep(20)
 
 # Expanding the table to include more data
 # Opening the options menu
-team_button = driver.find_element_by_xpath('/html/body/div[1]/div[3]/div[3]/div/div[2]/div/div[1]/button')
+team_button = driver.find_element(by=By.XPATH, value='/html/body/div[1]/div[3]/div[3]/div/div[2]/div/div[1]/button')
 team_button.click()
 
 # Iterate through the menu to click on all the unmarked labels
@@ -160,12 +167,12 @@ team_labels_dct = {'NPxG': '11',
                    'ODC': '18'}
 
 for label in team_labels_dct.values():
-    label_button = driver.find_element_by_xpath(
+    label_button = driver.find_element(by=By.XPATH, value=
         '/html/body/div[1]/div[3]/div[3]/div/div[2]/div/div[2]/div[2]/div/div[' + label + ']/div[2]/label')
     label_button.click()
 
 # Applying the changes
-team_apply = driver.find_element_by_xpath('/html/body/div[1]/div[3]/div[3]/div/div[2]/div/div[2]/div[3]/a[2]')
+team_apply = driver.find_element(by=By.XPATH, value='/html/body/div[1]/div[3]/div[3]/div/div[2]/div/div[2]/div[3]/a[2]')
 team_apply.click()
 
 # Parsing the first page
@@ -225,7 +232,7 @@ PLT.to_csv(r'Data\PLT\PLT_S' + season + '_GW1_' + current_GW + '.csv', index=Fal
 
 # Expanding the table to include more data
 # Opening the options menu
-player_button = driver.find_element_by_xpath('/html/body/div[1]/div[3]/div[4]/div/div[2]/div[1]/button')
+player_button = driver.find_element(by=By.XPATH, value='/html/body/div[1]/div[3]/div[4]/div/div[2]/div[1]/button')
 player_button.click()
 
 # Iterate through the menu to click on all the unmarked labels
@@ -242,12 +249,12 @@ player_labels_dct = {'N': '1',
 
 
 for label in player_labels_dct.values():
-    label_button = driver.find_element_by_xpath(
+    label_button = driver.find_element(by=By.XPATH, value=
         '/html/body/div[1]/div[3]/div[4]/div/div[2]/div[2]/div[2]/div/div[' + label + ']/div[2]/label')
     label_button.click()
 
 # Applying the changes
-player_apply = driver.find_element_by_xpath('/html/body/div[1]/div[3]/div[4]/div/div[2]/div[2]/div[3]/a[2]')
+player_apply = driver.find_element(by=By.XPATH, value='/html/body/div[1]/div[3]/div[4]/div/div[2]/div[2]/div[3]/a[2]')
 player_apply.click()
 
 # Scraping
@@ -261,7 +268,7 @@ for i in players_pages:
     temp_players = temp_players.iloc[20:len(temp_players) - 1]
     players_df.append(temp_players)
     next_table_str = '/html/body/div[1]/div[3]/div[4]/div/div[2]/div[1]/ul/li[' + i + ']/a'
-    next_table = driver.find_element_by_xpath(next_table_str)
+    next_table = driver.find_element(by=By.XPATH, value=next_table_str)
     next_table.click()
 
 final_players = pd.concat(players_df)
